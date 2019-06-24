@@ -1,4 +1,5 @@
 import React from 'react';
+import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './App.scss';
@@ -20,6 +21,12 @@ L.Icon.Default.mergeOptions({
 // until here
 
 const position = [-22.90762, -43.16927]
+const data = [
+  {quarter: 1, earnings: 13000},
+  {quarter: 2, earnings: 16500},
+  {quarter: 3, earnings: 14250},
+  {quarter: 4, earnings: 19000}
+];
 
 function App() {
   return (
@@ -33,6 +40,28 @@ function App() {
           <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
         </Marker>
       </Map>
+      <VictoryChart
+        // domainPadding will add space to each side of VictoryBar to
+        // prevent it from overlapping the axis
+        domainPadding={20}
+      >
+        <VictoryAxis
+          // tickValues specifies both the number of ticks and where
+          // they are placed on the axis
+          tickValues={[1, 2, 3, 4]}
+          tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+        />
+        <VictoryAxis
+          dependentAxis
+          // tickFormat specifies how ticks should be displayed
+          tickFormat={(x) => (`$${x / 1000}k`)}
+        />
+        <VictoryBar
+          data={data}
+          x="quarter"
+          y="earnings"
+        />
+      </VictoryChart>
     </div>
   );
 }
