@@ -11,6 +11,8 @@ import marker from 'leaflet/dist/images/marker-icon.png';
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
+import MainNavigator from '../../navigators/MainNavigator';
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -29,41 +31,42 @@ const data = [
 ];
 
 function App() {
-  return (
-    <div className="App">
-      <Map center={position} zoom={13} style={{height: '400px'}}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        />
-        <Marker position={position}>
-          <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker>
-      </Map>
-      <VictoryChart
-        // domainPadding will add space to each side of VictoryBar to
-        // prevent it from overlapping the axis
-        domainPadding={20}
-      >
-        <VictoryAxis
-          // tickValues specifies both the number of ticks and where
-          // they are placed on the axis
-          tickValues={[1, 2, 3, 4]}
-          tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
-        />
-        <VictoryAxis
-          dependentAxis
-          // tickFormat specifies how ticks should be displayed
-          tickFormat={(x) => (`$${x / 1000}k`)}
-        />
-        <VictoryBar
-          data={data}
-          x="quarter"
-          y="earnings"
-        />
-      </VictoryChart>
-    </div>
-  );
+  return (<MainNavigator />);
+  // return (
+  //   <div className="App">
+  //     <Map center={position} zoom={13} style={{height: '400px'}}>
+  //       <TileLayer
+  //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  //         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+  //       />
+  //       <Marker position={position}>
+  //         <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+  //       </Marker>
+  //     </Map>
+  //     <VictoryChart
+  //       // domainPadding will add space to each side of VictoryBar to
+  //       // prevent it from overlapping the axis
+  //       domainPadding={20}
+  //     >
+  //       <VictoryAxis
+  //         // tickValues specifies both the number of ticks and where
+  //         // they are placed on the axis
+  //         tickValues={[1, 2, 3, 4]}
+  //         tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
+  //       />
+  //       <VictoryAxis
+  //         dependentAxis
+  //         // tickFormat specifies how ticks should be displayed
+  //         tickFormat={(x) => (`$${x / 1000}k`)}
+  //       />
+  //       <VictoryBar
+  //         data={data}
+  //         x="quarter"
+  //         y="earnings"
+  //       />
+  //     </VictoryChart>
+  //   </div>
+  // );
 }
 
 export default App;
