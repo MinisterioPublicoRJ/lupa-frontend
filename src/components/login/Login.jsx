@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import Api from '../Api/Api'
 
 class Login extends React.Component {
   constructor(props) {
@@ -6,10 +7,18 @@ class Login extends React.Component {
     this.state = { email: '', password: '' };
   }
 
+  loginCallback(jwt) {
+    if (jwt) {
+      console.log("Done, ", jwt)
+    } else {
+      console.log("error")
+    }
+  }
+
   login(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    console.log('it worked!', email, password);
+    Api.login(this.loginCallback, email, password)
   }
 
   /**
