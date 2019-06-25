@@ -1,0 +1,53 @@
+.Login-container {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  max-width: 500px;
+  min-width: 200px;
+  width: 80%;
+}
+
+.Login-form {
+  background-color: red;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 40vh;
+  justify-content: space-between;
+  width: inherit;
+}
+
+.Login-banner {
+  background-color: orange;
+  box-sizing: border-box;
+  height: calc(60vh - 10px);
+  margin: auto;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+
+.Login-inputs {
+  background-color: yellow;
+  box-sizing: border-box;
+  width: inherit;
+}
+
+.Login-button {
+
+}
+
+input {
+  border-color: #A1A1A1;
+  border-width: 1px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  display: block;
+  height: 5vh;
+  margin-bottom: 2vh;
+  width: inherit;
+}

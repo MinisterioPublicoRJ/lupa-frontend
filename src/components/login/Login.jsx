@@ -1,6 +1,8 @@
 import React from 'react'
 import Api from '../Api/Api'
 
+import './Login.scss';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,9 @@ class Login extends React.Component {
   }
 
   login(event) {
+    // blocks default page reload
     event.preventDefault();
+
     const { email, password } = this.state;
     Api.login(this.loginCallback, email, password)
   }
@@ -36,12 +40,19 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div>
-        <form onSubmit={event => this.login(event)}>
-          <input type="text" value={email} onChange={event => this.handleChange(event, 'email')} />
-          <input type="text" value={password} onChange={event => this.handleChange(event, 'password')} />
-          <button type="submit">Entrar</button>
-        </form>
+      <div className="wrapper">
+        <div className="Login-container">
+          <div className="Login-banner">
+            <p>image goes here</p>
+          </div>
+          <form className="Login-form" onSubmit={event => this.login(event)}>
+            <div className="Login-inputs">
+              <input type="text" value={email} onChange={event => this.handleChange(event, 'email')} />
+              <input type="text" value={password} onChange={event => this.handleChange(event, 'password')} />
+            </div>
+            <button type="submit" className="Login-button">Entrar</button>
+          </form>
+        </div>
       </div>
     );
   }
