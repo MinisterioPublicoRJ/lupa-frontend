@@ -1,3 +1,33 @@
 {
-  "login": {}
+    "login": {},
+    "entidade": [
+        {
+            "id": 1,
+            "titulo": "Município do Rio de Janeiro",
+            "tipo": "municipio",
+            "geoJSON": {},
+            "listaCaixinhas": []
+        },
+        {
+            "id": 2,
+            "titulo": "Niterói",
+            "tipo": "municipio",
+            "geoJSON": {},
+            "listaCaixinhas": []
+        },
+        {
+            "id": 3,
+            "titulo": "São Gonçalo",
+            "tipo": "municipio",
+            "geoJSON": {},
+            "listaCaixinhas": []
+        },
+        {
+            "id": 4,
+            "titulo": "Nilópolis",
+            "tipo": "municipio",
+            "geoJSON": {},
+            "listaCaixinhas": []
+        }
+    ]
 }
