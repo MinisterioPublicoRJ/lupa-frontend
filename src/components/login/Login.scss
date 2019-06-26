@@ -22,8 +22,11 @@
 }
 
 .Login-banner {
+  align-items: center;
   box-sizing: border-box;
+  display: flex;
   height: calc(60vh - 10px);
+  justify-content: center;
   margin: auto;
   margin: 0 0 10px 0;
   width: 100%;
@@ -51,7 +54,6 @@ label {
   display: flex;
   font-family: Helvetica regular;
   font-size: 12px;
-
 }
 
 .Login-container-button {
@@ -71,5 +73,6 @@ label {
   font-family: Helvetica regular;
   height: calc(9vh - 10px);
   margin-bottom: 10px;
+  padding: 0 15px 0 15px;
   width: inherit;
 }
