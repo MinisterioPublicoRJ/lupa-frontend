@@ -12,18 +12,16 @@
 }
 
 .Login-form {
-  background-color: red;
   align-items: center;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 40vh;
   justify-content: space-between;
-  width: inherit;
+  width: 100%;
 }
 
 .Login-banner {
-  background-color: orange;
   box-sizing: border-box;
   height: calc(60vh - 10px);
   margin: auto;
@@ -32,22 +30,46 @@
 }
 
 .Login-inputs {
-  background-color: yellow;
   box-sizing: border-box;
   width: inherit;
 }
 
-.Login-button {
+button {
+  background-color: #009BFD;
+  border: none;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: Helvetica regular;
+  height: 8vh;
+  width: 100%;
+}
+
+label {
+  align-items: center;
+  color: #8a8a8a;
+  display: flex;
+  font-family: Helvetica regular;
+  font-size: 12px;
 
 }
 
-input {
-  border-color: #A1A1A1;
-  border-width: 1px;
+.Login-container-button {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+.Login-input {
+  border: 1px solid #a1a1a1;
   border-radius: 7px;
   box-sizing: border-box;
+  color: #8a8a8a;
   display: block;
-  height: 5vh;
-  margin-bottom: 2vh;
+  font-family: Helvetica regular;
+  height: calc(9vh - 10px);
+  margin-bottom: 10px;
   width: inherit;
 }

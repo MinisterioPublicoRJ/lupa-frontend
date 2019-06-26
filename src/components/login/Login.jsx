@@ -1,19 +1,19 @@
-import React from 'react'
-import Api from '../Api/Api'
+import React from 'react';
+import Api from '../Api/Api';
 
 import './Login.scss';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: '', save: false };
   }
 
   loginCallback(jwt) {
     if (jwt) {
-      console.log("Done, ", jwt)
+      console.log('Done, ', jwt);
     } else {
-      console.log("error")
+      console.log('error');
     }
   }
 
@@ -22,7 +22,7 @@ class Login extends React.Component {
     event.preventDefault();
 
     const { email, password } = this.state;
-    Api.login(this.loginCallback, email, password)
+    Api.login(this.loginCallback, email, password);
   }
 
   /**
@@ -37,6 +37,13 @@ class Login extends React.Component {
     this.setState(updatedState);
   }
 
+  handleSavingChange() {
+    this.setState((prevState) => {
+      const save = !prevState.save;
+      return { save }
+    })
+  }
+
   render() {
     const { email, password } = this.state;
     return (
@@ -47,10 +54,28 @@ class Login extends React.Component {
           </div>
           <form className="Login-form" onSubmit={event => this.login(event)}>
             <div className="Login-inputs">
-              <input type="text" value={email} onChange={event => this.handleChange(event, 'email')} />
-              <input type="text" value={password} onChange={event => this.handleChange(event, 'password')} />
+              <input
+                className="Login-input"
+                placeholder="Email"
+                type="text"
+                value={email}
+                onChange={event => this.handleChange(event, 'email')}
+              />
+              <input
+                className="Login-input"
+                placeholder="Senha"
+                type="text"
+                value={password}
+                onChange={event => this.handleChange(event, 'password')}
+              />
+              <label htmlFor="save">
+                <input type="checkbox" id="save" onChange={() => this.handleSavingChange()}/>
+                Salvar senha
+              </label>
             </div>
-            <button type="submit" className="Login-button">Entrar</button>
+            <div className="Login-container-button">
+              <button type="submit">Entrar</button>
+            </div>
           </form>
         </div>
       </div>
