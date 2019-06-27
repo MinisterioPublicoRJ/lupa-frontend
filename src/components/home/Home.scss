@@ -1,0 +1,19 @@
+.Home-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  z-index: 0;
+}
+
+.Map-view {
+  background-color: pink;
+  height: 70vh;
+  display: block;
+  width: 100%;
+}
+
+.Home-footer {
+  background-color: #9FCBEE;
+  height: 30vh;
+  width: 100%;
+}

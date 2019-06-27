@@ -1,0 +1,40 @@
+.Search-container {
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 500;
+}
+
+.Search-view {
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  height: 80vh;
+  justify-content: space-between;
+  display: flex;
+  max-height: 40px;
+  width: 93%;
+}
+
+.Search-button {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-width: 45px;
+  width: 10%;
+}
+
+.Search-button {
+  color: #C1C1C1;
+}
+
+.Search-input {
+  border: none;
+  display: flex;
+  flex: 1;
+}
