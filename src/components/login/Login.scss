@@ -1,0 +1,75 @@
+.Login-container {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  max-width: 500px;
+  min-width: 200px;
+  width: 80%;
+}
+
+.Login-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 40vh;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Login-banner {
+  box-sizing: border-box;
+  height: calc(60vh - 10px);
+  margin: auto;
+  margin: 0 0 10px 0;
+  width: 100%;
+}
+
+.Login-inputs {
+  box-sizing: border-box;
+  width: inherit;
+}
+
+button {
+  background-color: #009BFD;
+  border: none;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: Helvetica regular;
+  height: 8vh;
+  width: 100%;
+}
+
+label {
+  align-items: center;
+  color: #8a8a8a;
+  display: flex;
+  font-family: Helvetica regular;
+  font-size: 12px;
+
+}
+
+.Login-container-button {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+.Login-input {
+  border: 1px solid #a1a1a1;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #8a8a8a;
+  display: block;
+  font-family: Helvetica regular;
+  height: calc(9vh - 10px);
+  margin-bottom: 10px;
+  width: inherit;
+}
