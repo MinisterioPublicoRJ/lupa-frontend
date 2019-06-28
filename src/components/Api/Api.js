@@ -4,6 +4,14 @@ const API_URL = `http://localhost:5000`
 const LOGIN_MOCK = true
 
 const Api = (() => {
+    function buildings(callback) {
+        axios
+            .get(`${API_URL}/buildings`)
+            .then(response => {
+                callback(response)
+            })
+    }
+
     /**
      * 
      */
@@ -25,6 +33,7 @@ const Api = (() => {
     }
 
     return {
+        buildings,
         login
     }
 })()

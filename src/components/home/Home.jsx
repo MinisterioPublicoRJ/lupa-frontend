@@ -1,7 +1,14 @@
 import React from 'react'
+import Api from '../Api/Api'
 import MapView from '../map/Map'
 import Search from '../search/Search'
 import './Home.scss';
+
+// mock buildings
+const buildingsCallback = data => {
+
+}
+Api.buildings(buildingsCallback)
 
 function App() {
   return (
@@ -15,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
