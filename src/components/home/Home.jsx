@@ -1,8 +1,10 @@
 import React from 'react';
+import Div100vh from 'react-div-100vh'
 
 import './Home.scss';
 import Search from '../search/Search';
 import Map from '../Map/Map';
+import Filter from '../filter/filter';
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,9 +20,13 @@ class Home extends React.Component {
     console.log('Menu')
   }
 
+  handleFiltering(filter) {
+    console.log(filter);
+  }
+
   render() {
     return (
-      <div className="Home-container">
+      <Div100vh className="Home-container">
         <Search
           searchPressed={() => this.handleSearching()}
           menuPressed={() => this.handleMenu()}
@@ -29,9 +35,9 @@ class Home extends React.Component {
           <Map />
         </div>
         <div className="Home-footer">
-          <p>here goes menu and last viewed</p>
+          <Filter filterClicked={filter => this.handleFiltering(filter)} />
         </div>
-      </div>
+      </Div100vh>
     );
   }
 }
