@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Map, Marker, Popup, TileLayer,
+  Map, GeoJSON, TileLayer,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -18,24 +18,85 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
+const buildingsMock = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "Edifício Canavarro",
+        "address": "Avenida Marechal Câmara, 350"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.16969007253647,
+          -22.90777133234943
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "address": "Avenida Marechal Câmara, 370",
+        "name": "Sede Administrativa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.169765174388885,
+          -22.9074995583537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "name": "Edifício Sede",
+        "address": "Praça Procurador-Geral de Justiça Hermano Odilon dos Anjos, S/N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.169260919094086,
+          -22.907637916092323
+        ]
+      }
+    }
+  ]
+}
+
+const mapData = buildingsMock
+
 const position = [-22.90762, -43.16927]
 
 const propTypes = {}
 
+const onEachFeature = (feature, layer) => {
+  layer.on({
+    click: clickToFeature.bind(this)
+  })
+}
+
+const clickToFeature = (e) => {
+  var layer = e.target;
+  console.log("I clicked on " ,layer.feature.properties);
+}
+
 const map = (props) => {
   return (
-    <Map center={position} zoom={13} style={{ height: '400px' }}>
+    <Map center={position} zoom={16} style={{ height: '400px' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup.
-          <br />
-          Easily customizable.
-        </Popup>
-      </Marker>
+      <GeoJSON
+        data={mapData}
+        onEachFeature={onEachFeature}
+      />
     </Map>
   )
 }
