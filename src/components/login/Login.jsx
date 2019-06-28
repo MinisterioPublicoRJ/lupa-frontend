@@ -23,6 +23,7 @@ class Login extends React.Component {
 
     const { email, password } = this.state;
     Api.login(this.loginCallback, email, password);
+    this.props.history.push('/home');
   }
 
   /**
@@ -37,11 +38,15 @@ class Login extends React.Component {
     this.setState(updatedState);
   }
 
+  /**
+   * Inverts the current state value of the save field
+   * @return {void}
+   */
   handleSavingChange() {
     this.setState((prevState) => {
       const save = !prevState.save;
-      return { save }
-    })
+      return { save };
+    });
   }
 
   render() {
@@ -69,7 +74,7 @@ class Login extends React.Component {
                 onChange={event => this.handleChange(event, 'password')}
               />
               <label htmlFor="save">
-                <input type="checkbox" id="save" onChange={() => this.handleSavingChange()}/>
+                <input type="checkbox" id="save" onChange={() => this.handleSavingChange()} />
                 Salvar senha
               </label>
             </div>
