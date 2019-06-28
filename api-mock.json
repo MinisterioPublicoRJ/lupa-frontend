@@ -1,33 +1,83 @@
 {
-    "login": {},
-    "entidade": [
-        {
-            "id": 1,
-            "titulo": "Município do Rio de Janeiro",
-            "tipo": "municipio",
-            "geoJSON": {},
-            "listaCaixinhas": []
+  "login": {},
+  "buildings": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "id": 1,
+          "name": "Edifício Canavarro",
+          "address": "Avenida Marechal Câmara, 350"
         },
-        {
-            "id": 2,
-            "titulo": "Niterói",
-            "tipo": "municipio",
-            "geoJSON": {},
-            "listaCaixinhas": []
-        },
-        {
-            "id": 3,
-            "titulo": "São Gonçalo",
-            "tipo": "municipio",
-            "geoJSON": {},
-            "listaCaixinhas": []
-        },
-        {
-            "id": 4,
-            "titulo": "Nilópolis",
-            "tipo": "municipio",
-            "geoJSON": {},
-            "listaCaixinhas": []
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -43.16969007253647,
+            -22.90777133234943
+          ]
         }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "id": 2,
+          "address": "Avenida Marechal Câmara, 370",
+          "name": "Sede Administrativa"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -43.169765174388885,
+            -22.9074995583537
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "id": 3,
+          "name": "Edifício Sede",
+          "address": "Praça Procurador-Geral de Justiça Hermano Odilon dos Anjos, S/N"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -43.169260919094086,
+            -22.907637916092323
+          ]
+        }
+      }
     ]
+  },
+  "entidade": [
+    {
+      "id": 1,
+      "titulo": "Município do Rio de Janeiro",
+      "tipo": "municipio",
+      "geoJSON": {},
+      "listaCaixinhas": []
+    },
+    {
+      "id": 2,
+      "titulo": "Niterói",
+      "tipo": "municipio",
+      "geoJSON": {},
+      "listaCaixinhas": []
+    },
+    {
+      "id": 3,
+      "titulo": "São Gonçalo",
+      "tipo": "municipio",
+      "geoJSON": {},
+      "listaCaixinhas": []
+    },
+    {
+      "id": 4,
+      "titulo": "Nilópolis",
+      "tipo": "municipio",
+      "geoJSON": {},
+      "listaCaixinhas": []
+    }
+  ]
 }
