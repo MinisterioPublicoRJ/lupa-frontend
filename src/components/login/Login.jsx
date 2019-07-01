@@ -1,29 +1,29 @@
-import React from 'react';
-import Api from '../Api/Api';
+import React from 'react'
+import Api from '../Api/Api'
 
-import './Login.scss';
+import './Login.scss'
 
 class Login extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { email: '', password: '', save: false };
+    super(props)
+    this.state = { email: '', password: '', save: false }
   }
 
   loginCallback(jwt) {
     if (jwt) {
-      console.log('Done, ', jwt);
+      console.log('Done, ', jwt)
     } else {
-      console.log('error');
+      console.log('error')
     }
   }
 
   login(event) {
     // blocks default page reload
-    event.preventDefault();
+    event.preventDefault()
 
-    const { email, password } = this.state;
-    Api.login(this.loginCallback, email, password);
-    this.props.history.push('/home');
+    const { email, password } = this.state
+    Api.login(this.loginCallback, email, password)
+    this.props.history.push('/home')
   }
 
   /**
@@ -33,9 +33,9 @@ class Login extends React.Component {
    * @return {void}
    */
   handleChange(event, type) {
-    const updatedState = {};
-    updatedState[type] = event.target.value;
-    this.setState(updatedState);
+    const updatedState = {}
+    updatedState[type] = event.target.value
+    this.setState(updatedState)
   }
 
   /**
@@ -44,13 +44,13 @@ class Login extends React.Component {
    */
   handleSavingChange() {
     this.setState((prevState) => {
-      const save = !prevState.save;
-      return { save };
-    });
+      const save = !prevState.save
+      return { save }
+    })
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password } = this.state
     return (
       <div className="wrapper">
         <div className="Login-container">
@@ -62,16 +62,18 @@ class Login extends React.Component {
               <input
                 className="Login-input"
                 placeholder="Email"
-                type="text"
+                type="email"
                 value={email}
                 onChange={event => this.handleChange(event, 'email')}
+                required
               />
               <input
                 className="Login-input"
                 placeholder="Senha"
-                type="text"
+                type="password"
                 value={password}
                 onChange={event => this.handleChange(event, 'password')}
+                required
               />
               <label htmlFor="save">
                 <input type="checkbox" id="save" onChange={() => this.handleSavingChange()} />
@@ -84,8 +86,8 @@ class Login extends React.Component {
           </form>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Login;
+export default Login
