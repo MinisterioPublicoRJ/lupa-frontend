@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "buildandserve": "npm run buildprod && npm run servep",
     "buildprod": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
