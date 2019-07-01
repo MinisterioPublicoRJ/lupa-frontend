@@ -7,6 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.0",
+    "express": "^4.17.1",
     "leaflet": "^1.5.1",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
@@ -20,10 +21,12 @@
     "victory": "^32.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "startdev": "react-scripts start",
+    "start": "npm run buildprod && npm run servep",
+    "buildprod": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "servep": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
