@@ -1,0 +1,28 @@
+.Recents-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: 15vh;
+  left: 0;
+  height: 20vh;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.Recents-title {
+  color: #2C496B;
+  font-family: 'Roboto';
+  margin: 10px 0 10px 10px;
+}
+
+.Recents-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Card-container {
+  background-color: white;
+  border-radius: 15px;
+  height: calc((20vh - 36px) * 0.8);
+  display: flex;
+  width: calc((20vh - 36px) * 0.8);
+}
