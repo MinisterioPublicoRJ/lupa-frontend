@@ -24,6 +24,7 @@ class Login extends React.Component {
     event.preventDefault()
 
     const { email, password } = this.state
+    const { history } = this.props
     Api.login(this.loginCallback, email, password)
   }
 
