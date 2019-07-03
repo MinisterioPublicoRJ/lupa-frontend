@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import bbox from '@turf/bbox'
 // import PropTypes from 'prop-types';
 import {
   Map, GeoJSON, TileLayer,
@@ -65,13 +66,26 @@ const buildingsMock = {
           -22.907637916092323
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "name": "Edifício Jockey Club Brasileiro",
+        "address": "Avenida Almirante Barroso, 139"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.17395,
+          -22.90670
+        ]
+      }
     }
   ]
 }
 
 const mapData = buildingsMock
-
-const position = [-22.90762, -43.16927]
 
 const propTypes = {}
 
@@ -81,14 +95,17 @@ const onEachFeature = (feature, layer) => {
   })
 }
 
-const clickToFeature = (e) => {
-  var layer = e.target;
-  console.log("I clicked on " ,layer.feature.properties);
+const clickToFeature = e => {
+  var layer = e.target
+  console.log("I clicked on " ,layer.feature.properties)
 }
 
-const map = (props) => {
+const map = props => {
+  const bboxArray = bbox(mapData)
+  const corner1 = [bboxArray[1], bboxArray[0]]
+  const corner2 = [bboxArray[3], bboxArray[2]]
   return (
-    <Map center={position} zoom={16} style={{ height: '400px' }}>
+    <Map bounds={[corner1, corner2]} style={{ height: '400px' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -101,5 +118,5 @@ const map = (props) => {
   )
 }
 
-map.propTypes = propTypes;
-export default map;
+map.propTypes = propTypes
+export default map

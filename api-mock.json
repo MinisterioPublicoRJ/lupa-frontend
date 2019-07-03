@@ -47,6 +47,21 @@
             -22.907637916092323
           ]
         }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "id": 4,
+          "name": "Edifício Jockey Club Brasileiro",
+          "address": "Avenida Almirante Barroso, 139"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -43.17395,
+            -22.90670
+          ]
+        }
       }
     ]
   },
