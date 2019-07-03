@@ -1,25 +1,45 @@
-import React from 'react'
-import Api from '../Api/Api'
-import MapView from '../map/Map'
-import Search from '../search/Search'
+import React from 'react';
+import Div100vh from 'react-div-100vh'
+
 import './Home.scss';
+import Search from '../search/Search';
+import Map from '../Map/Map';
+import Filter from '../filter/filter';
 
-// mock buildings
-const buildingsCallback = data => {
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { buildings: null };
+  }
 
+  handleSearching() {
+    console.log('SEARCHING!')
+  }
+
+  handleMenu() {
+    console.log('Menu')
+  }
+
+  handleFiltering(filter) {
+    console.log(filter);
+  }
+
+  render() {
+    return (
+      <Div100vh className="Home-container">
+        <Search
+          searchPressed={() => this.handleSearching()}
+          menuPressed={() => this.handleMenu()}
+        />
+        <div className="Map-view">
+          <Map />
+        </div>
+        <div className="Home-footer">
+          <Filter filterClicked={filter => this.handleFiltering(filter)} />
+        </div>
+      </Div100vh>
+    );
+  }
 }
-Api.buildings(buildingsCallback)
 
-function App() {
-  return (
-    <div className="Home-container">
-      <Search />
-      <MapView />
-      <div className="Home-footer">
-        <p>here goes menu and last viewed</p>
-      </div>
-    </div>
-  );
-}
-
-export default App
+export default Home;
