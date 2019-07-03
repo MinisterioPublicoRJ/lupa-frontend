@@ -7,14 +7,16 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = { email: '', password: '', save: false }
+    this.loginCallback = this.loginCallback.bind(this)
   }
 
-  loginCallback(jwt) {
-    if (jwt) {
-      console.log('Done, ', jwt)
-    } else {
-      console.log('error')
+  loginCallback(response) {
+    if (response.status === 200) {
+      const { history } = this.props
+      localStorage.setItem('token', response.data)
+      history.push('/home')
     }
+    // colocar mensagem de erro aqui
   }
 
   login(event) {
@@ -24,7 +26,6 @@ class Login extends React.Component {
     const { email, password } = this.state
     const { history } = this.props
     Api.login(this.loginCallback, email, password)
-    history.push('/home')
   }
 
   /**
@@ -62,8 +63,8 @@ class Login extends React.Component {
             <div className="Login-inputs">
               <input
                 className="Login-input"
-                placeholder="Email"
-                type="email"
+                placeholder="Usuário"
+                type="text"
                 value={email}
                 onChange={event => this.handleChange(event, 'email')}
                 required

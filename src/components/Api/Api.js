@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // const API_URL = `http://localhost:5000`
 const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
-const LOGIN_MOCK = false
 
 const Api = (() => {
   function login(callback, username, password) {
@@ -11,11 +10,14 @@ const Api = (() => {
     formData.set('username', username)
     formData.set('password', password)
 
-    axios.post(`${API_URL}/login/`, formData)
-    .then((response) => {
-      console.log(response)
-    })
-    .catch((err) => console.log('failed!'))
+    axios
+      .post(`${API_URL}/login/`, formData)
+      .then((response) => {
+        callback(response)
+      })
+      .catch((error) => {
+        callback(error)
+      })
   }
 
   return {
