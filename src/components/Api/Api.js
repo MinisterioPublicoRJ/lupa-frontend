@@ -4,6 +4,14 @@ import axios from 'axios'
 const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
 
 const Api = (() => {
+  function buildings(callback) {
+    axios
+      .get(`${API_URL}/buildings`)
+      .then(response => {
+        callback(response)
+      })
+  }
+
   function login(callback, username, password) {
     const formData = new FormData()
 
@@ -21,7 +29,8 @@ const Api = (() => {
   }
 
   return {
-    login,
+    buildings,
+    login
   }
 })()
 
