@@ -3,7 +3,7 @@ import Div100vh from 'react-div-100vh'
 
 import './Home.scss';
 import Search from '../search/Search';
-import Map from '../Map/Map';
+import Map from '../map/Map';
 import Filter from '../filter/filter';
 
 class Home extends React.Component {
