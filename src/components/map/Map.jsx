@@ -105,7 +105,7 @@ const map = props => {
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
   return (
-    <Map bounds={[corner1, corner2]} style={{ height: '100%' }}>
+    <Map bounds={[corner1, corner2]} style={{ height: '100%' }} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
