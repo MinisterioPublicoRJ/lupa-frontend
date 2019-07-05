@@ -2,6 +2,7 @@ import React from 'react'
 import Div100vh from 'react-div-100vh'
 
 import './Home.scss'
+import Contents from '../contents/Contents'
 import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/filter'
@@ -32,13 +33,13 @@ class Home extends React.Component {
           searchPressed={() => this.handleSearching()}
           menuPressed={() => this.handleMenu()}
         />
-        <div className="Map-view">
+        <div className="Main-container">
           <Map />
           <Recents />
+          <hr/>
+          <Contents />
         </div>
-        <div className="Home-footer">
-          <Filter filterClicked={filter => this.handleFiltering(filter)} />
-        </div>
+        <Filter filterClicked={filter => this.handleFiltering(filter)} />
       </Div100vh>
     )
   }

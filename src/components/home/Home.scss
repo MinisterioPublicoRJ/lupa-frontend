@@ -6,14 +6,13 @@
   z-index: 0;
 }
 
-.Map-view {
+.Main-container {
   height: 85vh;
   display: block;
+  position: relative;
   width: 100%;
-}
 
-.Home-footer {
-  background-color: pink;
-  height: 15vh;
-  width: 100%;
+  hr {
+    width: 7%;
+  }
 }
