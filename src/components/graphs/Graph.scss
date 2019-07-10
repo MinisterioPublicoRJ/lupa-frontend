@@ -1,0 +1,55 @@
+.Graph-container {
+  border: 1px solid #E8E8E8;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding: 5px;
+  margin: 5% 5px 5% 5px;
+  width: calc(100% - 5px);
+}
+
+.Graph-header {
+  display: flex;
+  min-height: 10vh;
+  padding: 5px;
+}
+
+.Graph-title-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: calc(90% - 10px);
+}
+
+.Graph-title-left {
+  display: flex;
+  justify-content: flex-end;
+  width: 10%;
+}
+
+.Graph-name {
+  color: #929698;
+  display: grid;
+  font-family: Roboto; //medium
+  font-size: 3vh;
+  margin: 5px 0 5px 0;
+}
+
+.Graph-description {
+  color: #929698;
+  display: grid;
+  font-family: Roboto; //medium
+  font-size: 2.5vh;
+  margin: 5px 0 5px 0;
+}
+
+.Graph-source {
+  color: #929698;
+  display: grid;
+  font-family: Roboto; //light
+  font-size: 2vh;
+  margin: 5px 0 5px 0;
+  text-align: right;
+  width: 100%;
+}
