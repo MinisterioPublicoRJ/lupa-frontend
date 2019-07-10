@@ -33,38 +33,38 @@ const data = [
   //   type: 'unordered list',
   // },
   {
-    title: 'Servidores na promotoria promotoria',
+    title: 'Gráfico de barras',
     source: 'MGP',
-    description: 'description goes here! description goes here! description goes here! description goes here!',
     graph: {
-      type: 'pie',
+      type: 'bar',
       data: [
-        {
-          x: 1,
-          y: 120,
-        },
-        {
-          x: 2,
-          y: 150,
-        },
-        {
-          x: 3,
-          y: 75,
-        },
+        { x: new Date(1986, 1, 1), y: 2 },
+        { x: new Date(1996, 1, 1), y: 3 },
+        { x: new Date(2006, 1, 1), y: 5 },
+        { x: new Date(2016, 1, 1), y: 4 },
       ],
     },
     type: 'graph',
   },
   // {
-  //   title: 'Gráfico de barras',
+  //   title: 'Servidores na promotoria promotoria',
   //   source: 'MGP',
+  //   description: 'description goes here! description goes here! description goes here! description goes here!',
   //   graph: {
-  //     type: 'bar',
+  //     type: 'pie',
   //     data: [
-  //       { x: new Date(1986, 1, 1), y: 2 },
-  //       { x: new Date(1996, 1, 1), y: 3 },
-  //       { x: new Date(2006, 1, 1), y: 5 },
-  //       { x: new Date(2016, 1, 1), y: 4 },
+  //       {
+  //         x: 1,
+  //         y: 120,
+  //       },
+  //       {
+  //         x: 2,
+  //         y: 150,
+  //       },
+  //       {
+  //         x: 3,
+  //         y: 75,
+  //       },
   //     ],
   //   },
   //   type: 'graph',

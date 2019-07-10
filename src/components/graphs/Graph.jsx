@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 
 import './Graph.scss'
 import GraphPie from './GraphPie'
+import GraphBar from './graphBar'
 
-const checkGraphType = ({ type, ...otherProps }) => {
+const checkGraphType = ({ type, data }) => {
   switch (type) {
     case 'pie':
-      return <GraphPie {...otherProps} />
+      return <GraphPie data={data} />
+    case 'bar':
+      return <GraphBar data={data} />
     default:
       return <div>error!</div>
   }
