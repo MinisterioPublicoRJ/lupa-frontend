@@ -33,6 +33,7 @@ const propTypes = {
   infoPressed: PropTypes.func,
   sourcePressed: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.string),
+  highlight: PropTypes.bool,
 }
 
 const defaultProps = {
@@ -42,6 +43,7 @@ const defaultProps = {
   infoPressed: () => console.log('hello'),
   sourcePressed: () => console.log('hello'),
   categories: [],
+  highlight: false,
 }
 
 const colorScale = ['#000000', '#0000FF', '#FF6347']
@@ -55,20 +57,32 @@ const graph = ({
   infoPressed,
   sourcePressed,
   categories,
+  highlight,
 }) => (
-  <div className="Graph-container">
+  <div className="Graph-container" style={highlight && { backgroundColor: '#35B1FD' }}>
     <div className="Graph-header">
       <div className="Graph-title-right">
-        <span className="Graph-name">{title.toLocaleUpperCase('pt-br')}</span>
-        {description && <span className="Graph-description ">{description}</span>}
+        <span className="Graph-name" style={highlight && { color: '#FFFFFF' }}>
+          {title.toLocaleUpperCase('pt-br')}
+        </span>
+        {description && (
+          <span className="Graph-description" style={highlight && { color: '#FFFFFF' }}>
+            {description}
+          </span>
+        )}
       </div>
       <div className="Graph-title-left" onClick={() => infoPressed()}>
         i
       </div>
     </div>
-    <div className="Graph-body">{checkGraphType({ type, data })}</div>
+    <div className="Graph-body" style={highlight && { backgroundColor: '#FFFFFF' }}>
+      {checkGraphType({ type, data })}
+    </div>
     {categories && (
-      <div className="Graph-categories-container">
+      <div
+        className="Graph-categories-container"
+        style={highlight && { backgroundColor: '#FFFFFF' }}
+      >
         {categories.map((item, i) => (
           <span className="Graph-categories">
             <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
@@ -78,7 +92,11 @@ const graph = ({
       </div>
     )}
     {source && (
-      <span className="Graph-source" onClick={() => sourcePressed()}>
+      <span
+        className="Graph-source"
+        onClick={() => sourcePressed()}
+        style={highlight && { color: '#FFFFFF' }}
+      >
         mais detalhes ->
       </span>
     )}

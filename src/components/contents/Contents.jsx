@@ -51,6 +51,7 @@ const data = [
     source: 'MGP',
     graph: {
       type: 'stackedBar',
+      highlight: true,
       data: [
         [{ x: 'a', y: 2 }, { x: 'b', y: 3 }, { x: 'c', y: 5 }],
         [{ x: 'a', y: 1 }, { x: 'b', y: 4 }, { x: 'c', y: 5 }],

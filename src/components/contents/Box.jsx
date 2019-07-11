@@ -17,6 +17,7 @@ const Box = ({ content }) => {
       return (
         <Graph
           type={content.graph.type}
+          highlight={content.graph.highlight}
           title={content.title}
           description={content.description}
           data={content.graph.data}
