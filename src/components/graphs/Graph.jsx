@@ -59,14 +59,14 @@ const graph = ({
   categories,
   highlight,
 }) => (
-  <div className="Graph-container" style={highlight && { backgroundColor: '#35B1FD' }}>
+  <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
     <div className="Graph-header">
       <div className="Graph-title-right">
-        <span className="Graph-name" style={highlight && { color: '#FFFFFF' }}>
+        <span className="Graph-name" style={highlight ? { color: '#FFFFFF' } : null}>
           {title.toLocaleUpperCase('pt-br')}
         </span>
         {description && (
-          <span className="Graph-description" style={highlight && { color: '#FFFFFF' }}>
+          <span className="Graph-description" style={highlight ? { color: '#FFFFFF' } : null}>
             {description}
           </span>
         )}
@@ -75,13 +75,13 @@ const graph = ({
         i
       </div>
     </div>
-    <div className="Graph-body" style={highlight && { backgroundColor: '#FFFFFF' }}>
+    <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
       {checkGraphType({ type, data })}
     </div>
     {categories && (
       <div
         className="Graph-categories-container"
-        style={highlight && { backgroundColor: '#FFFFFF' }}
+        style={highlight ? { backgroundColor: '#35B1FD' } : null}
       >
         {categories.map((item, i) => (
           <span className="Graph-categories">
@@ -95,7 +95,7 @@ const graph = ({
       <span
         className="Graph-source"
         onClick={() => sourcePressed()}
-        style={highlight && { color: '#FFFFFF' }}
+        style={highlight ? { color: '#FFFFFF' } : null}
       >
         mais detalhes ->
       </span>

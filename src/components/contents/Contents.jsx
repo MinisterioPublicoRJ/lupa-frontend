@@ -61,29 +61,29 @@ const data = [
     },
     type: 'graph',
   },
-  // {
-  //   title: 'Servidores na promotoria promotoria',
-  //   source: 'MGP',
-  //   description: 'description goes here! description goes here! description goes here! description goes here!',
-  //   graph: {
-  //     type: 'pie',
-  //     data: [
-  //       {
-  //         x: 1,
-  //         y: 120,
-  //       },
-  //       {
-  //         x: 2,
-  //         y: 150,
-  //       },
-  //       {
-  //         x: 3,
-  //         y: 75,
-  //       },
-  //     ],
-  //   },
-  //   type: 'graph',
-  // },
+  {
+    title: 'Servidores na promotoria promotoria',
+    source: 'MGP',
+    description: 'description goes here! description goes here! description goes here! description goes here!',
+    graph: {
+      type: 'pie',
+      data: [
+        {
+          x: 1,
+          y: 120,
+        },
+        {
+          x: 2,
+          y: 150,
+        },
+        {
+          x: 3,
+          y: 75,
+        },
+      ],
+    },
+    type: 'graph',
+  },
 ]
 
 const Contents = () => (
