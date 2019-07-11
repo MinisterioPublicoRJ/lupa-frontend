@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import './Graph.scss'
 import GraphPie from './GraphPie'
 import GraphBar from './graphBar'
+import GraphStackedBar from './graphStackedBar'
 
 const checkGraphType = ({ type, data }) => {
   switch (type) {
@@ -11,6 +12,8 @@ const checkGraphType = ({ type, data }) => {
       return <GraphPie data={data} />
     case 'bar':
       return <GraphBar data={data} />
+    case 'stackedBar':
+      return <GraphStackedBar data={data} />
     default:
       return <div>error!</div>
   }
@@ -29,6 +32,7 @@ const propTypes = {
   source: PropTypes.string,
   infoPressed: PropTypes.func,
   sourcePressed: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.string),
 }
 
 const defaultProps = {
@@ -37,10 +41,20 @@ const defaultProps = {
   source: null,
   infoPressed: () => console.log('hello'),
   sourcePressed: () => console.log('hello'),
+  categories: [],
 }
 
+const colorScale = ['#000000', '#0000FF', '#FF6347']
+
 const graph = ({
-  type, title, description, data, source, infoPressed, sourcePressed,
+  type,
+  title,
+  description,
+  data,
+  source,
+  infoPressed,
+  sourcePressed,
+  categories,
 }) => (
   <div className="Graph-container">
     <div className="Graph-header">
@@ -53,6 +67,16 @@ const graph = ({
       </div>
     </div>
     <div className="Graph-body">{checkGraphType({ type, data })}</div>
+    {categories && (
+      <div className="Graph-categories-container">
+        {categories.map((item, i) => (
+          <span className="Graph-categories">
+            <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
+            {item}
+          </span>
+        ))}
+      </div>
+    )}
     {source && (
       <span className="Graph-source" onClick={() => sourcePressed()}>
         mais detalhes ->

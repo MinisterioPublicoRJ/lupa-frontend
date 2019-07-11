@@ -10,8 +10,7 @@ const propTypes = {
     }),
   ).isRequired,
 }
-// const defaultProps = {}
-//
+
 const graphStyle = {
   data: { fill: 'tomato' },
   labels: { textAnchor: 'middle' },
@@ -30,5 +29,4 @@ const graphBar = ({ data }) => {
 }
 
 graphBar.propTypes = propTypes
-// graphBar.defaultProps = defaultProps
 export default graphBar

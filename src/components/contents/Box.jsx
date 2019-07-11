@@ -20,6 +20,7 @@ const Box = ({ content }) => {
           title={content.title}
           description={content.description}
           data={content.graph.data}
+          categories={content.graph.categories}
           source={content.source}
         />
       )

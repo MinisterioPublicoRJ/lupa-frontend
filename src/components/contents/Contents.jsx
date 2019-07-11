@@ -32,17 +32,31 @@ const data = [
   //   image: 'https://slipsum.com/wp-content/themes/15zine/img/sam.png',
   //   type: 'unordered list',
   // },
+  // {
+  //   title: 'Gráfico de barras',
+  //   source: 'MGP',
+  //   graph: {
+  //     type: 'bar',
+  //     data: [
+  //       { x: new Date(1986, 1, 1), y: 2 },
+  //       { x: new Date(1996, 1, 1), y: 3 },
+  //       { x: new Date(2006, 1, 1), y: 5 },
+  //       { x: new Date(2016, 1, 1), y: 4 },
+  //     ],
+  //   },
+  //   type: 'graph',
+  // },
   {
     title: 'Gráfico de barras',
     source: 'MGP',
     graph: {
-      type: 'bar',
+      type: 'stackedBar',
       data: [
-        { x: new Date(1986, 1, 1), y: 2 },
-        { x: new Date(1996, 1, 1), y: 3 },
-        { x: new Date(2006, 1, 1), y: 5 },
-        { x: new Date(2016, 1, 1), y: 4 },
+        [{ x: 'a', y: 2 }, { x: 'b', y: 3 }, { x: 'c', y: 5 }],
+        [{ x: 'a', y: 1 }, { x: 'b', y: 4 }, { x: 'c', y: 5 }],
+        [{ x: 'a', y: 3 }, { x: 'b', y: 2 }, { x: 'c', y: 6 }],
       ],
+      categories: ['legenda1', 'legenda2', 'legenda 3'],
     },
     type: 'graph',
   },
