@@ -1,8 +1,8 @@
 import React from 'react'
 import { VictoryPie } from 'victory'
 
-const GraphPie = ({ content }) => {
-  return <VictoryPie data={content.data} />
+const GraphPie = ({ data }) => {
+  return <VictoryPie data={data} />
 }
 
 export default GraphPie
