@@ -7,6 +7,9 @@ import LongBox from './LongBox'
 import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
+import Person from '../person/Person'
+
+// ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
 
 const Box = ({ content }) => {
   switch (content.type) {
@@ -50,8 +53,12 @@ const Box = ({ content }) => {
           source={content.source}
         />
       )
+    case 'person':
+      return (
+        <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
+      )
     default:
-      return content
+      return <div>INSIRA AQUI UM ERRO MELHOR!</div>
   }
 }
 
