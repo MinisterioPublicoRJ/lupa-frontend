@@ -1,17 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import './Box.scss'
 
-const NumberBox = ({content}) => {
-  return <div className="box">
-    <h1>{content.title}</h1>
-    <h2>{content.number}</h2>
-    {
-      content && content.text
-      ? <p>{content.text}</p>
-      : null
-    }
-    <small>{content.source}</small>
-  </div>
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  description: PropTypes.string,
 }
+const defaultProps = { description: null }
 
+const NumberBox = ({ title, value, description }) => (
+  <div className="box Number-box">
+    <div className="Number-box-title">{title.toLocaleUpperCase('pt-br')}</div>
+    <div className="Number-box-value">{value}</div>
+    {description && <div className="Number-box-description">{description}</div>}
+  </div>
+)
+
+NumberBox.propTypes = propTypes
+NumberBox.defaultProps = defaultProps
 export default NumberBox

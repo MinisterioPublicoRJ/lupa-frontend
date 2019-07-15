@@ -2,8 +2,158 @@
   background: #FFF;
   border: 1px solid #E8E8E8;
   border-radius: 3px;
+  margin: 2.5% 5px 2.5% 5px;
+  padding: 5px;
 
   &--image {
     max-width: 100%;
   }
+}
+
+.Number-box {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 30vh;
+  justify-content: center;
+  max-height: 400px;
+  max-width: 45%;
+  overflow: hidden;
+}
+
+.Number-box-title {
+  align-items: flex-end;
+  color: #706E6E;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  font-family: roboto;
+  font-weight: 500; //medium
+  font-size: 2.5vh;
+  max-height: 30%;
+  padding: 10px;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.Number-box-value {
+  align-items: center;
+  color: #009DFD;
+  display: flex;
+  flex: 1.5;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 5vh;
+  justify-content: center;
+  max-height: 30%;
+  text-align: center;
+  width: 100%;
+}
+
+.Number-box-description {
+  align-items: flex-start;
+  color: #929698;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  font-family: roboto;
+  font-weight: 400; // light
+  font-size: 2vh;
+  max-height: 30%;
+  padding: 10px;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.ContrastBox-container {
+  align-items: center;
+  background-color: #00A5FD;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 30vh;
+  justify-content: center;
+  max-height: 400px;
+  max-width: 45%;
+  overflow: hidden;
+}
+
+.ContrastBox-value {
+  align-items: flex-end;
+  color: #FFF;
+  display: flex;
+  flex: 3;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 5vh;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.ContrastBox-title {
+  align-items: flex-start;
+  color: #FFF;
+  display: flex;
+  flex: 2;
+  flex-wrap: wrap;
+  font-family: roboto;
+  font-weight: 500; //medium
+  font-size: 2.5vh;
+  padding: 10px;
+  text-align: center;
+}
+
+.LongBox-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 10vh;
+  max-height: 70px;
+  overflow: hidden;
+  padding: 5px 0 5px 0;
+  width: 100%;
+}
+
+.LongBox-icon {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  max-height: 100%;
+  justify-content: center;
+}
+
+.LongBox-title {
+  align-items: center;
+  color: #009DFD;
+  display: flex;
+  flex: 4.5;
+  font-family: roboto;
+  font-weight: 500; //medium
+  font-size: 2.5vh;
+  padding-right: 10px;
+}
+
+.LongBox-value {
+  align-items: center;
+  color: #009DFD;
+  display: flex;
+  flex-wrap: wrap;
+  flex: 4.5;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 3vh;
+  max-height: 100%;
+  padding-left: 10px;
+  justify-content: flex-end;
+}
+
+.LongBox-arrow {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
 }
