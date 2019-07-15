@@ -5,7 +5,7 @@ import './Home.scss'
 import Contents from '../contents/Contents'
 import Search from '../search/Search'
 import Map from '../map/Map'
-import Filter from '../filter/filter'
+import Filter from '../filter/Filter'
 import Recents from '../recents/recents'
 
 class Home extends React.Component {
