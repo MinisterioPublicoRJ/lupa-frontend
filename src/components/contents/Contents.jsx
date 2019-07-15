@@ -8,13 +8,13 @@ const data = [
     source: 'MGP',
     description: 'Dados da promotoria',
     value: '35',
-    type: 'number-contrast',
+    type: 'long-box',
   },
   {
     title: 'Servidores na promotoria - o retorno Servidores na promotoria - o retorno Servidores na promotoria - o retorno',
     source: 'MGP',
     value: 'R$1.000.000,00',
-    type: 'number-contrast',
+    type: 'long-box',
   },
   // {
   //   title: 'Servidores na promotoria',

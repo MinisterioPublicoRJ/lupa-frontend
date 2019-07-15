@@ -1,6 +1,7 @@
 import React from 'react'
 import NumberBox from './NumberBox'
 import ContrastBox from './ContrastBox'
+import LongBox from './LongBox'
 import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
@@ -19,6 +20,13 @@ const Box = ({ content }) => {
     case 'number-contrast':
       return (
         <ContrastBox
+          title={content.title}
+          value={content.value}
+        />
+      )
+    case 'long-box':
+      return (
+        <LongBox
           title={content.title}
           value={content.value}
         />
