@@ -5,11 +5,9 @@ const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
 
 const Api = (() => {
   function buildings(callback) {
-    axios
-      .get(`${API_URL}/buildings`)
-      .then(response => {
-        callback(response)
-      })
+    axios.get(`${API_URL}/buildings`).then((response) => {
+      callback(response)
+    })
   }
 
   function login(callback, username, password) {
@@ -30,7 +28,7 @@ const Api = (() => {
 
   return {
     buildings,
-    login
+    login,
   }
 })()
 
