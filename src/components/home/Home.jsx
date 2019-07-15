@@ -36,7 +36,7 @@ class Home extends React.Component {
         <div className="Main-container">
           <Map />
           <Recents />
-          <hr/>
+          <hr />
           <Contents />
         </div>
         <Filter filterClicked={filter => this.handleFiltering(filter)} />
