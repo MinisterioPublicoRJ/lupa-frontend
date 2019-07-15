@@ -1,8 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import './Box.scss'
 
-// {content && content.text ? <p>{content.text}</p> : null}
-// <small>{content.source}</small>
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  description: PropTypes.string,
+}
+const defaultProps = { description: null }
+
 const NumberBox = ({ title, value, description }) => (
   <div className="box Number-box">
     <div className="Number-box-title">{title.toLocaleUpperCase('pt-br')}</div>
@@ -11,4 +18,6 @@ const NumberBox = ({ title, value, description }) => (
   </div>
 )
 
+NumberBox.propTypes = propTypes
+NumberBox.defaultProps = defaultProps
 export default NumberBox
