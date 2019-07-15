@@ -31,6 +31,14 @@ const Box = ({ content }) => {
           value={content.value}
         />
       )
+    case 'long-box-contrast':
+      return (
+        <LongBox
+          title={content.title}
+          value={content.value}
+          contrast
+        />
+      )
     case 'ordered list':
       return <OrderedList content={content} />
     case 'unordered list':
