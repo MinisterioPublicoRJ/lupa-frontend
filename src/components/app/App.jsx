@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import './App.scss';
-import MainNavigator from '../../navigators/MainNavigator';
+import './App.scss'
+import MainNavigator from '../../navigators/MainNavigator'
 
 function App() {
-  return (<MainNavigator />);
+  return <MainNavigator />
 }
 
-export default App;
+export default App

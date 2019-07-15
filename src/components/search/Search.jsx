@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
 
-import './Search.scss';
+import './Search.scss'
 
 const propTypes = {
   menuPressed: PropTypes.func.isRequired,
@@ -11,7 +11,7 @@ const propTypes = {
 }
 
 function search(props) {
-  const text = 'Pesquise Municípios, Prédios e Órgãos';
+  const text = 'Pesquise Municípios, Prédios e Órgãos'
   return (
     <div className="Search-container">
       <div className="Search-view">
@@ -32,8 +32,8 @@ function search(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
-search.propTypes = propTypes;
+search.propTypes = propTypes
 
-export default search;
+export default search

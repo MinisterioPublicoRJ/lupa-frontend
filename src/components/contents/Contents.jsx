@@ -8,10 +8,11 @@ const data = [
     source: 'MGP',
     description: 'Dados da promotoria',
     value: '35',
-    type: 'long-box-contrast',
+    type: 'small-box',
   },
   {
-    title: 'Servidores na promotoria - o retorno Servidores na promotoria - o retorno Servidores na promotoria - o retorno',
+    title:
+      'Servidores na promotoria - o retorno Servidores na promotoria - o retorno Servidores na promotoria - o retorno',
     source: 'MGP',
     value: 'R$1.000.000,00',
     type: 'long-box-contrast',
@@ -70,7 +71,8 @@ const data = [
   {
     title: 'Servidores na promotoria promotoria',
     source: 'MGP',
-    description: 'description goes here! description goes here! description goes here! description goes here!',
+    description:
+      'description goes here! description goes here! description goes here! description goes here!',
     graph: {
       type: 'pie',
       data: [

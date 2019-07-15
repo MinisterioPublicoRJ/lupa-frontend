@@ -1,48 +1,43 @@
 import React from 'react'
-import NumberBox from './NumberBox'
-import ContrastBox from './ContrastBox'
+
+import './Box.scss'
+import SmallBox from './SmallBox'
+import SmallBoxContrast from './SmallBoxContrast'
 import LongBox from './LongBox'
 import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
-import './Box.scss'
 
 const Box = ({ content }) => {
   switch (content.type) {
-    case 'number':
+    case 'small-box':
       return (
-        <NumberBox
-          title={content.title}
-          value={content.value}
-          description={content.description}
-        />
+        <SmallBox title={content.title} value={content.value} description={content.description} />
       )
-    case 'number-contrast':
-      return (
-        <ContrastBox
-          title={content.title}
-          value={content.value}
-        />
-      )
+    case 'small-box-contrast':
+      return <SmallBoxContrast title={content.title} value={content.value} />
     case 'long-box':
-      return (
-        <LongBox
-          title={content.title}
-          value={content.value}
-        />
-      )
+      return <LongBox title={content.title} value={content.value} />
     case 'long-box-contrast':
+      return <LongBox title={content.title} value={content.value} contrast />
+    case 'ordered list':
       return (
-        <LongBox
+        <OrderedList
           title={content.title}
-          value={content.value}
-          contrast
+          list={content.list}
+          image={content.image}
+          source={content.souce}
         />
       )
-    case 'ordered list':
-      return <OrderedList content={content} />
     case 'unordered list':
-      return <UnorderedList content={content} />
+      return (
+        <UnorderedList
+          title={content.title}
+          list={content.list}
+          image={content.image}
+          source={content.souce}
+        />
+      )
     case 'graph':
       return (
         <Graph

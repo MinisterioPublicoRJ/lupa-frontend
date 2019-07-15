@@ -5,8 +5,8 @@ import './Home.scss'
 import Contents from '../contents/Contents'
 import Search from '../search/Search'
 import Map from '../map/Map'
-import Filter from '../filter/filter'
-import Recents from '../recents/recents'
+import Filter from '../filter/Filter'
+import Recents from '../recents/Recents'
 
 class Home extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class Home extends React.Component {
         <div className="Main-container">
           <Map />
           <Recents />
-          <hr/>
+          <hr />
           <Contents />
         </div>
         <Filter filterClicked={filter => this.handleFiltering(filter)} />

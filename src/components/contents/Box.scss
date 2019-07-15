@@ -10,7 +10,7 @@
   }
 }
 
-.Number-box {
+.SmallBox {
   align-items: center;
   display: flex;
   flex: 1;
@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-.Number-box-title {
+.SmallBox-title {
   align-items: flex-end;
   color: #706E6E;
   display: flex;
@@ -38,7 +38,7 @@
   overflow-y: scroll;
 }
 
-.Number-box-value {
+.SmallBox-value {
   align-items: center;
   color: #009DFD;
   display: flex;
@@ -52,7 +52,7 @@
   width: 100%;
 }
 
-.Number-box-description {
+.SmallBox-description {
   align-items: flex-start;
   color: #929698;
   display: flex;
@@ -67,7 +67,7 @@
   overflow-y: scroll;
 }
 
-.ContrastBox-container {
+.SmallBoxContrast-container {
   align-items: center;
   background-color: #00A5FD;
   display: flex;
@@ -81,7 +81,7 @@
   overflow: hidden;
 }
 
-.ContrastBox-value {
+.SmallBoxContrast-value {
   align-items: flex-end;
   color: #FFF;
   display: flex;
@@ -94,7 +94,7 @@
   width: 100%;
 }
 
-.ContrastBox-title {
+.SmallBoxContrast-title {
   align-items: flex-start;
   color: #FFF;
   display: flex;

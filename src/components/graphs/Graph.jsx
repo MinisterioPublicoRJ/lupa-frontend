@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import './Graph.scss'
 import GraphPie from './GraphPie'
-import GraphBar from './graphBar'
-import GraphStackedBar from './graphStackedBar'
+import GraphBar from './GraphBar'
+import GraphStackedBar from './GraphStackedBar'
 
 const checkGraphType = ({ type, data }) => {
   switch (type) {

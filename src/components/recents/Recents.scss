@@ -2,8 +2,8 @@
   background-color: rgba(255, 255, 255, 0.5);
   bottom: 0;
   left: 0;
-  height: 20vh;
   position: absolute;
+  height: 20vh;
   width: 100%;
   z-index: 1000;
 }
@@ -22,7 +22,7 @@
 .Card-container {
   background-color: white;
   border-radius: 15px;
-  height: calc((20vh - 36px) * 0.8);
   display: flex;
+  height: calc((20vh - 36px) * 0.8);
   width: calc((20vh - 36px) * 0.8);
 }

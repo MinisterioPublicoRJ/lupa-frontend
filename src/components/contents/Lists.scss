@@ -3,12 +3,12 @@
   text-transform: uppercase;
 
   &--header {
-    background: #00A5FD;
+    background: #00a5fd;
     padding: 0 2.5%;
   }
 
   &--title {
-    color: #FFF;
+    color: #fff;
     display: inline-block;
     font-size: 21px;
     font-weight: normal;
@@ -26,7 +26,7 @@
     padding: 0 2.5%;
 
     &-item {
-      border-bottom: 1px solid #F8F8F8;
+      border-bottom: 1px solid #f8f8f8;
       color: #929698;
       font-size: 14px;
       font-weight: bold;
@@ -40,7 +40,7 @@
       &__ordered::before {
         border: 1px solid;
         border-radius: 50%;
-        color: #E8E8E8;
+        color: #e8e8e8;
         content: counter(order);
         counter-increment: order;
         display: inline-block;
