@@ -4,6 +4,15 @@ import './Contents.scss'
 
 const data = [
   {
+    type: 'person',
+    name: 'Wilson Witzel',
+    job: 'governor',
+    data: {
+      vice: 'Cláudio Bomfim de Castro e Silva',
+      cargo: 'Vice-Governador',
+    },
+  },
+  {
     title: 'Servidores na promotoria',
     source: 'MGP',
     description: 'Dados da promotoria',
