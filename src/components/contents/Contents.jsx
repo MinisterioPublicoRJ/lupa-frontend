@@ -3,13 +3,19 @@ import Box from './Box'
 import './Contents.scss'
 
 const data = [
-  // {
-  //   title: 'Servidores na promotoria',
-  //   source: 'MGP',
-  //   text: 'Dados da promotoria',
-  //   number: 35,
-  //   type: 'number',
-  // },
+  {
+    title: 'Servidores na promotoria',
+    source: 'MGP',
+    description: 'Dados da promotoria',
+    value: '35',
+    type: 'number',
+  },
+  {
+    title: 'Servidores na promotoria - o retorno Servidores na promotoria - o retorno Servidores na promotoria - o retorno',
+    source: 'MGP',
+    value: 'R$1.000.000,00',
+    type: 'number',
+  },
   // {
   //   title: 'Servidores na promotoria',
   //   source: 'MGP',

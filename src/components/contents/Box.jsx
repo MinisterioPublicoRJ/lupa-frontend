@@ -8,7 +8,13 @@ import './Box.scss'
 const Box = ({ content }) => {
   switch (content.type) {
     case 'number':
-      return <NumberBox content={content} />
+      return (
+        <NumberBox
+          title={content.title}
+          value={content.value}
+          description={content.description}
+        />
+      )
     case 'ordered list':
       return <OrderedList content={content} />
     case 'unordered list':
