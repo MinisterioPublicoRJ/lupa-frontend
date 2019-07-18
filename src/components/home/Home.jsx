@@ -6,7 +6,7 @@ import Contents from '../contents/Contents'
 import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
-import Recents from '../recents/Recents'
+// import Recents from '../recents/Recents'
 
 class Home extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Home extends React.Component {
         />
         <div className="Main-container">
           <Map />
-          <Recents />
+          {/* <Recents /> */}
           <hr />
           <Contents />
         </div>
