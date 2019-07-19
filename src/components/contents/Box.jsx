@@ -14,12 +14,12 @@ import LoadingBox from './LoadingBox'
 
 const Box = ({ content }) => {
   switch (content.data_type) {
-    case 'small-box':
+    case 'texto_pequeno':
       return (
-        <SmallBox title={content.title} value={content.value} description={content.description} />
+        <SmallBox title={content.exibition_field} value={content.external_data.dado} description={content.description} />
       )
-    case 'small-box-contrast':
-      return <SmallBoxContrast title={content.title} value={content.value} />
+    case 'texto_pequeno_destaque':
+      return <SmallBoxContrast title={content.exibition_field} value={content.external_data.dado} description={content.description} />
     case 'long-box':
       return <LongBox title={content.title} value={content.value} />
     case 'long-box-contrast':

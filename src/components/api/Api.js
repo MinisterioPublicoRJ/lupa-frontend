@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'http://10.1.248.57:8000'
-// const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
+// const API_URL = 'http://10.1.248.57:8000'
+const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
 
 const Api = (() => {
   function buildings(callback) {
@@ -41,7 +41,7 @@ const Api = (() => {
    * @return {void}
    */
   function getEntityData(callback, type, id) {
-    axios.get(`${API_URL}/api/${type}/${id}`)
+    axios.get(`${API_URL}/api/${type}/${id}?format=json`)
       .then(response => callback(response.data))
       .catch(error => callback(error))
   }
@@ -55,7 +55,7 @@ const Api = (() => {
    * @return {void}
    */
   function getBoxData(callback, entityType, entityId, boxId) {
-    axios.get(`${API_URL}/api/data/${entityType}/${entityId}/${boxId}`)
+    axios.get(`${API_URL}/api/${entityType}/${entityId}/${boxId}`)
       .then(response => callback(response.data))
       .catch(error => callback(error))
   }
@@ -64,6 +64,7 @@ const Api = (() => {
     buildings,
     login,
     getEntityData,
+    getBoxData,
   }
 })()
 

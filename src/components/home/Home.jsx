@@ -15,12 +15,13 @@ class Home extends React.Component {
     super(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
     this.checkContent = this.checkContent.bind(this)
+    this.renderBox = this.renderBox.bind(this)
   }
 
   componentDidMount() {
     const { loading } = this.state
     if (loading) {
-      Api.getEntityData(this.checkContent, 'MUN', '3300308')
+      Api.getEntityData(this.checkContent, 'MUN', '330455')
     }
   }
 
@@ -52,7 +53,7 @@ class Home extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '3300308', item.id))
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330455', item.id))
   }
 
   handleSearching() {
@@ -81,7 +82,7 @@ class Home extends React.Component {
 
       return box
     })
-
+    console.log(newContent);
     this.setState({ content: newContent })
   }
 
