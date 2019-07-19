@@ -26,9 +26,22 @@ const Api = (() => {
       })
   }
 
+  function getEntityData(callback, type, id) {
+    axios.get(`${API_URL}/api/${type}/${id}`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error))
+  }
+
+  function getBoxData(callback, entityType, entityId, boxId) {
+    axios.get(`${API_URL}/api/data/${entityType}/${entityId}/${boxId}`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error))
+  }
+
   return {
     buildings,
     login,
+    getEntityData,
   }
 })()
 

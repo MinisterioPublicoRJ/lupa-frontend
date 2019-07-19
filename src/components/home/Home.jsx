@@ -6,27 +6,79 @@ import Contents from '../contents/Contents'
 import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
+import FullScreenLoading from '../utils/FullScreenLoading'
+import Api from '../api/Api'
 // import Recents from '../recents/Recents'
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { buildings: null }
+    this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
+    this.checkContent = this.checkContent.bind(this)
+  }
+
+  componentDidMount() {
+    const { loading } = this.state
+    if (loading) {
+      Api.getEntityData(this.checkContent, 'MUN', '330455')
+    }
+  }
+
+  checkContent(entityResponse) {
+    if (!entityResponse.data_list) {
+      this.setState({ loading: false, error: entityResponse })
+      return
+    }
+
+    const loadingBoxes = entityResponse.data_list.map(info => ({
+      id: info.id,
+      data_type: 'loading',
+    }))
+    this.setState({ loading: false, content: loadingBoxes })
+
+    this.loadBoxes(entityResponse.data_list)
+  }
+
+  loadBoxes(dataList) {
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330030', item.id))
   }
 
   handleSearching() {
     console.log('SEARCHING!')
   }
 
-  handleMenu() {
-    console.log('Menu')
+  // NOT FOR VERSION ONE
+  // handleMenu() {
+  //   console.log('Menu')
+  // }
+
+  /**
+   * Changes the current filter applied to the content
+   * NOT FOR VERSION ONE
+   * @param  {string} filter filter name
+   * @return {void}
+   */
+  handleFiltering(filter) {
+    this.setState({ activeFilter: filter })
   }
 
-  handleFiltering(filter) {
-    console.log(filter)
+  renderBox(updatedBox) {
+    const { content } = this.state
+    const newContent = content.map((box) => {
+      if (box.id === updatedBox.id) return updatedBox
+
+      return box
+    })
+
+    this.setState({ content: newContent })
   }
 
   render() {
+    const {
+      loading, activeFilter, content, error,
+    } = this.state
+
+    if (loading) return <FullScreenLoading />
     return (
       <Div100vh className="Home-container">
         <Search
@@ -37,9 +89,9 @@ class Home extends React.Component {
           <Map />
           {/* <Recents /> */}
           <hr />
-          <Contents />
+          <Contents error={error} boxes={content} />
         </div>
-        <Filter filterClicked={filter => this.handleFiltering(filter)} />
+        <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
       </Div100vh>
     )
   }
