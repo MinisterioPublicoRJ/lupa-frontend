@@ -20,10 +20,17 @@ class Home extends React.Component {
   componentDidMount() {
     const { loading } = this.state
     if (loading) {
-      Api.getEntityData(this.checkContent, 'MUN', '330455')
+      Api.getEntityData(this.checkContent, 'MUN', '3300308')
     }
   }
 
+  /**
+   * Callback from the getEntityData function
+   * Handles database response, updating the state with the error
+   * or new data and loading the entity's boxes if they exist
+   * @param  {json || string} entityResponse whatever comer from the database
+   * @return {void}
+   */
   checkContent(entityResponse) {
     if (!entityResponse.data_list) {
       this.setState({ loading: false, error: entityResponse })
@@ -39,8 +46,13 @@ class Home extends React.Component {
     this.loadBoxes(entityResponse.data_list)
   }
 
+  /**
+   * Creates promises to get the boxes' content from the database
+   * @param  {array} dataList Array of jsons with the boxes id's
+   * @return {void}
+   */
   loadBoxes(dataList) {
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330030', item.id))
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '3300308', item.id))
   }
 
   handleSearching() {
