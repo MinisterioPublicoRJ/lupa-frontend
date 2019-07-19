@@ -8,17 +8,18 @@ import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
 import Person from '../person/Person'
+import LoadingBox from './LoadingBox'
 
 // ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
 
 const Box = ({ content }) => {
-  switch (content.type) {
-    case 'small-box':
+  switch (content.data_type) {
+    case 'texto_pequeno':
       return (
-        <SmallBox title={content.title} value={content.value} description={content.description} />
+        <SmallBox title={content.exibition_field} value={content.external_data.dado} description={content.description} />
       )
-    case 'small-box-contrast':
-      return <SmallBoxContrast title={content.title} value={content.value} />
+    case 'texto_pequeno_destaque':
+      return <SmallBoxContrast title={content.exibition_field} value={content.external_data.dado} description={content.description} />
     case 'long-box':
       return <LongBox title={content.title} value={content.value} />
     case 'long-box-contrast':
@@ -57,6 +58,8 @@ const Box = ({ content }) => {
       return (
         <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
       )
+    case 'loading':
+      return (<LoadingBox />)
     default:
       return <div>INSIRA AQUI UM ERRO MELHOR!</div>
   }

@@ -1,0 +1,37 @@
+.Error-container {
+  align-items: center;
+  background-color: #00A5FD;
+  border: 1px solid #E8E8E8;
+  border-radius: 3px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 25vh;
+  max-height: 400px;
+  margin: 2.5% 5px 2.5% 5px;
+  overflow: hidden;
+  padding: 25px;
+  width: 100%;
+}
+
+.Error-title {
+  align-items: center;
+  color: white;
+  display: flex;
+  flex: 1;
+  font-family: roboto;
+  font-weight: bold;
+  font-size: 2vh;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.Error-body {
+  color: white;
+  display: flex;
+  flex: 2;
+  font-family: roboto;
+  font-weight: 400; // light
+  font-size: 1.5vh;
+}

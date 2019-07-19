@@ -30,7 +30,7 @@ const Person = ({
   <div className="Person-container">
     <div className="Person-picture">
       {' '}
-      <img src={photo} />
+      <img src={photo} alt="Person" />
       {' '}
     </div>
     <div className="Person-content">

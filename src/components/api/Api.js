@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// const API_URL = `http://localhost:5000`
+// const API_URL = 'http://10.1.248.57:8000'
 const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
 
 const Api = (() => {
@@ -10,6 +10,13 @@ const Api = (() => {
     })
   }
 
+  /**
+   * Fetches user token from API
+   * @param  {Function} callback
+   * @param  {string}   username
+   * @param  {string}   password
+   * @return {void}
+   */
   function login(callback, username, password) {
     const formData = new FormData()
 
@@ -26,9 +33,38 @@ const Api = (() => {
       })
   }
 
+  /**
+   * Loads an entity from the database
+   * @param  {Function} callback
+   * @param  {string}   type     Entity code in the database
+   * @param  {string}   id       Desired entity ID
+   * @return {void}
+   */
+  function getEntityData(callback, type, id) {
+    axios.get(`${API_URL}/api/${type}/${id}?format=json`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error))
+  }
+
+  /**
+   * Loads the box content from the database
+   * @param  {Function} callback
+   * @param  {string}   entityType Entity code in the database
+   * @param  {string}   entityId   Desired entity ID
+   * @param  {string}   boxId      Desired box ID
+   * @return {void}
+   */
+  function getBoxData(callback, entityType, entityId, boxId) {
+    axios.get(`${API_URL}/api/${entityType}/${entityId}/${boxId}`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error))
+  }
+
   return {
     buildings,
     login,
+    getEntityData,
+    getBoxData,
   }
 })()
 
