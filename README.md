@@ -9,7 +9,7 @@
 
 if you want to run mock APIs (on another terminal tab):
 
-    json-server --watch api-mock.json --port 5000\
+    json-server --watch api-mock.json --port 5000
 
 # How to run build dev
 
