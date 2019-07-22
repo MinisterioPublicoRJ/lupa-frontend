@@ -5,7 +5,7 @@ import './Box.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 
 const SmallBoxContrast = ({ title, value }) => (
