@@ -9,6 +9,7 @@ import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
 import Person from '../person/Person'
 import LoadingBox from './LoadingBox'
+import ErrorBox from './ErrorBox'
 
 // ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
 
@@ -16,10 +17,20 @@ const Box = ({ content }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
-        <SmallBox title={content.exibition_field} value={content.external_data.dado} description={content.description} />
+        <SmallBox
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+        />
       )
     case 'texto_pequeno_destaque':
-      return <SmallBoxContrast title={content.exibition_field} value={content.external_data.dado} description={content.description} />
+      return (
+        <SmallBoxContrast
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+        />
+      )
     case 'long-box':
       return <LongBox title={content.title} value={content.value} />
     case 'long-box-contrast':
@@ -59,9 +70,9 @@ const Box = ({ content }) => {
         <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
       )
     case 'loading':
-      return (<LoadingBox />)
+      return <LoadingBox />
     default:
-      return <div>INSIRA AQUI UM ERRO MELHOR!</div>
+      return <ErrorBox />
   }
 }
 
