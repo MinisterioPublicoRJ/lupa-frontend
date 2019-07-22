@@ -11,7 +11,6 @@ class Login extends React.Component {
   }
 
   loginCallback(response) {
-    console.log('callback', response);
     if (response.status === 200) {
       const { history } = this.props
       localStorage.setItem('token', response.data)

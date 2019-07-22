@@ -75,6 +75,13 @@ class Home extends React.Component {
     this.setState({ activeFilter: filter })
   }
 
+  /**
+   * Callback from the getBoxData function
+   * Receives the box info after the promise is resolved
+   * and updates the state with the new data
+   * @param  {json} updatedBox actual box content
+   * @return {void}
+   */
   renderBox(updatedBox) {
     const { content } = this.state
     const newContent = content.map((box) => {
@@ -82,7 +89,7 @@ class Home extends React.Component {
 
       return box
     })
-    console.log(newContent);
+
     this.setState({ content: newContent })
   }
 
