@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // const API_URL = 'http://10.1.248.57:8000'
-const API_URL = 'http://apimpmapas-devmpmapas.devcloud.mprj.mp.br'
+const API_URL = 'https://apimpmapas.mprj.mp.br'
 
 const Api = (() => {
   function buildings(callback) {
