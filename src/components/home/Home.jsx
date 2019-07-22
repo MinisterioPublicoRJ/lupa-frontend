@@ -38,7 +38,6 @@ class Home extends React.Component {
    * @param {Object} entityResponse.geojson GeoJSON of entity to be displayed on the map
    */
   checkContent(entityResponse) {
-    console.log('Home.jsx entityResponse', entityResponse)
     if (!entityResponse.data_list) {
       this.setState({ loading: false, error: entityResponse })
       return
