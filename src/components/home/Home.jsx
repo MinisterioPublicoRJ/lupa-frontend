@@ -29,8 +29,13 @@ class Home extends React.Component {
    * Callback from the getEntityData function
    * Handles database response, updating the state with the error
    * or new data and loading the entity's boxes if they exist
-   * @param  {json || string} entityResponse whatever comer from the database
-   * @return {void}
+   * @param {Object} entityResponse whatever comer from the database
+   * @param {Object} entityResponse.data_list[] Objects to load data and display in boxes
+   * @param {Number} entityResponse.data_list[].id Data ID to load
+   * @param {String} entityResponse.domain_id UUID of entity
+   * @param {String} entityResponse.entity_type Entity type
+   * @param {String} entityResponse.exibition_field Name to use as exibition
+   * @param {Object} entityResponse.geojson GeoJSON of entity to be displayed on the map
    */
   checkContent(entityResponse) {
     if (!entityResponse.data_list) {
@@ -42,7 +47,7 @@ class Home extends React.Component {
       id: info.id,
       data_type: 'loading',
     }))
-    this.setState({ loading: false, content: loadingBoxes })
+    this.setState({ loading: false, content: loadingBoxes, geojson: entityResponse.geojson })
 
     this.loadBoxes(entityResponse.data_list)
   }
@@ -95,7 +100,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error,
+      loading, activeFilter, content, error, geojson
     } = this.state
 
     if (loading) return <FullScreenLoading />
@@ -106,7 +111,7 @@ class Home extends React.Component {
           menuPressed={() => this.handleMenu()}
         />
         <div className="Main-container">
-          <Map />
+          <Map geojson={geojson}/>
           {/* <Recents /> */}
           <hr />
           <Contents error={error} boxes={content} />
