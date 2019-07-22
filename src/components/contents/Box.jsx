@@ -9,6 +9,7 @@ import UnorderedList from './UnorderedList'
 import Graph from '../graphs/Graph'
 import Person from '../person/Person'
 import LoadingBox from './LoadingBox'
+import ErrorBox from './ErrorBox'
 
 // ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
 
@@ -61,7 +62,7 @@ const Box = ({ content }) => {
     case 'loading':
       return (<LoadingBox />)
     default:
-      return <div>INSIRA AQUI UM ERRO MELHOR!</div>
+      return <ErrorBox />
   }
 }
 
