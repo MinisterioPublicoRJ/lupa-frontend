@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './County.scss'
 import Contents from '../contents/Contents'
@@ -6,6 +7,10 @@ import Map from '../map/Map'
 import Filter from '../filter/Filter'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
+
+const propTypes = {
+  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+}
 
 class County extends React.Component {
   constructor(props) {
@@ -17,22 +22,33 @@ class County extends React.Component {
 
   componentDidMount() {
     const { loading } = this.state
-    const { id } = this.props.match.params
+    const { match } = this.props
     if (loading) {
-      this.loadCountyData(id)
+      this.loadCountyData(match.params.id)
     }
   }
 
+  /**
+   * Checks if there was a change in the navigation params
+   * so it can update the new county data
+   */
   componentDidUpdate(prevProps) {
     const prevId = prevProps.match.params.id
-    const currentId = this.props.match.params.id
+    const { match } = this.props
+    const currentId = match.params.id
     if (currentId !== prevId) {
       this.loadCountyData(currentId)
     }
   }
 
+  /**
+   * Controls the loading and loads new county data
+   * @param  {string} id county id
+   * @return {void}
+   */
   loadCountyData(id) {
-    if (!this.state.loading) {
+    const { loading } = this.state
+    if (!loading) {
       this.setState({ loading: true })
     }
     Api.getEntityData(this.checkContent, 'MUN', id)
@@ -60,7 +76,12 @@ class County extends React.Component {
       id: info.id,
       data_type: 'loading',
     }))
-    this.setState({ loading: false, content: loadingBoxes, geojson: entityResponse.geojson })
+    this.setState({
+      loading: false,
+      content: loadingBoxes,
+      geojson: entityResponse.geojson,
+      name: entityResponse.exibition_field,
+    })
 
     this.loadBoxes(entityResponse.data_list)
   }
@@ -71,7 +92,8 @@ class County extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    const { id } = this.props.match.params
+    const { match } = this.props
+    const { id } = match.params
     dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', id, item.id))
   }
 
@@ -105,7 +127,7 @@ class County extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error, geojson,
+      loading, activeFilter, content, error, geojson, name,
     } = this.state
 
     if (loading) return <FullScreenLoading />
@@ -114,9 +136,8 @@ class County extends React.Component {
         <div className="Main-container">
           {geojson ? <Map geojson={geojson} /> : null}
           <hr />
-          <div onClick={() => this.props.history.push('/municipio/330030')}>
-            Barra do Piraí
-          </div>
+          <div className="Name-container">{name}</div>
+          <div className="Name-helper" />
           <Contents error={error} boxes={content} />
         </div>
         <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
@@ -125,4 +146,5 @@ class County extends React.Component {
   }
 }
 
+County.propTypes = propTypes
 export default County
