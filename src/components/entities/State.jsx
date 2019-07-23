@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './County.scss'
+import './State.scss'
 import Contents from '../contents/Contents'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
@@ -12,7 +12,7 @@ const propTypes = {
   match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
 }
 
-class County extends React.Component {
+class State extends React.Component {
   constructor(props) {
     super(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
@@ -24,34 +24,16 @@ class County extends React.Component {
     const { loading } = this.state
     const { match } = this.props
     if (loading) {
-      this.loadCountyData(match.params.id)
+      this.loadStateData(match.params.id)
     }
   }
 
   /**
-   * Checks if there was a change in the navigation params
-   * so it can update the new county data
-   */
-  componentDidUpdate(prevProps) {
-    const prevId = prevProps.match.params.id
-    const { match } = this.props
-    const currentId = match.params.id
-    if (currentId !== prevId) {
-      this.loadCountyData(currentId)
-    }
-  }
-
-  /**
-   * Controls the loading and loads new county data
-   * @param  {string} id county id
+   * Controls the loading and loads new state data
    * @return {void}
    */
-  loadCountyData(id) {
-    const { loading } = this.state
-    if (!loading) {
-      this.setState({ loading: true })
-    }
-    Api.getEntityData(this.checkContent, 'MUN', id)
+  loadStateData() {
+    Api.getEntityData(this.checkContent, 'EST', '33')
   }
 
   /**
@@ -92,9 +74,7 @@ class County extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    const { match } = this.props
-    const { id } = match.params
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', id, item.id))
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'EST', '33', item.id))
   }
 
   /**
@@ -148,5 +128,5 @@ class County extends React.Component {
   }
 }
 
-County.propTypes = propTypes
-export default County
+State.propTypes = propTypes
+export default State
