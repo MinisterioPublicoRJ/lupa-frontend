@@ -20,6 +20,7 @@
   justify-content: center;
   max-height: 400px;
   max-width: 45%;
+  min-width: 40%;
   overflow: hidden;
 }
 
@@ -35,7 +36,7 @@
   max-height: 30%;
   padding: 10px;
   text-align: center;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 
 .SmallBox-value {
@@ -64,7 +65,7 @@
   max-height: 30%;
   padding: 10px;
   text-align: center;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 
 .SmallBoxContrast-container {
@@ -78,6 +79,7 @@
   justify-content: center;
   max-height: 400px;
   max-width: 45%;
+  min-width: 40%;
   overflow: hidden;
 }
 
