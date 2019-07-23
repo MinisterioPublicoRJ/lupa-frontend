@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import Home from '../components/home/Home'
 import Login from '../components/login/Login'
+import County from '../components/entities/County'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -14,9 +15,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 export default function mainNavigator() {
   return (
-    <Router>
+    <Router basename="/">
       <Route exact path="/" component={Login} />
-      <PrivateRoute exact path="/home" component={Home} />
+      <PrivateRoute path="/home/:name" component={Home} />
+      <PrivateRoute path="/municipio/:id" component={County} />
     </Router>
   )
 }

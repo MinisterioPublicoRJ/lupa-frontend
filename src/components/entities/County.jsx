@@ -1,19 +1,20 @@
 import React from 'react'
-import Div100vh from 'react-div-100vh'
+import PropTypes from 'prop-types'
 
-import './Home.scss'
+import './County.scss'
 import Contents from '../contents/Contents'
-import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
-// import Recents from '../recents/Recents'
 
-class Home extends React.Component {
+const propTypes = {
+  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+}
+
+class County extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
     this.checkContent = this.checkContent.bind(this)
     this.renderBox = this.renderBox.bind(this)
@@ -21,9 +22,36 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { loading } = this.state
+    const { match } = this.props
     if (loading) {
-      Api.getEntityData(this.checkContent, 'MUN', '330455')
+      this.loadCountyData(match.params.id)
     }
+  }
+
+  /**
+   * Checks if there was a change in the navigation params
+   * so it can update the new county data
+   */
+  componentDidUpdate(prevProps) {
+    const prevId = prevProps.match.params.id
+    const { match } = this.props
+    const currentId = match.params.id
+    if (currentId !== prevId) {
+      this.loadCountyData(currentId)
+    }
+  }
+
+  /**
+   * Controls the loading and loads new county data
+   * @param  {string} id county id
+   * @return {void}
+   */
+  loadCountyData(id) {
+    const { loading } = this.state
+    if (!loading) {
+      this.setState({ loading: true })
+    }
+    Api.getEntityData(this.checkContent, 'MUN', id)
   }
 
   /**
@@ -48,7 +76,12 @@ class Home extends React.Component {
       id: info.id,
       data_type: 'loading',
     }))
-    this.setState({ loading: false, content: loadingBoxes, geojson: entityResponse.geojson })
+    this.setState({
+      loading: false,
+      content: loadingBoxes,
+      geojson: entityResponse.geojson,
+      name: entityResponse.exibition_field,
+    })
 
     this.loadBoxes(entityResponse.data_list)
   }
@@ -59,23 +92,14 @@ class Home extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330455', item.id))
+    const { match } = this.props
+    const { id } = match.params
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', id, item.id))
   }
-
-  handleSearching() {
-    // console.log('SEARCHING!')
-    const { history } = this.props
-    history.push('/home/Barbier')
-  }
-
-  // NOT FOR VERSION ONE
-  // handleMenu() {
-  //   console.log('Menu')
-  // }
 
   /**
-   * Changes the current filter applied to the content
    * NOT FOR VERSION ONE
+   * Changes the current filter applied to the content
    * @param  {string} filter filter name
    * @return {void}
    */
@@ -103,27 +127,24 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error, geojson,
+      loading, activeFilter, content, error, geojson, name,
     } = this.state
 
     if (loading) return <FullScreenLoading />
     return (
-      <Div100vh className="Home-container">
-        {/*<Search
-          searchPressed={() => this.handleSearching()}
-          menuPressed={() => this.handleMenu()}
-        />*/}
+      <div className="Entity-container">
         <div className="Main-container">
-          <Map geojson={geojson} />
-          {/* <Recents /> */}
+          {geojson ? <Map geojson={geojson} /> : null}
           <hr />
-          <span>{this.props.match.params.name}</span>
+          <div className="Name-container">{name}</div>
+          <div className="Name-helper" />
           <Contents error={error} boxes={content} />
         </div>
         <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
-      </Div100vh>
+      </div>
     )
   }
 }
 
-export default Home
+County.propTypes = propTypes
+export default County
