@@ -14,7 +14,7 @@ class Login extends React.Component {
     if (response.status === 200) {
       const { history } = this.props
       localStorage.setItem('token', response.data)
-      history.push('/home')
+      history.push('/municipio/330455')
     }
     // colocar mensagem de erro aqui
   }

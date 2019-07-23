@@ -1,0 +1,18 @@
+.Entity-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  z-index: 0;
+}
+
+.Main-container {
+  display: block;
+  height: 85vh;
+  position: relative;
+  width: 100%;
+
+  hr {
+    width: 7%;
+  }
+}

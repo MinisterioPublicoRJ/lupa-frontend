@@ -1,19 +1,15 @@
 import React from 'react'
-import Div100vh from 'react-div-100vh'
 
-import './Home.scss'
+import './County.scss'
 import Contents from '../contents/Contents'
-import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
-// import Recents from '../recents/Recents'
 
-class Home extends React.Component {
+class County extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
     this.checkContent = this.checkContent.bind(this)
     this.renderBox = this.renderBox.bind(this)
@@ -21,9 +17,25 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { loading } = this.state
+    const { id } = this.props.match.params
     if (loading) {
-      Api.getEntityData(this.checkContent, 'MUN', '330455')
+      this.loadCountyData(id)
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const prevId = prevProps.match.params.id
+    const currentId = this.props.match.params.id
+    if (currentId !== prevId) {
+      this.loadCountyData(currentId)
+    }
+  }
+
+  loadCountyData(id) {
+    if (!this.state.loading) {
+      this.setState({ loading: true })
+    }
+    Api.getEntityData(this.checkContent, 'MUN', id)
   }
 
   /**
@@ -59,23 +71,13 @@ class Home extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330455', item.id))
+    const { id } = this.props.match.params
+    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', id, item.id))
   }
-
-  handleSearching() {
-    // console.log('SEARCHING!')
-    const { history } = this.props
-    history.push('/home/Barbier')
-  }
-
-  // NOT FOR VERSION ONE
-  // handleMenu() {
-  //   console.log('Menu')
-  // }
 
   /**
-   * Changes the current filter applied to the content
    * NOT FOR VERSION ONE
+   * Changes the current filter applied to the content
    * @param  {string} filter filter name
    * @return {void}
    */
@@ -108,22 +110,19 @@ class Home extends React.Component {
 
     if (loading) return <FullScreenLoading />
     return (
-      <Div100vh className="Home-container">
-        {/*<Search
-          searchPressed={() => this.handleSearching()}
-          menuPressed={() => this.handleMenu()}
-        />*/}
+      <div className="Entity-container">
         <div className="Main-container">
-          <Map geojson={geojson} />
-          {/* <Recents /> */}
+          {geojson ? <Map geojson={geojson} /> : null}
           <hr />
-          <span>{this.props.match.params.name}</span>
+          <div onClick={() => this.props.history.push('/municipio/330030')}>
+            Barra do Piraí
+          </div>
           <Contents error={error} boxes={content} />
         </div>
         <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
-      </Div100vh>
+      </div>
     )
   }
 }
 
-export default Home
+export default County
