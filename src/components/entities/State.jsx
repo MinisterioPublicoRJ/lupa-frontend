@@ -22,9 +22,8 @@ class State extends React.Component {
 
   componentDidMount() {
     const { loading } = this.state
-    const { match } = this.props
     if (loading) {
-      this.loadStateData(match.params.id)
+      this.loadStateData()
     }
   }
 
