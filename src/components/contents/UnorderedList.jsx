@@ -33,7 +33,7 @@ const UnorderedList = ({
         </li>
       ))}
     </ol>
-    <div className="list-box--source">{source}</div>
+    {source ? <div className="list-box--source">{source}</div> : null}
   </div>
 )
 

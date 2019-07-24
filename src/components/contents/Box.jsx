@@ -35,13 +35,13 @@ const Box = ({ content }) => {
       return <LongBox title={content.title} value={content.value} />
     case 'long-box-contrast':
       return <LongBox title={content.title} value={content.value} contrast />
-    case 'ordered list':
+    case 'lista_ordenada':
       return (
         <OrderedList
-          title={content.title}
-          list={content.list}
-          image={content.image}
-          source={content.souce}
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
         />
       )
     case 'lista_sem_ordenacao':
