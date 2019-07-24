@@ -12,9 +12,11 @@ class Login extends React.Component {
 
   loginCallback(response) {
     if (response.status === 200) {
-      const { history } = this.props
+      const { history, location } = this.props
       localStorage.setItem('token', response.data)
-      history.push('/municipio/330455')
+      const navUrl = (location.state && location.state.prevUrl) ? location.state.prevUrl : '/estado'
+      console.log('navUrl', navUrl);
+      history.push(navUrl)
     }
     // colocar mensagem de erro aqui
   }

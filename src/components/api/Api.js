@@ -57,7 +57,7 @@ const Api = (() => {
   function getBoxData(callback, entityType, entityId, boxId) {
     axios.get(`${API_URL}/api/${entityType}/${entityId}/${boxId}`)
       .then(response => callback(response.data))
-      .catch(error => callback(error))
+      .catch(error => callback(error, boxId))
   }
 
   return {
