@@ -19,7 +19,7 @@ const LongBox = ({ title, value, contrast }) => (
       <Briefcase />
     </div>
     <div className="LongBox-title" style={contrast ? { color: 'white' } : null}>
-      {title.toLocaleUpperCase('pt-br')}
+      {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
     <div className="LongBox-value" style={contrast ? { color: 'white' } : null}>
       {value}

@@ -21,6 +21,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
+          source={content.fonte}
         />
       )
     case 'texto_pequeno_destaque':
@@ -29,12 +30,28 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
+          source={content.fonte}
         />
       )
-    case 'long-box':
-      return <LongBox title={content.title} value={content.value} />
+    case 'texto_grande':
+      return (
+        <LongBox
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+          source={content.fonte}
+        />
+      )
     case 'long-box-contrast':
-      return <LongBox title={content.title} value={content.value} contrast />
+      return (
+        <LongBox
+          contrast
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+          source={content.fonte}
+        />
+      )
     case 'lista_ordenada':
       return (
         <OrderedList
