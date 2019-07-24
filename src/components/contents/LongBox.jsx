@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ReactComponent as ArrowRight } from '../icons/arrowRight.svg'
-import { ReactComponent as Briefcase } from '../icons/briefcase.svg'
+import Briefcase from '../icons/briefcase'
+import ArrowRight from '../icons/arrowRight'
 
 import './Box.scss'
 
@@ -16,7 +16,7 @@ const defaultProps = { contrast: false }
 const LongBox = ({ title, value, contrast }) => (
   <div className="box LongBox-container" style={contrast ? { backgroundColor: '#009DFD' } : null}>
     <div className="LongBox-icon">
-      <Briefcase />
+      <Briefcase className="LongBox-img" />
     </div>
     <div className="LongBox-title" style={contrast ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
@@ -25,7 +25,7 @@ const LongBox = ({ title, value, contrast }) => (
       {value}
     </div>
     <div className="LongBox-arrow">
-      <ArrowRight />
+      <ArrowRight className="LongBox-img" />
     </div>
   </div>
 )
