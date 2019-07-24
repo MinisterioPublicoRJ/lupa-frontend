@@ -16,7 +16,7 @@ const defaultProps = { contrast: false }
 const LongBox = ({ title, value, contrast }) => (
   <div className="box LongBox-container" style={contrast ? { backgroundColor: '#009DFD' } : null}>
     <div className="LongBox-icon">
-      <Briefcase className="LongBox-img" />
+      <Briefcase className="LongBox-img" overlay={contrast ? '#fff' : null} />
     </div>
     <div className="LongBox-title" style={contrast ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
@@ -25,7 +25,7 @@ const LongBox = ({ title, value, contrast }) => (
       {value}
     </div>
     <div className="LongBox-arrow">
-      <ArrowRight className="LongBox-img" />
+      <ArrowRight className="LongBox-img" overlay={contrast ? '#fff' : null} />
     </div>
   </div>
 )
