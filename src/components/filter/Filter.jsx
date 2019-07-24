@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Filter.scss'
 import { ReactComponent as MapIcon } from '../icons/stateMap.svg'
-import { ReactComponent as Briefcase } from '../icons/briefcase.svg'
+import Briefcase from '../icons/briefcase'
 import { ReactComponent as Convergencia } from '../icons/convergencia.svg'
 
 const filter = props => (

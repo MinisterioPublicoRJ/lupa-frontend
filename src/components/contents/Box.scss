@@ -118,8 +118,13 @@
       align-items: center;
       display: flex;
       flex: 1;
+      flex-wrap: wrap;
       max-height: 100%;
       justify-content: center;
+    }
+
+    .box-img {
+      width: 10vw;
     }
 
     .box-title {
