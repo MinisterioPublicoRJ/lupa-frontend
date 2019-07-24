@@ -12,7 +12,7 @@ const defaultProps = { description: null }
 
 const SmallBox = ({ title, value, description }) => (
   <div className="box SmallBox">
-    <div className="SmallBox-title">{title.toLocaleUpperCase('pt-br')}</div>
+    <div className="SmallBox-title">{title ? title.toLocaleUpperCase('pt-br') : null}</div>
     <div className="SmallBox-value">{value}</div>
     {description && <div className="SmallBox-description">{description}</div>}
   </div>
