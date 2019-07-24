@@ -91,6 +91,13 @@ const Box = ({ content }) => {
           data={content.data}
         />
       )
+    case 'grafico_barra_vertical':
+    case 'grafico_pizza':
+      return <Graph
+        type={content.data_type}
+        title={content.exibition_field}
+        data={content.external_data}
+      />
     case 'loading':
       return <LoadingBox />
     default:

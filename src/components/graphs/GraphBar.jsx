@@ -17,12 +17,13 @@ const graphStyle = {
 }
 
 const graphBar = ({ data }) => {
-  const xLabels = data.map(item => item.x)
-  const yLabels = data.map(item => item.y)
+  const xLabels = data.map(item => item.label)
+  const yLabels = data.map(item => item.dado)
   return (
-    <VictoryChart domainPadding={50} x={item => item.x.getFullYear()}>
-      <VictoryBar data={data} style={graphStyle} />
-      <VictoryAxis tickFormat={tick => tick.getFullYear()} tickValues={xLabels} />
+    <VictoryChart domainPadding={50}>
+      <VictoryBar data={data} style={graphStyle} x="label" y="dado" />
+      <VictoryAxis tickValues={xLabels} />
+      {/* tickFormat={tick => tick.getFullYear()} */}
       <VictoryAxis dependentAxis tickValues={yLabels} />
     </VictoryChart>
   )

@@ -8,9 +8,9 @@ import GraphStackedBar from './GraphStackedBar'
 
 const checkGraphType = ({ type, data }) => {
   switch (type) {
-    case 'pie':
+    case 'grafico_pizza':
       return <GraphPie data={data} />
-    case 'bar':
+    case 'grafico_barra_vertical':
       return <GraphBar data={data} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
