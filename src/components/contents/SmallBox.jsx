@@ -16,10 +16,10 @@ const defaultProps = {
 
 const SmallBox = ({ description, source, title, value }) => (
   <div className="box SmallBox">
-    <div className="SmallBox-title">{title ? title.toLocaleUpperCase('pt-br') : null}</div>
-    <div className="SmallBox-value">{value}</div>
-    {description && <div className="SmallBox-description">{description}</div>}
-    {source ? <div className="SmallBox--source">{source}</div> : null}
+    <div className="box-title">{title ? title.toLocaleUpperCase('pt-br') : null}</div>
+    <div className="box-value">{value}</div>
+    {description && <div className="box-description">{description}</div>}
+    {source ? <div className="box-source">{source}</div> : null}
   </div>
 )
 

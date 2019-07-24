@@ -7,26 +7,31 @@ import { ReactComponent as Briefcase } from '../icons/briefcase.svg'
 import './Box.scss'
 
 const propTypes = {
+  contrast: PropTypes.bool,
+  source: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  contrast: PropTypes.bool,
 }
-const defaultProps = { contrast: false }
+const defaultProps = {
+  contrast: false,
+  source: null,
+}
 
-const LongBox = ({ title, value, contrast }) => (
-  <div className="box LongBox-container" style={contrast ? { backgroundColor: '#009DFD' } : null}>
-    <div className="LongBox-icon">
+const LongBox = ({ contrast, source, title, value }) => (
+  <div className="box LongBox" style={contrast ? { backgroundColor: '#009DFD' } : null}>
+    <div className="box-icon">
       <Briefcase />
     </div>
-    <div className="LongBox-title" style={contrast ? { color: 'white' } : null}>
+    <div className="box-title" style={contrast ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
-    <div className="LongBox-value" style={contrast ? { color: 'white' } : null}>
+    <div className="box-value" style={contrast ? { color: 'white' } : null}>
       {value}
     </div>
-    <div className="LongBox-arrow">
+    <div className="box-arrow">
       <ArrowRight />
     </div>
+    {source ? <div className="box-source">{source}</div> : null}
   </div>
 )
 

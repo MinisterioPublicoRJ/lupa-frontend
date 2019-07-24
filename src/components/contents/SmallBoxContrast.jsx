@@ -13,10 +13,10 @@ const defaultProps = {
 }
 
 const SmallBoxContrast = ({ title, source, value }) => (
-  <div className="box SmallBoxContrast--container">
-    <div className="SmallBoxContrast--value">{value}</div>
-    <div className="SmallBoxContrast--title">{title.toLocaleUpperCase('pt-br')}</div>
-    {source ? <div className="SmallBoxContrast--source">{source}</div> : null}
+  <div className="box SmallBox SmallBoxContrast">
+    <div className="box-value">{value}</div>
+    <div className="box-title">{title.toLocaleUpperCase('pt-br')}</div>
+    {source ? <div className="box-source">{source}</div> : null}
   </div>
 )
 
