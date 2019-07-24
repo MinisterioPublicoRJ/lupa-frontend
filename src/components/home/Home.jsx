@@ -3,7 +3,7 @@ import Div100vh from 'react-div-100vh'
 
 import './Home.scss'
 import Contents from '../contents/Contents'
-import Search from '../search/Search'
+// import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
 import FullScreenLoading from '../utils/FullScreenLoading'

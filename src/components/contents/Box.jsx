@@ -21,6 +21,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
+          source={content.external_data.fonte}
         />
       )
     case 'texto_pequeno_destaque':
@@ -29,28 +30,44 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
+          source={content.external_data.fonte}
         />
       )
-    case 'long-box':
-      return <LongBox title={content.title} value={content.value} />
+    case 'texto_grande':
+      return (
+        <LongBox
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+          source={content.external_data.fonte}
+        />
+      )
     case 'long-box-contrast':
-      return <LongBox title={content.title} value={content.value} contrast />
-    case 'ordered list':
+      return (
+        <LongBox
+          contrast
+          title={content.exibition_field}
+          value={content.external_data.dado}
+          description={content.description}
+          source={content.external_data.fonte}
+        />
+      )
+    case 'lista_ordenada':
       return (
         <OrderedList
-          title={content.title}
-          list={content.list}
-          image={content.image}
-          source={content.souce}
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
         />
       )
-    case 'unordered list':
+    case 'lista_sem_ordenacao':
       return (
         <UnorderedList
-          title={content.title}
-          list={content.list}
-          image={content.image}
-          source={content.souce}
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
         />
       )
     case 'graph':
@@ -67,7 +84,12 @@ const Box = ({ content }) => {
       )
     case 'person':
       return (
-        <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
+        <Person
+          name={content.name}
+          job={content.job}
+          photo={content.photo}
+          data={content.data}
+        />
       )
     case 'loading':
       return <LoadingBox />

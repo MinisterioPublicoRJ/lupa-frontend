@@ -20,18 +20,23 @@ const OrderedList = ({
 }) => (
   <div className="box list-box">
     <div className="list-box--header">
-      <h1 className="list-box--title">{title}</h1>
-      <img className="list-box--icon" src="" alt="Icone" />
+      {title ? <h1 className="list-box--title">{title}</h1> : null}
+      {image ? <img src={image} alt="" className="list-box--icon" /> : null}
     </div>
     <ol className="list-box--list">
-      {list.map((itemList, key) => (
-        <li key={key} className="list-box--list-item list-box--list-item__ordered">
-          {itemList}
+      {list.map((itemList, index) => (
+        <li key={`${itemList.label}-${itemList.dado}`} className="list-box--list-item">
+          <div className="list-box--list-item-position">{index + 1}</div>
+          <div className="list-box--list-item-body">
+            {itemList.label ? (
+              <div className="list-box--list-item-label">{itemList.label}</div>
+            ) : null}
+            {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
+          </div>
         </li>
       ))}
     </ol>
-    {image ? <img src={image} alt="" className="box--image" /> : null}
-    <p className="list-box--source">{source}</p>
+    {source ? <div className="list-box--source">{source}</div> : null}
   </div>
 )
 

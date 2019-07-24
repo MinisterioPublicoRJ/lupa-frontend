@@ -1,32 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ReactComponent as ArrowRight } from '../icons/arrowRight.svg'
-import { ReactComponent as Briefcase } from '../icons/briefcase.svg'
+import Briefcase from '../icons/briefcase'
+import ArrowRight from '../icons/arrowRight'
 
 import './Box.scss'
 
 const propTypes = {
+  contrast: PropTypes.bool,
+  source: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  contrast: PropTypes.bool,
 }
-const defaultProps = { contrast: false }
+const defaultProps = {
+  contrast: false,
+  source: null,
+}
 
-const LongBox = ({ title, value, contrast }) => (
-  <div className="box LongBox-container" style={contrast ? { backgroundColor: '#009DFD' } : null}>
-    <div className="LongBox-icon">
-      <Briefcase />
+const LongBox = ({ contrast, source, title, value }) => (
+  <div className="box LongBox" style={contrast ? { backgroundColor: '#009DFD' } : null}>
+    <div className="box-icon">
+      <Briefcase className="box-img" overlay={contrast ? '#fff' : null} />
     </div>
-    <div className="LongBox-title" style={contrast ? { color: 'white' } : null}>
-      {title.toLocaleUpperCase('pt-br')}
+    <div className="box-title" style={contrast ? { color: 'white' } : null}>
+      {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
-    <div className="LongBox-value" style={contrast ? { color: 'white' } : null}>
+    <div className="box-value" style={contrast ? { color: 'white' } : null}>
       {value}
     </div>
-    <div className="LongBox-arrow">
-      <ArrowRight />
+    <div className="box-arrow">
+      <ArrowRight className="box-img" overlay={contrast ? '#fff' : null} />
     </div>
+    {source ? <div className="box-source">{source}</div> : null}
   </div>
 )
 
