@@ -21,7 +21,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
-          source={content.fonte}
+          source={content.external_data.fonte}
         />
       )
     case 'texto_pequeno_destaque':
@@ -30,7 +30,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
-          source={content.fonte}
+          source={content.external_data.fonte}
         />
       )
     case 'texto_grande':
@@ -39,7 +39,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
-          source={content.fonte}
+          source={content.external_data.fonte}
         />
       )
     case 'long-box-contrast':
@@ -49,7 +49,7 @@ const Box = ({ content }) => {
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.description}
-          source={content.fonte}
+          source={content.external_data.fonte}
         />
       )
     case 'lista_ordenada':
@@ -84,7 +84,12 @@ const Box = ({ content }) => {
       )
     case 'person':
       return (
-        <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
+        <Person
+          name={content.name}
+          job={content.job}
+          photo={content.photo}
+          data={content.data}
+        />
       )
     case 'loading':
       return <LoadingBox />
