@@ -44,13 +44,13 @@ const Box = ({ content }) => {
           source={content.souce}
         />
       )
-    case 'unordered list':
+    case 'lista_sem_ordenacao':
       return (
         <UnorderedList
-          title={content.title}
-          list={content.list}
-          image={content.image}
-          source={content.souce}
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
         />
       )
     case 'graph':
