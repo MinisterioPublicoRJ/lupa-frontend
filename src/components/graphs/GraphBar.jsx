@@ -5,8 +5,11 @@ import { VictoryChart, VictoryBar, VictoryAxis } from 'victory'
 const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      y: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      fonte: PropTypes.string,
+      detalhes: PropTypes.string,
+      link: PropTypes.string,
     }),
   ).isRequired,
 }
