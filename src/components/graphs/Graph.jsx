@@ -41,13 +41,13 @@ const defaultProps = {
   title: null,
   description: null,
   source: null,
-  infoPressed: () => console.log('hello'),
-  sourcePressed: () => console.log('hello'),
+  infoPressed: () => {},
+  sourcePressed: () => {},
   categories: [],
   highlight: false,
 }
 
-const colorScale = ['#000000', '#0000FF', '#FF6347']
+const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
 
 const graph = ({
   type,
@@ -59,50 +59,63 @@ const graph = ({
   sourcePressed,
   categories,
   highlight,
-}) => (
-  <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
-    <div className="Graph-header">
-      <div className="Graph-title-right">
-        <span className="Graph-name" style={highlight ? { color: '#FFFFFF' } : null}>
-          {title.toLocaleUpperCase('pt-br')}
+}) => {
+  const sortedData = data.sort((a, b) => Number(a.dado) - Number(b.dado))
+  return (
+    <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
+      <div className="Graph-header">
+        <div className="Graph-title-right">
+          <span className="Graph-name" style={highlight ? { color: '#FFFFFF' } : null}>
+            {title.toLocaleUpperCase('pt-br')}
+          </span>
+          {description && (
+            <span className="Graph-description" style={highlight ? { color: '#FFFFFF' } : null}>
+              {description}
+            </span>
+          )}
+        </div>
+        {/* <div className="Graph-title-left" onClick={() => infoPressed()}>
+          i
+        </div> */}
+      </div>
+      <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
+        {checkGraphType({ type, data })}
+      </div>
+      {categories && (
+        <div
+          className="Graph-categories-container"
+          style={highlight ? { backgroundColor: '#35B1FD' } : null}
+        >
+          {categories
+            ? categories.map((item, i) => (
+              <span className="Graph-categories">
+                <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
+                {item}
+              </span>
+            ))
+            : null}
+          {type === 'grafico_pizza'
+            ? sortedData.map((item, i) => (
+              <span className="Graph-categories" key={item.label}>
+                <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
+                {item.label}
+              </span>
+            ))
+            : null}
+        </div>
+      )}
+      {/* source && (
+        <span
+          className="Graph-source"
+          onClick={() => sourcePressed()}
+          style={highlight ? { color: '#FFFFFF' } : null}
+        >
+          mais detalhes ->
         </span>
-        {description && (
-          <span className="Graph-description" style={highlight ? { color: '#FFFFFF' } : null}>
-            {description}
-          </span>
-        )}
-      </div>
-      <div className="Graph-title-left" onClick={() => infoPressed()}>
-        i
-      </div>
+      ) */}
     </div>
-    <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
-      {checkGraphType({ type, data })}
-    </div>
-    {categories && (
-      <div
-        className="Graph-categories-container"
-        style={highlight ? { backgroundColor: '#35B1FD' } : null}
-      >
-        {categories.map((item, i) => (
-          <span className="Graph-categories">
-            <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
-            {item}
-          </span>
-        ))}
-      </div>
-    )}
-    {source && (
-      <span
-        className="Graph-source"
-        onClick={() => sourcePressed()}
-        style={highlight ? { color: '#FFFFFF' } : null}
-      >
-        mais detalhes ->
-      </span>
-    )}
-  </div>
-)
+  )
+}
 
 graph.propTypes = propTypes
 graph.defaultProps = defaultProps

@@ -14,7 +14,21 @@ const propTypes = {
   ).isRequired,
 }
 
-const GraphPie = ({ data }) => <VictoryPie data={data} x="label" y="dado" />
+const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
+
+const graphStyle = {
+  labels: { display: 'none' },
+}
+
+const GraphPie = ({ data }) => (
+  <VictoryPie
+    data={data}
+    radius={150}
+    y={item => Number(item.dado)}
+    colorScale={colorScale}
+    style={graphStyle}
+  />
+)
 
 GraphPie.propTypes = propTypes
 export default GraphPie
