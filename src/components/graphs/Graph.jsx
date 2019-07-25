@@ -7,12 +7,12 @@ import GraphBar from './GraphBar'
 import GraphStackedBar from './GraphStackedBar'
 import ErrorBox from '../contents/ErrorBox'
 
-const checkGraphType = ({ type, data }) => {
+const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
     case 'grafico_pizza':
       return <GraphPie data={data} />
     case 'grafico_barra_vertical':
-      return <GraphBar data={data} />
+      return <GraphBar data={data} sortedData={sortedData} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
@@ -79,7 +79,7 @@ const graph = ({
         </div> */}
       </div>
       <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
-        {checkGraphType({ type, data })}
+        {checkGraphType({ type, data, sortedData })}
       </div>
       {categories && (
         <div

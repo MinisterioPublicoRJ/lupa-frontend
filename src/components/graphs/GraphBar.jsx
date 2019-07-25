@@ -12,6 +12,15 @@ const propTypes = {
       link: PropTypes.string,
     }),
   ).isRequired,
+  sortedData: PropTypes.arrayOf(
+    PropTypes.shape({
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      fonte: PropTypes.string,
+      detalhes: PropTypes.string,
+      link: PropTypes.string,
+    }),
+  ).isRequired,
 }
 
 const graphStyle = {
@@ -30,9 +39,15 @@ const axisStyles = {
   },
 }
 
-const graphBar = ({ data }) => {
+const calculateYDomain = (data) => {
+  const minY = (Number(data[0].dado) * 0.95)
+  const maxY = (Number(data[data.length - 1].dado) * 1.05)
+  return { y: [minY, maxY] }
+}
+
+const graphBar = ({ data, sortedData }) => {
   const xLabels = data.map(item => item.label)
-  // const yLabels = data.map(item => Number(item.dado))
+  const yDomain = calculateYDomain(sortedData)
   return (
     <VictoryChart
       domainPadding={{ x: 50 }}
@@ -43,7 +58,13 @@ const graphBar = ({ data }) => {
         right: 50,
       }}
     >
-      <VictoryBar data={data} style={graphStyle} x="label" y={item => Number(item.dado)} />
+      <VictoryBar
+        data={data}
+        style={graphStyle}
+        x="label"
+        y={item => Number(item.dado)}
+        domain={yDomain}
+      />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
       <VictoryAxis dependentAxis style={axisStyles} />
     </VictoryChart>
