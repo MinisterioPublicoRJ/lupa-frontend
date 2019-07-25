@@ -5,6 +5,7 @@ import './Graph.scss'
 import GraphPie from './GraphPie'
 import GraphBar from './GraphBar'
 import GraphStackedBar from './GraphStackedBar'
+import ErrorBox from '../contents/ErrorBox'
 
 const checkGraphType = ({ type, data }) => {
   switch (type) {
@@ -15,7 +16,7 @@ const checkGraphType = ({ type, data }) => {
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
-      return <div>error!</div>
+      return <ErrorBox />
   }
 }
 
