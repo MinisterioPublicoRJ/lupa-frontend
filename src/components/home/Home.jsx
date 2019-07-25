@@ -10,7 +10,10 @@ import Api from '../api/Api'
 
 const propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({ entityType: PropTypes.string, entityId: PropTypes.string }),
+    params: PropTypes.shape({
+      entityType: PropTypes.string,
+      entityId: PropTypes.string,
+    }),
   }).isRequired,
 }
 
@@ -141,7 +144,8 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          {geojson ? <Map geojson={geojson} /> : null}
+          {geojson ? <Map geojsonArray={[geojson]} /> : null}
+          {/* MOCK: passing as array */}
           <hr />
           <div className="Name-container">{name}</div>
           <div className="Name-helper" />

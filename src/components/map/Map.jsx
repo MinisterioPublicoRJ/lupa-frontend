@@ -1,6 +1,6 @@
 import React from 'react'
 import bbox from '@turf/bbox'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Map, GeoJSON, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -29,7 +29,37 @@ const onEachFeature = (feature, layer) => {
   })
 }
 
-const propTypes = {}
+const propTypes = {
+  props: PropTypes.shape({
+    geojson: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string,
+        coordinates: PropTypes.arrayOf(
+          PropTypes.arrayOf(
+            PropTypes.arrayOf(
+              PropTypes.arrayOf(
+                PropTypes.number
+              )
+            )
+          )
+        ),
+      })
+    ),
+  })
+}
+
+// colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js
+const yellow200 = "#FFF59D";
+const deepOrange600 = "#F4511E";
+const lime300 = "#DCE775";
+const lightGreen500 = "#8BC34A";
+const teal700 = "#00796B";
+const cyan900 = "#006064";
+const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900];
+
+const styleGeojson = feature => {
+  return { color: colors[feature.properties.index % colors.length] }
+}
 
 /**
  *
@@ -37,16 +67,68 @@ const propTypes = {}
  * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
  */
 const map = props => {
-  const bboxArray = bbox(props.geojson)
+  const geojsonWithAll = {
+    type: "FeatureCollection",
+    features: props.geojsonArray.map((eachGeojson, index) => {
+      return {
+        type: "Feature",
+        geometry: eachGeojson,
+        properties: {
+          index
+        }
+      }
+    })
+  }
+  const bboxArray = bbox(geojsonWithAll)
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
+
+  // debug
+  // MOCK adds another fake feature
+  geojsonWithAll.features.push({
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -43.49,
+            -23.24
+          ],
+          [
+            -43.18,
+            -23.24
+          ],
+          [
+            -43.18,
+            -23.11
+          ],
+          [
+            -43.49,
+            -23.11
+          ],
+          [
+            -43.494873046875,
+            -23.24134610238612
+          ]
+        ]
+      ]
+    },
+    "properties": {index: geojsonWithAll.features.length},
+  })
+  console.log(geojsonWithAll)
+  // /debug
   return (
     <Map bounds={[corner1, corner2]} style={{ height: '100%' }} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
       />
-      <GeoJSON data={props.geojson} onEachFeature={onEachFeature} />
+      <GeoJSON
+        data={geojsonWithAll}
+        onEachFeature={onEachFeature}
+        style={styleGeojson}
+      />
     </Map>
   )
 }
