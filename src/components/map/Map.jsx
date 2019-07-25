@@ -79,9 +79,6 @@ const map = props => {
       }
     })
   }
-  const bboxArray = bbox(geojsonWithAll)
-  const corner1 = [bboxArray[1], bboxArray[0]]
-  const corner2 = [bboxArray[3], bboxArray[2]]
 
   // debug
   // MOCK adds another fake feature
@@ -116,8 +113,13 @@ const map = props => {
     },
     "properties": {index: geojsonWithAll.features.length},
   })
-  console.log(geojsonWithAll)
   // /debug
+
+  // bounding box
+  const bboxArray = bbox(geojsonWithAll)
+  const corner1 = [bboxArray[1], bboxArray[0]]
+  const corner2 = [bboxArray[3], bboxArray[2]]
+
   return (
     <Map bounds={[corner1, corner2]} style={{ height: '100%' }} zoomControl={false}>
       <TileLayer
