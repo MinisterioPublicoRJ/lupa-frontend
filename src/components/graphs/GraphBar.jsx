@@ -12,19 +12,38 @@ const propTypes = {
 }
 
 const graphStyle = {
+  parent: { fill: 'red' },
   data: { fill: 'tomato' },
-  labels: { textAnchor: 'middle' },
+  labels: { display: 'none' },
+}
+
+const axisStyles = {
+  axis: { stroke: '#696568' },
+  tickLabels: {
+    padding: 5,
+    fontSize: 10,
+    fontFamily: 'Roboto',
+    fill: '#696568',
+  },
 }
 
 const graphBar = ({ data }) => {
   const xLabels = data.map(item => item.label)
-  const yLabels = data.map(item => item.dado)
+  const yLabels = data.map(item => Number(item.dado))
   return (
-    <VictoryChart domainPadding={50}>
+    <VictoryChart
+      domainPadding={{ x: 50 }}
+      padding={{
+        top: 50,
+        bottom: 50,
+        left: 65,
+        right: 50,
+      }}
+    >
       <VictoryBar data={data} style={graphStyle} x="label" y="dado" />
-      <VictoryAxis tickValues={xLabels} />
+      <VictoryAxis tickValues={xLabels} style={axisStyles} />
       {/* tickFormat={tick => tick.getFullYear()} */}
-      <VictoryAxis dependentAxis tickValues={yLabels} />
+      <VictoryAxis dependentAxis tickValues={yLabels} style={axisStyles} />
     </VictoryChart>
   )
 }
