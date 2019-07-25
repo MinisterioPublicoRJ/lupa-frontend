@@ -9,7 +9,9 @@ import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
 
 const propTypes = {
-  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({ entityType: PropTypes.string, entityId: PropTypes.string }),
+  }).isRequired,
 }
 
 class Home extends React.Component {
@@ -30,7 +32,7 @@ class Home extends React.Component {
 
   /**
    * Checks if there was a change in the navigation params
-   * so it can update the new county data
+   * and updates the component with new data
    */
   componentDidUpdate(prevProps) {
     const prevType = prevProps.match.params.entityType
@@ -44,8 +46,9 @@ class Home extends React.Component {
   }
 
   /**
-   * Controls the loading and loads new county data
-   * @param  {string} id county id
+   * Controls the loading and loads new entity data
+   * @param  {string} entityType
+   * @param  {string} entityId
    * @return {void}
    */
   loadEntityData(entityType, entityId) {
