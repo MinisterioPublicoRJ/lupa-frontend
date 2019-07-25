@@ -32,7 +32,7 @@ const axisStyles = {
 
 const graphBar = ({ data }) => {
   const xLabels = data.map(item => item.label)
-  const yLabels = data.map(item => Number(item.dado))
+  // const yLabels = data.map(item => Number(item.dado))
   return (
     <VictoryChart
       domainPadding={{ x: 50 }}
@@ -43,10 +43,9 @@ const graphBar = ({ data }) => {
         right: 50,
       }}
     >
-      <VictoryBar data={data} style={graphStyle} x="label" y="dado" />
+      <VictoryBar data={data} style={graphStyle} x="label" y={item => Number(item.dado)} />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
-      {/* tickFormat={tick => tick.getFullYear()} */}
-      <VictoryAxis dependentAxis tickValues={yLabels} style={axisStyles} />
+      <VictoryAxis dependentAxis style={axisStyles} />
     </VictoryChart>
   )
 }
