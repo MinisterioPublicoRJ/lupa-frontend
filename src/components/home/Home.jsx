@@ -1,19 +1,20 @@
 import React from 'react'
-import Div100vh from 'react-div-100vh'
+import PropTypes from 'prop-types'
 
 import './Home.scss'
 import Contents from '../contents/Contents'
-// import Search from '../search/Search'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
-// import Recents from '../recents/Recents'
+
+const propTypes = {
+  match: PropTypes.shape({ params: PropTypes.shape({ id: PropTypes.string }) }).isRequired,
+}
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
     this.checkContent = this.checkContent.bind(this)
     this.renderBox = this.renderBox.bind(this)
@@ -21,9 +22,38 @@ class Home extends React.Component {
 
   componentDidMount() {
     const { loading } = this.state
+    const { match } = this.props
     if (loading) {
-      Api.getEntityData(this.checkContent, 'MUN', '330455')
+      this.loadEntityData(match.params.entityType, match.params.entityId)
     }
+  }
+
+  /**
+   * Checks if there was a change in the navigation params
+   * so it can update the new county data
+   */
+  componentDidUpdate(prevProps) {
+    const prevType = prevProps.match.params.entityType
+    const prevId = prevProps.match.params.entityId
+    const { match } = this.props
+    const currentType = match.params.entityType
+    const currentId = match.params.entityId
+    if (currentId !== prevId || currentType !== prevType) {
+      this.loadEntityData(currentType, currentId)
+    }
+  }
+
+  /**
+   * Controls the loading and loads new county data
+   * @param  {string} id county id
+   * @return {void}
+   */
+  loadEntityData(entityType, entityId) {
+    const { loading } = this.state
+    if (!loading) {
+      this.setState({ loading: true })
+    }
+    Api.getEntityData(this.checkContent, entityType, entityId)
   }
 
   /**
@@ -48,7 +78,12 @@ class Home extends React.Component {
       id: info.id,
       data_type: 'loading',
     }))
-    this.setState({ loading: false, content: loadingBoxes, geojson: entityResponse.geojson })
+    this.setState({
+      loading: false,
+      content: loadingBoxes,
+      geojson: entityResponse.geojson,
+      name: entityResponse.exibition_field,
+    })
 
     this.loadBoxes(entityResponse.data_list)
   }
@@ -59,23 +94,14 @@ class Home extends React.Component {
    * @return {void}
    */
   loadBoxes(dataList) {
-    dataList.forEach(item => Api.getBoxData(this.renderBox, 'MUN', '330455', item.id))
+    const { match } = this.props
+    const { entityType, entityId } = match.params
+    dataList.forEach(item => Api.getBoxData(this.renderBox, entityType, entityId, item.id))
   }
-
-  handleSearching() {
-    // console.log('SEARCHING!')
-    const { history } = this.props
-    history.push('/home/Barbier')
-  }
-
-  // NOT FOR VERSION ONE
-  // handleMenu() {
-  //   console.log('Menu')
-  // }
 
   /**
-   * Changes the current filter applied to the content
    * NOT FOR VERSION ONE
+   * Changes the current filter applied to the content
    * @param  {string} filter filter name
    * @return {void}
    */
@@ -88,12 +114,14 @@ class Home extends React.Component {
    * Receives the box info after the promise is resolved
    * and updates the state with the new data
    * @param  {json} updatedBox actual box content
+   * @param  {string} boxId    id (only comes if the request fails)
    * @return {void}
    */
-  renderBox(updatedBox) {
+  renderBox(updatedBox, boxId) {
     const { content } = this.state
+    const newBox = boxId ? { id: boxId, data_type: 'error' } : updatedBox
     const newContent = content.map((box) => {
-      if (box.id === updatedBox.id) return updatedBox
+      if (box.id === newBox.id) return newBox
 
       return box
     })
@@ -103,27 +131,24 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error, geojson,
+      loading, activeFilter, content, error, geojson, name,
     } = this.state
 
     if (loading) return <FullScreenLoading />
     return (
-      <Div100vh className="Home-container">
-        {/*<Search
-          searchPressed={() => this.handleSearching()}
-          menuPressed={() => this.handleMenu()}
-        />*/}
+      <div className="Entity-container">
         <div className="Main-container">
-          <Map geojson={geojson} />
-          {/* <Recents /> */}
+          {geojson ? <Map geojson={geojson} /> : null}
           <hr />
-          <span>{this.props.match.params.name}</span>
+          <div className="Name-container">{name}</div>
+          <div className="Name-helper" />
           <Contents error={error} boxes={content} />
         </div>
         <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
-      </Div100vh>
+      </div>
     )
   }
 }
 
+Home.propTypes = propTypes
 export default Home

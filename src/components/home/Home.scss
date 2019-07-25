@@ -1,4 +1,4 @@
-.Home-container {
+.Entity-container {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -13,6 +13,30 @@
   width: 100%;
 
   hr {
+    color: #C1C1C1;
+    margin: 20px auto 20px auto;
     width: 7%;
   }
+}
+
+.Name-container {
+  align-items: center;
+  background-color: #0090FC;
+  border-radius: 20px 20px 0 0;
+  color: white;
+  display: flex;
+  font-size: 3vh;
+  font-family: Roboto;
+  height: 7vh;
+  justify-content: center;
+  padding-bottom: 10px;
+  min-height: 40px;
+}
+
+.Name-helper {
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  height: 3vh;
+  min-height: 10px;
+  margin-top: -11px;
 }
