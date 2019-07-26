@@ -66,11 +66,11 @@ const graphBar = ({ data, sortedData }) => {
         style={graphStyle}
         x="rotulo"
         y={item => Number(item.dado)}
-        labels={item => Number(item.dado)}
+        labels={item => Number(item.dado).toLocaleString('pt-br')}
         domain={yDomain}
       />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
-      <VictoryAxis dependentAxis style={axisStyles} />
+      <VictoryAxis dependentAxis style={axisStyles} tickFormat={tick => tick.toLocaleString('pt-br')} />
     </VictoryChart>
   )
 }
