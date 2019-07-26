@@ -15,7 +15,6 @@ class Login extends React.Component {
       const { history, location } = this.props
       localStorage.setItem('token', response.data)
       const navUrl = (location.state && location.state.prevUrl) ? location.state.prevUrl : '/EST/33'
-      console.log('navUrl', navUrl);
       history.push(navUrl)
     }
     // colocar mensagem de erro aqui

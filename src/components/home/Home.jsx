@@ -10,7 +10,10 @@ import Api from '../api/Api'
 
 const propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape({ entityType: PropTypes.string, entityId: PropTypes.string }),
+    params: PropTypes.shape({
+      entityType: PropTypes.string,
+      entityId: PropTypes.string,
+    }),
   }).isRequired,
 }
 
@@ -112,6 +115,12 @@ class Home extends React.Component {
     this.setState({ activeFilter: filter })
   }
 
+  handleNavigateToEntity(entityType, entityId) {
+    console.log('Home received navigate to entity', entityType, entityId)
+    const { history } = this.props
+    history.push(`/${entityType}/${entityId}`)
+  }
+
   /**
    * Callback from the getBoxData function
    * Receives the box info after the promise is resolved
@@ -141,7 +150,14 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          {geojson ? <Map geojson={geojson} /> : null}
+          {geojson ? (
+            <Map
+              geojsonArray={geojson}
+              navigateToEntity={
+                (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+              }
+            />
+          ) : null}
           <hr />
           <div className="Name-container">{name}</div>
           <div className="Name-helper" />
