@@ -6,7 +6,7 @@ const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -15,7 +15,7 @@ const propTypes = {
   sortedData: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -24,9 +24,12 @@ const propTypes = {
 }
 
 const graphStyle = {
-  parent: { fill: 'red' },
   data: { fill: 'tomato' },
-  labels: { display: 'none' },
+  labels: {
+    fontSize: 9,
+    fontFamily: 'Roboto',
+    fill: '#696568',
+  },
 }
 
 const axisStyles = {
@@ -40,13 +43,13 @@ const axisStyles = {
 }
 
 const calculateYDomain = (data) => {
-  const minY = (Number(data[0].dado) * 0.95)
-  const maxY = (Number(data[data.length - 1].dado) * 1.05)
+  const minY = Number(data[0].dado) * 0.95
+  const maxY = Number(data[data.length - 1].dado) * 1.05
   return { y: [minY, maxY] }
 }
 
 const graphBar = ({ data, sortedData }) => {
-  const xLabels = data.map(item => item.label)
+  const xLabels = data.map(item => item.rotulo)
   const yDomain = calculateYDomain(sortedData)
   return (
     <VictoryChart
@@ -61,8 +64,9 @@ const graphBar = ({ data, sortedData }) => {
       <VictoryBar
         data={data}
         style={graphStyle}
-        x="label"
+        x="rotulo"
         y={item => Number(item.dado)}
+        labels={item => Number(item.dado)}
         domain={yDomain}
       />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />

@@ -6,7 +6,7 @@ const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,

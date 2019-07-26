@@ -4,7 +4,7 @@ import './Box.scss'
 import './Spinner.scss'
 
 const LoadingBox = () => (
-  <div className="box SmallBoxContrast--container">
+  <div className="box SmallBox SmallBoxContrast">
     <div className="lds-spinner">
       <div />
       <div />

@@ -7,11 +7,7 @@ import EntityError from '../utils/EntityError'
 const Contents = ({ boxes, error }) => (
   <div className="contents">
     {error ? <EntityError errorInfo={error} /> : null}
-    {boxes ?
-      boxes.map((d, key) => (
-      <Box key={key} content={d} />
-    ))
-  : null}
+    {boxes ? boxes.map((d, key) => <Box key={key} content={d} />) : null}
   </div>
 )
 
