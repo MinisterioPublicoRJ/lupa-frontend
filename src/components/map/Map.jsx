@@ -24,22 +24,20 @@ const clickToFeature = (e, callback) => {
 }
 
 const propTypes = {
-  props: PropTypes.shape({
-    geojson: PropTypes.arrayOf(
-      PropTypes.shape({
-        coordinates: PropTypes.arrayOf(
-          PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
-        ),
-        properties: PropTypes.shape({
-          entity_link_id: PropTypes.number,
-          entity_link_type: PropTypes.string,
-          name: PropTypes.string,
-        }),
-        type: PropTypes.string,
+  geojson: PropTypes.arrayOf(
+    PropTypes.shape({
+      coordinates: PropTypes.arrayOf(
+        PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+      ),
+      properties: PropTypes.shape({
+        entity_link_id: PropTypes.number,
+        entity_link_type: PropTypes.string,
+        name: PropTypes.string,
       }),
-    ),
-    navigateToEntity: PropTypes.func,
-  }).isRequired,
+      type: PropTypes.string,
+    }),
+  ),
+  navigateToEntity: PropTypes.func,
 }
 
 // colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js

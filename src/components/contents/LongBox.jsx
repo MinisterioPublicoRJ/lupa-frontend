@@ -10,7 +10,7 @@ const propTypes = {
   contrast: PropTypes.bool,
   source: PropTypes.string,
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 const defaultProps = {
   contrast: false,

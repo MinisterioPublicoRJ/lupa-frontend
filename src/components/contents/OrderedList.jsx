@@ -6,7 +6,7 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.string).isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string })).isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
 }
