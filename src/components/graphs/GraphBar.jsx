@@ -26,11 +26,10 @@ const propTypes = {
 const graphStyle = {
   data: { fill: 'tomato' },
   labels: {
-    // padding: 5,
     fontSize: 9,
     fontFamily: 'Roboto',
     fill: '#696568',
-  }
+  },
 }
 
 const axisStyles = {
@@ -44,8 +43,8 @@ const axisStyles = {
 }
 
 const calculateYDomain = (data) => {
-  const minY = (Number(data[0].dado) * 0.95)
-  const maxY = (Number(data[data.length - 1].dado) * 1.05)
+  const minY = Number(data[0].dado) * 0.95
+  const maxY = Number(data[data.length - 1].dado) * 1.05
   return { y: [minY, maxY] }
 }
 
@@ -67,7 +66,7 @@ const graphBar = ({ data, sortedData }) => {
         style={graphStyle}
         x="rotulo"
         y={item => Number(item.dado)}
-        labels={(item) => Number(item.dado)}
+        labels={item => Number(item.dado)}
         domain={yDomain}
       />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
