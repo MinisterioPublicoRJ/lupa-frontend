@@ -104,15 +104,15 @@ const graph = ({
             : null}
         </div>
       )}
-      {/* source && (
+      {source && (
         <span
           className="Graph-source"
           onClick={() => sourcePressed()}
           style={highlight ? { color: '#FFFFFF' } : null}
         >
-          mais detalhes ->
+          {source}
         </span>
-      ) */}
+      )}
     </div>
   )
 }
