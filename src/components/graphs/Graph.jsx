@@ -98,7 +98,7 @@ const graph = ({
             ? sortedData.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
                 <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
-                {item.rotulo}
+                {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))
             : null}
