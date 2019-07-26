@@ -18,22 +18,21 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
-const clickToFeature = e => {
+const clickToFeature = (e, navigateToEntity) => {
   const layer = e.target
-  console.log('I clicked on ', layer.feature.properties)
+  console.log('I clicked on ', layer.feature.properties, navigateToEntity)
 }
 
-const onEachFeature = (feature, layer) => {
-  layer.on({
-    click: clickToFeature.bind(this),
-  })
-}
+// const onEachFeature = (feature, layer) => {
+//   layer.on({
+//     click: clickToFeature.bind(this),
+//   })
+// }
 
 const propTypes = {
   props: PropTypes.shape({
     geojson: PropTypes.arrayOf(
       PropTypes.shape({
-        type: PropTypes.string,
         coordinates: PropTypes.arrayOf(
           PropTypes.arrayOf(
             PropTypes.arrayOf(
@@ -43,8 +42,15 @@ const propTypes = {
             )
           )
         ),
+        properties: PropTypes.shape({
+          entity_link_id: PropTypes.number,
+          entity_link_type: PropTypes.string,
+          name: PropTypes.string,
+        }),
+        type: PropTypes.string,
       })
     ),
+    navigateToEntity: PropTypes.func,
   })
 }
 
@@ -71,49 +77,14 @@ const map = props => {
     type: "FeatureCollection",
     features: props.geojsonArray.map((eachGeojson, index) => {
       return {
-        type: "Feature",
-        geometry: eachGeojson,
+        ...eachGeojson,
         properties: {
+          ...eachGeojson.properties,
           index
         }
       }
     })
   }
-
-  // debug
-  // MOCK adds another fake feature
-  geojsonWithAll.features.push({
-    "type": "Feature",
-    "geometry": {
-      "type": "Polygon",
-      "coordinates": [
-        [
-          [
-            -43.49,
-            -23.24
-          ],
-          [
-            -43.18,
-            -23.24
-          ],
-          [
-            -43.18,
-            -23.11
-          ],
-          [
-            -43.49,
-            -23.11
-          ],
-          [
-            -43.494873046875,
-            -23.24134610238612
-          ]
-        ]
-      ]
-    },
-    "properties": {index: geojsonWithAll.features.length},
-  })
-  // /debug
 
   // bounding box
   const bboxArray = bbox(geojsonWithAll)
@@ -128,7 +99,11 @@ const map = props => {
       />
       <GeoJSON
         data={geojsonWithAll}
-        onEachFeature={onEachFeature}
+        onEachFeature={(feature, layer, navigateToEntity) => {
+          layer.on({
+            click: clickToFeature.bind(this),
+          })
+        }}
         style={styleGeojson}
       />
     </Map>

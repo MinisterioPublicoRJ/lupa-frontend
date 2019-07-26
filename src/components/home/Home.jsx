@@ -115,6 +115,10 @@ class Home extends React.Component {
     this.setState({ activeFilter: filter })
   }
 
+  navigateToEntity(entityType, entityId) {
+    console.log('Home received navigate to entity', entityType, entityId)
+  }
+
   /**
    * Callback from the getBoxData function
    * Receives the box info after the promise is resolved
@@ -144,8 +148,7 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          {geojson ? <Map geojsonArray={[geojson]} /> : null}
-          {/* MOCK: passing as array */}
+          {geojson ? <Map geojsonArray={geojson} navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)}/> : null}
           <hr />
           <div className="Name-container">{name}</div>
           <div className="Name-helper" />
