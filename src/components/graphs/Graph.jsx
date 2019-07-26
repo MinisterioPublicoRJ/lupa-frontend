@@ -26,8 +26,8 @@ const propTypes = {
   description: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      y: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   ).isRequired,
   source: PropTypes.string,
@@ -96,9 +96,9 @@ const graph = ({
             : null}
           {type === 'grafico_pizza'
             ? sortedData.map((item, i) => (
-              <span className="Graph-categories" key={item.label}>
+              <span className="Graph-categories" key={item.rotulo}>
                 <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
-                {item.label}
+                {item.rotulo}
               </span>
             ))
             : null}
