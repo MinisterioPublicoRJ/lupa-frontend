@@ -1,6 +1,6 @@
 import React from 'react'
 import bbox from '@turf/bbox'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { Map, GeoJSON, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -18,29 +18,17 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
-const clickToFeature = (e, navigateToEntity) => {
+const clickToFeature = (e, callback) => {
   const layer = e.target
-  console.log('I clicked on ', layer.feature.properties, navigateToEntity)
+  callback(layer.feature.properties.entity_link_type, layer.feature.properties.entity_link_id)
 }
-
-// const onEachFeature = (feature, layer) => {
-//   layer.on({
-//     click: clickToFeature.bind(this),
-//   })
-// }
 
 const propTypes = {
   props: PropTypes.shape({
     geojson: PropTypes.arrayOf(
       PropTypes.shape({
         coordinates: PropTypes.arrayOf(
-          PropTypes.arrayOf(
-            PropTypes.arrayOf(
-              PropTypes.arrayOf(
-                PropTypes.number
-              )
-            )
-          )
+          PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
         ),
         properties: PropTypes.shape({
           entity_link_id: PropTypes.number,
@@ -48,42 +36,38 @@ const propTypes = {
           name: PropTypes.string,
         }),
         type: PropTypes.string,
-      })
+      }),
     ),
     navigateToEntity: PropTypes.func,
-  })
+  }).isRequired,
 }
 
 // colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js
-const yellow200 = "#FFF59D";
-const deepOrange600 = "#F4511E";
-const lime300 = "#DCE775";
-const lightGreen500 = "#8BC34A";
-const teal700 = "#00796B";
-const cyan900 = "#006064";
-const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900];
+const yellow200 = '#FFF59D'
+const deepOrange600 = '#F4511E'
+const lime300 = '#DCE775'
+const lightGreen500 = '#8BC34A'
+const teal700 = '#00796B'
+const cyan900 = '#006064'
+const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900]
 
-const styleGeojson = feature => {
-  return { color: colors[feature.properties.index % colors.length] }
-}
+const styleGeojson = feature => ({ color: colors[feature.properties.index % colors.length] })
 
 /**
  *
  * @param {Object} props Map props passed on by React
  * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
  */
-const map = props => {
+const map = (props) => {
   const geojsonWithAll = {
-    type: "FeatureCollection",
-    features: props.geojsonArray.map((eachGeojson, index) => {
-      return {
-        ...eachGeojson,
-        properties: {
-          ...eachGeojson.properties,
-          index
-        }
-      }
-    })
+    type: 'FeatureCollection',
+    features: props.geojsonArray.map((eachGeojson, index) => ({
+      ...eachGeojson,
+      properties: {
+        ...eachGeojson.properties,
+        index,
+      },
+    })),
   }
 
   // bounding box
@@ -99,9 +83,9 @@ const map = props => {
       />
       <GeoJSON
         data={geojsonWithAll}
-        onEachFeature={(feature, layer, navigateToEntity) => {
+        onEachFeature={(feature, layer) => {
           layer.on({
-            click: clickToFeature.bind(this),
+            click: event => clickToFeature(event, props.navigateToEntity),
           })
         }}
         style={styleGeojson}
