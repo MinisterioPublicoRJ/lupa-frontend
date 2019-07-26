@@ -86,7 +86,6 @@ const map = (props) => {
             click: event => clickToFeature(event, props.navigateToEntity),
           })
         }}
-        style={styleGeojson}
       />
     </Map>
   )
