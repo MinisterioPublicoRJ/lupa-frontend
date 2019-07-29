@@ -76,7 +76,7 @@ class Home extends React.Component {
    */
   checkContent(entityResponse) {
     if (!entityResponse.data_list) {
-      this.setState({ loading: false, error: entityResponse })
+      this.setState({ loading: false, error: entityResponse, content: null })
       return
     }
 
@@ -86,6 +86,7 @@ class Home extends React.Component {
     }))
     this.setState({
       loading: false,
+      error: null,
       content: loadingBoxes,
       geojson: entityResponse.geojson,
       name: entityResponse.exibition_field,
