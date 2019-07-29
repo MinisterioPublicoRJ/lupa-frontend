@@ -117,7 +117,6 @@ class Home extends React.Component {
   }
 
   handleNavigateToEntity(entityType, entityId) {
-    console.log('Home received navigate to entity', entityType, entityId)
     const { history } = this.props
     history.push(`/${entityType}/${entityId}`)
   }
@@ -132,12 +131,17 @@ class Home extends React.Component {
    */
   renderBox(updatedBox, boxId) {
     const { content } = this.state
-    const newBox = boxId ? { id: boxId, data_type: 'error' } : updatedBox
-    const newContent = content.map((box) => {
-      if (box.id === newBox.id) return newBox
+    let newContent
+    if (boxId) {
+      newContent = content.filter(box => box.id !== boxId)
+    } else {
+      newContent = content.map((box) => {
+        if (box.id === updatedBox.id) return updatedBox
 
-      return box
-    })
+        return box
+      })
+    }
+    // const newBox = boxId ? null : updatedBox
 
     this.setState({ content: newContent })
   }
@@ -154,8 +158,7 @@ class Home extends React.Component {
           {geojson ? (
             <Map
               geojsonArray={geojson}
-              navigateToEntity={
-                (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+              navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
               }
             />
           ) : null}
