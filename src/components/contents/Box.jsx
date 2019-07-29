@@ -20,7 +20,7 @@ const Box = ({ content }) => {
         <SmallBox
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.description}
+          description={content.external_data.detalhes}
           source={content.external_data.fonte}
         />
       )
@@ -29,7 +29,7 @@ const Box = ({ content }) => {
         <SmallBoxContrast
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.description}
+          description={content.external_data.detalhes}
           source={content.external_data.fonte}
         />
       )
@@ -38,7 +38,7 @@ const Box = ({ content }) => {
         <LongBox
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.description}
+          description={content.external_data.detalhes}
           source={content.external_data.fonte}
         />
       )
@@ -48,7 +48,7 @@ const Box = ({ content }) => {
           contrast
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.description}
+          description={content.external_data.detalhes}
           source={content.external_data.fonte}
         />
       )
