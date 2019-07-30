@@ -58,7 +58,8 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
+  padding: 0 10px 0 10px;
   width: 100%;
 }
 
@@ -69,6 +70,7 @@
   font-family: Roboto; //light
   font-size: 1.7vh;
   margin: 5px 0 5px 0;
+  min-width: 50%;
 }
 
 .Graph-color {

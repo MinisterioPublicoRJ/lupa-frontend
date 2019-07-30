@@ -18,10 +18,27 @@ const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6
 
 const graphStyle = {
   labels: {
+    // angle: 45,
     fontSize: 11,
     fontFamily: 'Roboto',
     fill: '#696568',
   },
+  data: {
+    stroke: '#fff',
+    strokeWidth: 0.5,
+  },
+}
+
+/**
+ * only gives a label if the value is greater than 3%
+ * @param  {string} valueStr slice value
+ * @param  {number} total    sum of all slices
+ * @return {string || null}
+ */
+const renderLabel = (valueStr, total) => {
+  const percentage = (Number(valueStr) * 100) / total
+  if (percentage > 3) return `${percentage.toFixed(2)}%`
+  return null
 }
 
 const GraphPie = ({ data }) => {
@@ -29,9 +46,10 @@ const GraphPie = ({ data }) => {
   return (
     <VictoryPie
       data={data}
-      radius={150}
+      radius={140}
+      labelRadius={145}
       y={item => Number(item.dado)}
-      labels={item => `${(Number(item.dado) *100 / total).toFixed(2)}%`}
+      labels={item => renderLabel(item.dado, total)}
       colorScale={colorScale}
       style={graphStyle}
     />
