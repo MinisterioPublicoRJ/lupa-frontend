@@ -18,6 +18,12 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
+const maxBounds = [
+  [-20,-40],
+  [-24,-46]
+]
+const minZoom = 7
+
 const clickToFeature = (e, callback) => {
   const layer = e.target
   callback(layer.feature.properties.entity_link_type, layer.feature.properties.entity_link_id)
@@ -74,7 +80,13 @@ const map = (props) => {
   const corner2 = [bboxArray[3], bboxArray[2]]
 
   return (
-    <Map bounds={[corner1, corner2]} style={{ height: '100%' }} zoomControl={false}>
+    <Map
+      bounds={[corner1, corner2]}
+      maxBounds={maxBounds}
+      minZoom={minZoom}
+      style={{ height: '100%' }}
+      zoomControl={false}
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
