@@ -1,12 +1,15 @@
 import React from 'react'
 import bbox from '@turf/bbox'
 import PropTypes from 'prop-types'
-import { Map, GeoJSON, TileLayer } from 'react-leaflet'
+import { GeoJSON, Map, Marker, TileLayer } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-markercluster'
 import 'leaflet/dist/leaflet.css'
+import 'react-leaflet-markercluster/dist/styles.min.css'
 import L from 'leaflet'
 import marker from 'leaflet/dist/images/marker-icon.png'
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import mock from './mock.json'
 
 // stupid hack so that leaflet's images work after going through webpack
 // https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-388492108
@@ -46,17 +49,6 @@ const propTypes = {
   navigateToEntity: PropTypes.func,
 }
 
-// colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js
-const yellow200 = '#FFF59D'
-const deepOrange600 = '#F4511E'
-const lime300 = '#DCE775'
-const lightGreen500 = '#8BC34A'
-const teal700 = '#00796B'
-const cyan900 = '#006064'
-const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900]
-
-const styleGeojson = feature => ({ color: colors[feature.properties.index % colors.length] })
-
 /**
  *
  * @param {Object} props Map props passed on by React
@@ -84,6 +76,7 @@ const map = (props) => {
       bounds={[corner1, corner2]}
       maxBounds={maxBounds}
       minZoom={minZoom}
+      maxZoom={19}
       style={{ height: '100%' }}
       zoomControl={false}
     >
@@ -99,6 +92,9 @@ const map = (props) => {
           })
         }}
       />
+      <MarkerClusterGroup>
+        {mock.features.map((marker, index) => <Marker position={[marker.geometry.coordinates[1],marker.geometry.coordinates[0]]} key={index} />)}
+      </MarkerClusterGroup>
     </Map>
   )
 }
