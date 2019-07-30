@@ -41,15 +41,15 @@ const propTypes = {
 }
 
 // colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js
-const yellow200 = '#FFF59D'
-const deepOrange600 = '#F4511E'
-const lime300 = '#DCE775'
-const lightGreen500 = '#8BC34A'
-const teal700 = '#00796B'
-const cyan900 = '#006064'
-const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900]
+// const yellow200 = '#FFF59D'
+// const deepOrange600 = '#F4511E'
+// const lime300 = '#DCE775'
+// const lightGreen500 = '#8BC34A'
+// const teal700 = '#00796B'
+// const cyan900 = '#006064'
+// const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900]
 
-const styleGeojson = feature => ({ color: colors[feature.properties.index % colors.length] })
+// const styleGeojson = feature => ({ color: colors[feature.properties.index % colors.length] })
 
 /**
  *

@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 import './Graph.scss'
 import GraphPie from './GraphPie'
 import GraphBar from './GraphBar'
+import GraphBarHorizontal from './GraphBarHorizontal'
 import GraphStackedBar from './GraphStackedBar'
 import ErrorBox from '../contents/ErrorBox'
+
+const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
 
 const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
@@ -13,6 +16,8 @@ const checkGraphType = ({ type, data, sortedData }) => {
       return <GraphPie data={data} />
     case 'grafico_barra_vertical':
       return <GraphBar data={data} sortedData={sortedData} />
+    case 'grafico_barra_horizontal':
+      return <GraphBarHorizontal data={data} sortedData={sortedData} colorScale={colorScale} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
@@ -46,8 +51,6 @@ const defaultProps = {
   categories: [],
   highlight: false,
 }
-
-const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
 
 const graph = ({
   type,
@@ -97,7 +100,10 @@ const graph = ({
           {type === 'grafico_pizza'
             ? sortedData.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
-                <span className="Graph-color" style={{ backgroundColor: colorScale[i % colorScale.length] }} />
+                <span
+                  className="Graph-color"
+                  style={{ backgroundColor: colorScale[i % colorScale.length] }}
+                />
                 {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))
