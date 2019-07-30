@@ -1,8 +1,10 @@
 import React from 'react'
 import bbox from '@turf/bbox'
 import PropTypes from 'prop-types'
-import { Map, GeoJSON, TileLayer } from 'react-leaflet'
+import { GeoJSON, Map, Marker, TileLayer } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-markercluster'
 import 'leaflet/dist/leaflet.css'
+import 'react-leaflet-markercluster/dist/styles.min.css'
 import L from 'leaflet'
 import marker from 'leaflet/dist/images/marker-icon.png'
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
@@ -18,15 +20,9 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
-const maxBounds = [
-  [-20,-40],
-  [-24,-46]
-]
-const minZoom = 7
-
-const clickToFeature = (e, callback) => {
-  const layer = e.target
-  callback(layer.feature.properties.entity_link_type, layer.feature.properties.entity_link_id)
+const clickToFeature = (e, callback, markerProperties) => {
+  let objectProperties = markerProperties ? markerProperties : e.target.feature.properties
+  callback(objectProperties.entity_link_type, objectProperties.entity_link_id)
 }
 
 const propTypes = {
@@ -46,32 +42,23 @@ const propTypes = {
   navigateToEntity: PropTypes.func,
 }
 
-// colors from VictoryJS material.js https://github.com/FormidableLabs/victory/blob/master/packages/victory-core/src/victory-theme/material.js
-const yellow200 = '#FFF59D'
-const deepOrange600 = '#F4511E'
-const lime300 = '#DCE775'
-const lightGreen500 = '#8BC34A'
-const teal700 = '#00796B'
-const cyan900 = '#006064'
-const colors = [deepOrange600, yellow200, lime300, lightGreen500, teal700, cyan900]
-
-const styleGeojson = feature => ({ color: colors[feature.properties.index % colors.length] })
-
 /**
  *
  * @param {Object} props Map props passed on by React
  * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
  */
-const map = (props) => {
+const map = props => {
   const geojsonWithAll = {
     type: 'FeatureCollection',
-    features: props.geojsonArray.map((eachGeojson, index) => ({
-      ...eachGeojson,
-      properties: {
-        ...eachGeojson.properties,
-        index,
-      },
-    })),
+    features: props.geojsonArray
+  }
+  const geojsonWithAllAreas = {
+    type: 'FeatureCollection',
+    features: props.geojsonArray.filter(feature => feature.geometry.type === 'MultiPolygon')
+  }
+  const geojsonWithAllPoints = {
+    type: 'FeatureCollection',
+    features: props.geojsonArray.filter(feature => feature.geometry.type === 'Point')
   }
 
   // bounding box
@@ -82,8 +69,7 @@ const map = (props) => {
   return (
     <Map
       bounds={[corner1, corner2]}
-      maxBounds={maxBounds}
-      minZoom={minZoom}
+      maxZoom={19}
       style={{ height: '100%' }}
       zoomControl={false}
     >
@@ -92,13 +78,22 @@ const map = (props) => {
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
       />
       <GeoJSON
-        data={geojsonWithAll}
+        data={geojsonWithAllAreas}
         onEachFeature={(feature, layer) => {
           layer.on({
             click: event => clickToFeature(event, props.navigateToEntity),
           })
         }}
       />
+      <MarkerClusterGroup>
+        {geojsonWithAllPoints.features.map((marker, index) => (
+          <Marker
+            key={index}
+            position={[marker.geometry.coordinates[1],marker.geometry.coordinates[0]]}
+            onClick={event => clickToFeature(event, props.navigateToEntity, marker.properties)}
+          />
+        ))}
+      </MarkerClusterGroup>
     </Map>
   )
 }
