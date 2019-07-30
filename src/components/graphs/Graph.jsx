@@ -31,7 +31,7 @@ const propTypes = {
     }),
   ).isRequired,
   source: PropTypes.string,
-  infoPressed: PropTypes.func,
+  // infoPressed: PropTypes.func,
   sourcePressed: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.string),
   highlight: PropTypes.bool,
@@ -41,7 +41,7 @@ const defaultProps = {
   title: null,
   description: null,
   source: null,
-  infoPressed: () => {},
+  // infoPressed: () => {},
   sourcePressed: () => {},
   categories: [],
   highlight: false,
@@ -55,7 +55,7 @@ const graph = ({
   description,
   data,
   source,
-  infoPressed,
+  // infoPressed,
   sourcePressed,
   categories,
   highlight,
@@ -97,7 +97,7 @@ const graph = ({
           {type === 'grafico_pizza'
             ? sortedData.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
-                <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
+                <span className="Graph-color" style={{ backgroundColor: colorScale[i % colorScale.length] }} />
                 {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))
