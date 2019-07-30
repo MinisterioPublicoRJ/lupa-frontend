@@ -9,7 +9,6 @@ import L from 'leaflet'
 import marker from 'leaflet/dist/images/marker-icon.png'
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import mock from './mock.json'
 
 // stupid hack so that leaflet's images work after going through webpack
 // https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-388492108
@@ -27,9 +26,9 @@ const maxBounds = [
 ]
 const minZoom = 7
 
-const clickToFeature = (e, callback) => {
-  const layer = e.target
-  callback(layer.feature.properties.entity_link_type, layer.feature.properties.entity_link_id)
+const clickToFeature = (e, callback, markerProperties) => {
+  let objectProperties = markerProperties ? markerProperties : e.target.feature.properties
+  callback(objectProperties.entity_link_type, objectProperties.entity_link_id)
 }
 
 const propTypes = {
@@ -54,20 +53,18 @@ const propTypes = {
  * @param {Object} props Map props passed on by React
  * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
  */
-const map = (props) => {
-  const geojsonWithAll = {
+const map = props => {
+  const geojsonWithAllAreas = {
     type: 'FeatureCollection',
-    features: props.geojsonArray.map((eachGeojson, index) => ({
-      ...eachGeojson,
-      properties: {
-        ...eachGeojson.properties,
-        index,
-      },
-    })),
+    features: props.geojsonArray.filter(feature => feature.geometry.type === 'MultiPolygon')
+  }
+  const geojsonWithAllPoints = {
+    type: 'FeatureCollection',
+    features: props.geojsonArray.filter(feature => feature.geometry.type === 'Point')
   }
 
   // bounding box
-  const bboxArray = bbox(geojsonWithAll)
+  const bboxArray = bbox(geojsonWithAllAreas)
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
 
@@ -85,7 +82,7 @@ const map = (props) => {
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
       />
       <GeoJSON
-        data={geojsonWithAll}
+        data={geojsonWithAllAreas}
         onEachFeature={(feature, layer) => {
           layer.on({
             click: event => clickToFeature(event, props.navigateToEntity),
@@ -93,7 +90,13 @@ const map = (props) => {
         }}
       />
       <MarkerClusterGroup>
-        {mock.features.map((marker, index) => <Marker position={[marker.geometry.coordinates[1],marker.geometry.coordinates[0]]} key={index} />)}
+        {geojsonWithAllPoints.features.map((marker, index) => (
+          <Marker
+            key={index}
+            position={[marker.geometry.coordinates[1],marker.geometry.coordinates[0]]}
+            onClick={event => clickToFeature(event, props.navigateToEntity, marker.properties)}
+          />
+        ))}
       </MarkerClusterGroup>
     </Map>
   )
