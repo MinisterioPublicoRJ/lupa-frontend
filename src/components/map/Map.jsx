@@ -20,12 +20,6 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
-// const maxBounds = [
-//   [-20,-40],
-//   [-24,-46]
-// ]
-// const minZoom = 1
-
 const clickToFeature = (e, callback, markerProperties) => {
   let objectProperties = markerProperties ? markerProperties : e.target.feature.properties
   callback(objectProperties.entity_link_type, objectProperties.entity_link_id)
@@ -75,8 +69,6 @@ const map = props => {
   return (
     <Map
       bounds={[corner1, corner2]}
-      // maxBounds={maxBounds}
-      // minZoom={minZoom}
       maxZoom={19}
       style={{ height: '100%' }}
       zoomControl={false}
