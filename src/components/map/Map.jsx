@@ -20,11 +20,11 @@ L.Icon.Default.mergeOptions({
 })
 // /hack
 
-const maxBounds = [
-  [-20,-40],
-  [-24,-46]
-]
-const minZoom = 7
+// const maxBounds = [
+//   [-20,-40],
+//   [-24,-46]
+// ]
+// const minZoom = 1
 
 const clickToFeature = (e, callback, markerProperties) => {
   let objectProperties = markerProperties ? markerProperties : e.target.feature.properties
@@ -54,6 +54,10 @@ const propTypes = {
  * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
  */
 const map = props => {
+  const geojsonWithAll = {
+    type: 'FeatureCollection',
+    features: props.geojsonArray
+  }
   const geojsonWithAllAreas = {
     type: 'FeatureCollection',
     features: props.geojsonArray.filter(feature => feature.geometry.type === 'MultiPolygon')
@@ -64,15 +68,15 @@ const map = props => {
   }
 
   // bounding box
-  const bboxArray = bbox(geojsonWithAllAreas)
+  const bboxArray = bbox(geojsonWithAll)
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
 
   return (
     <Map
       bounds={[corner1, corner2]}
-      maxBounds={maxBounds}
-      minZoom={minZoom}
+      // maxBounds={maxBounds}
+      // minZoom={minZoom}
       maxZoom={19}
       style={{ height: '100%' }}
       zoomControl={false}
