@@ -63,7 +63,7 @@ const graph = ({
   categories,
   highlight,
 }) => {
-  const sortedData = data.sort((a, b) => Number(a.dado) - Number(b.dado))
+  const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
   return (
     <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
       <div className="Graph-header">
@@ -104,6 +104,20 @@ const graph = ({
                   className="Graph-color"
                   style={{ backgroundColor: colorScale[i % colorScale.length] }}
                 />
+                {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
+              </span>
+            ))
+            : null}
+          {type === 'grafico_barra_horizontal'
+            ? data.map((item, i) => (
+              <span className="Graph-categories" key={item.rotulo}>
+                <span
+                  className="Graph-color"
+                  style={{ backgroundColor: colorScale[i % colorScale.length] }}
+                />
+                <span style={{ color: colorScale[i % colorScale.length] }}>
+                  {`[${i + 1}]`}
+                </span>
                 {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))

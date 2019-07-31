@@ -50,36 +50,36 @@ const calculateYDomain = (data) => {
 
 const graphBarHorizontal = ({ data, sortedData, colorScale }) => {
   const dataWithColors = data.map((item, i) => ({
-    x: (data.length - i).toLocaleString('pt-br'),
+    x: (i + 1).toLocaleString('pt-br'),
     y: Number(item.dado),
     color: colorScale[i % colorScale.length],
   }))
+
   const yDomain = calculateYDomain(sortedData)
   return (
-    <VictoryChart domainPadding={{ x: 5 }}>
+    <VictoryChart
+      domainPadding={{ x: 5 }}
+      padding={{
+        top: 20, bottom: 20, left: 20, right: 40,
+      }}
+    >
       <VictoryBar
         horizontal
         data={dataWithColors}
+        barRatio={0.5}
+        labels={item => item.y.toLocaleString('pt-br')}
+        domain={yDomain}
+        sortOrder="descending"
+        sortKey="x"
         style={{
           data: {
             fill: item => item.color,
           },
           ...graphStyle,
         }}
-        barRatio={0.5}
-        labels={item => item.y.toLocaleString('pt-br')}
-        domain={yDomain}
       />
       <VictoryAxis
-        style={{
-          axis: { stroke: '#696568' },
-          tickLabels: {
-            padding: 5,
-            fontSize: 10,
-            fontFamily: 'Roboto',
-            fill: label => colorScale[(label - 1) % colorScale.length],
-          },
-        }}
+        style={axisStyles}
       />
       <VictoryAxis
         dependentAxis
