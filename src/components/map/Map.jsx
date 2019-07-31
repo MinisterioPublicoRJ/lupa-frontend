@@ -1,7 +1,9 @@
 import React from 'react'
 import bbox from '@turf/bbox'
 import PropTypes from 'prop-types'
-import { GeoJSON, Map, Marker, TileLayer } from 'react-leaflet'
+import {
+  GeoJSON, Map, Marker, TileLayer,
+} from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import 'leaflet/dist/leaflet.css'
 import 'react-leaflet-markercluster/dist/styles.min.css'
@@ -21,12 +23,12 @@ L.Icon.Default.mergeOptions({
 // /hack
 
 const clickToFeature = (e, callback, markerProperties) => {
-  let objectProperties = markerProperties ? markerProperties : e.target.feature.properties
+  const objectProperties = markerProperties || e.target.feature.properties
   callback(objectProperties.entity_link_type, objectProperties.entity_link_id)
 }
 
 const propTypes = {
-  geojson: PropTypes.arrayOf(
+  geojsonArray: PropTypes.arrayOf(
     PropTypes.shape({
       coordinates: PropTypes.arrayOf(
         PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
@@ -38,27 +40,29 @@ const propTypes = {
       }),
       type: PropTypes.string,
     }),
-  ),
-  navigateToEntity: PropTypes.func,
+  ).isRequired,
+  navigateToEntity: PropTypes.func.isRequired,
 }
 
 /**
  *
  * @param {Object} props Map props passed on by React
- * @param {Object} props.geojson A GeoJSON object with geographical features to be displayed on the map
+ * @param {Object} props.geojsonArray A GeoJSON object with geographical features to
+ *  be displayed on the map
  */
-const map = props => {
+const map = (props) => {
+  const { geojsonArray } = props
   const geojsonWithAll = {
     type: 'FeatureCollection',
-    features: props.geojsonArray
+    features: geojsonArray,
   }
   const geojsonWithAllAreas = {
     type: 'FeatureCollection',
-    features: props.geojsonArray.filter(feature => feature.geometry.type === 'MultiPolygon')
+    features: geojsonArray.filter(feature => feature.geometry.type === 'MultiPolygon'),
   }
   const geojsonWithAllPoints = {
     type: 'FeatureCollection',
-    features: props.geojsonArray.filter(feature => feature.geometry.type === 'Point')
+    features: geojsonArray.filter(feature => feature.geometry.type === 'Point'),
   }
 
   // bounding box
@@ -67,12 +71,7 @@ const map = props => {
   const corner2 = [bboxArray[3], bboxArray[2]]
 
   return (
-    <Map
-      bounds={[corner1, corner2]}
-      maxZoom={19}
-      style={{ height: '100%' }}
-      zoomControl={false}
-    >
+    <Map bounds={[corner1, corner2]} maxZoom={19} style={{ height: '50%' }} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
@@ -89,7 +88,7 @@ const map = props => {
         {geojsonWithAllPoints.features.map((marker, index) => (
           <Marker
             key={index}
-            position={[marker.geometry.coordinates[1],marker.geometry.coordinates[0]]}
+            position={[marker.geometry.coordinates[1], marker.geometry.coordinates[0]]}
             onClick={event => clickToFeature(event, props.navigateToEntity, marker.properties)}
           />
         ))}
