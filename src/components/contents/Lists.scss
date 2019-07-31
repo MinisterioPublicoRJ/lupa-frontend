@@ -113,6 +113,8 @@
   }
 
   &-filterable {
+    overflow: hidden;
+
     .list-box-container {
       position: relative;
 
@@ -152,6 +154,7 @@
       border-bottom: 1px solid #eee;
       font-size: 1em;
       padding: 10px;
+      width: 100%;
     }
   }
 }
