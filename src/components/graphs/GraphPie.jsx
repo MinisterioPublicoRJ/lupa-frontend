@@ -12,13 +12,11 @@ const propTypes = {
       link: PropTypes.string,
     }),
   ).isRequired,
+  colorScale: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
-
-const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
 
 const graphStyle = {
   labels: {
-    // angle: 45,
     fontSize: 11,
     fontFamily: 'Roboto',
     fill: '#696568',
@@ -41,7 +39,7 @@ const renderLabel = (valueStr, total) => {
   return null
 }
 
-const GraphPie = ({ data }) => {
+const GraphPie = ({ data, colorScale }) => {
   const total = data.reduce((soma, item) => soma + Number(item.dado), 0)
   return (
     <VictoryPie

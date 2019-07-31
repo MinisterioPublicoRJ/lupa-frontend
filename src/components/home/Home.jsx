@@ -158,7 +158,8 @@ class Home extends React.Component {
           {geojson ? (
             <Map
               geojsonArray={geojson}
-              navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+              navigateToEntity={
+                (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
               }
             />
           ) : null}

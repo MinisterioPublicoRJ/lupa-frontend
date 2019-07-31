@@ -2,6 +2,7 @@ import React from 'react'
 import Api from '../api/Api'
 
 import './Login.scss'
+import Logo from '../icons/logo'
 
 class Login extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Login extends React.Component {
       <div className="wrapper">
         <div className="Login-container">
           <div className="Login-banner">
-            <p>image goes here</p>
+            <Logo width="100%" />
           </div>
           <form className="Login-form" onSubmit={event => this.login(event)}>
             <div className="Login-inputs">
