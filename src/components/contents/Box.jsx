@@ -85,15 +85,6 @@ const Box = ({ content }) => {
           source={content.external_data[0].fonte}
         />
       )
-    // case 'grafico_pizza':
-    //   return (
-    //     <Graph
-    //       type={content.data_type}
-    //       title={content.exibition_field}
-    //       data={content.external_data}
-    //       source={content.external_data[0].fonte}
-    //     />
-    //   )
     case 'loading':
       return <LoadingBox />
     default:
