@@ -18,7 +18,7 @@ const checkGraphType = ({ type, data, sortedData }) => {
     case 'grafico_barra_vertical':
       return <GraphBar data={data} sortedData={sortedData} />
     case 'grafico_barra_horizontal':
-      return <GraphBarHorizontal data={data} sortedData={sortedData} colorScale={colorScale} />
+      return <GraphBarHorizontal data={data} sortedData={sortedData} colorScale={ColorScale} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
@@ -93,7 +93,7 @@ const graph = ({
           {categories
             ? categories.map((item, i) => (
               <span className="Graph-categories">
-                <span className="Graph-color" style={{ backgroundColor: colorScale[i] }} />
+                <span className="Graph-color" style={{ backgroundColor: ColorScale[i] }} />
                 {item}
               </span>
             ))
@@ -114,11 +114,9 @@ const graph = ({
               <span className="Graph-categories" key={item.rotulo}>
                 <span
                   className="Graph-color"
-                  style={{ backgroundColor: colorScale[i % colorScale.length] }}
+                  style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
-                <span style={{ color: colorScale[i % colorScale.length] }}>
-                  {`[${i + 1}]`}
-                </span>
+                <span style={{ color: ColorScale[i % ColorScale.length] }}>{`[${i + 1}]`}</span>
                 {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))
