@@ -4,8 +4,11 @@ import PropTypes from 'prop-types'
 import './Graph.scss'
 import GraphPie from './GraphPie'
 import GraphBar from './GraphBar'
+import GraphBarHorizontal from './GraphBarHorizontal'
 import GraphStackedBar from './GraphStackedBar'
 import ErrorBox from '../contents/ErrorBox'
+
+const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
 
 const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
@@ -13,6 +16,8 @@ const checkGraphType = ({ type, data, sortedData }) => {
       return <GraphPie data={data} />
     case 'grafico_barra_vertical':
       return <GraphBar data={data} sortedData={sortedData} />
+    case 'grafico_barra_horizontal':
+      return <GraphBarHorizontal data={data} sortedData={sortedData} colorScale={colorScale} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
@@ -47,8 +52,6 @@ const defaultProps = {
   highlight: false,
 }
 
-const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
-
 const graph = ({
   type,
   title,
@@ -60,7 +63,7 @@ const graph = ({
   categories,
   highlight,
 }) => {
-  const sortedData = data.sort((a, b) => Number(a.dado) - Number(b.dado))
+  const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
   return (
     <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
       <div className="Graph-header">
@@ -97,7 +100,24 @@ const graph = ({
           {type === 'grafico_pizza'
             ? sortedData.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
-                <span className="Graph-color" style={{ backgroundColor: colorScale[i % colorScale.length] }} />
+                <span
+                  className="Graph-color"
+                  style={{ backgroundColor: colorScale[i % colorScale.length] }}
+                />
+                {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
+              </span>
+            ))
+            : null}
+          {type === 'grafico_barra_horizontal'
+            ? data.map((item, i) => (
+              <span className="Graph-categories" key={item.rotulo}>
+                <span
+                  className="Graph-color"
+                  style={{ backgroundColor: colorScale[i % colorScale.length] }}
+                />
+                <span style={{ color: colorScale[i % colorScale.length] }}>
+                  {`[${i + 1}]`}
+                </span>
                 {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
               </span>
             ))

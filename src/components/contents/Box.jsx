@@ -74,16 +74,9 @@ const Box = ({ content }) => {
       return (
         <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
       )
-    case 'grafico_barra_vertical':
-      return (
-        <Graph
-          type={content.data_type}
-          title={content.exibition_field}
-          data={content.external_data}
-          source={content.external_data[0].fonte}
-        />
-      )
     case 'grafico_pizza':
+    case 'grafico_barra_vertical':
+    case 'grafico_barra_horizontal':
       return (
         <Graph
           type={content.data_type}
