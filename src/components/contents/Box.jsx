@@ -6,6 +6,7 @@ import SmallBoxContrast from './SmallBoxContrast'
 import LongBox from './LongBox'
 import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
+import FilterableList from './FilterableList'
 import Graph from '../graphs/Graph'
 import Person from '../person/Person'
 import LoadingBox from './LoadingBox'
@@ -53,6 +54,14 @@ const Box = ({ content }) => {
         />
       )
     case 'lista_ordenada':
+      return (
+        <FilterableList
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
+        />
+      )
       return (
         <OrderedList
           title={content.exibition_field}
