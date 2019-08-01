@@ -37,7 +37,7 @@ class Login extends React.Component {
    */
   handleChange(event, type) {
     const updatedState = {}
-    updatedState[type] = event.target.value
+    updatedState[type] = event.target.value.toLocaleLowerCase()
     this.setState(updatedState)
   }
 
