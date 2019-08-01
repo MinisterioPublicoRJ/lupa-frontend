@@ -3,10 +3,20 @@ import PropTypes from 'prop-types'
 
 import Person from './Person'
 
+const propTypes = {
+  title: PropTypes.string,
+  peopleArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      dado: PropTypes.string,
+      detalhes: PropTypes.string,
+      photo: PropTypes.string,
+    })
+  ),
+}
+
 const People = ({
   title, peopleArray
 }) => {
-  console.log('People', title, peopleArray)
   if (!peopleArray || peopleArray.length === 0) {
     return null
   }
@@ -25,4 +35,5 @@ const People = ({
   )
 }
 
+People.propTypes = propTypes
 export default People
