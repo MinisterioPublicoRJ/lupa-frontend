@@ -2,17 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Box.scss'
+import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
     .isRequired,
-  image: PropTypes.node,
   source: PropTypes.string,
 }
 
 const defaultProps = {
-  image: null,
   source: null,
 }
 
@@ -36,21 +35,18 @@ class FilterableList extends React.Component {
   }
 
   render() {
-    const {
-      title, source, list, image,
-    } = this.props
+    const { title, source } = this.props
     const { filteredList } = this.state
     return (
       <div className="box list-box list-box-filterable">
-        <div className="list-box--header">
-          {title ? <h1 className="list-box--title">{title}</h1> : null}
-          {image ? <img src={image} alt="" className="list-box--icon" /> : null}
+        <div className="list-box-filterable--header">
+          {title ? <div className="list-box-filterable--title">{title}</div> : null}
+          <input
+            className="list-box-filterable--input"
+            placeholder="Digite aqui para filtrar"
+            onChange={this.handleFiltering}
+          />
         </div>
-        <input
-          className="list-box-filterable--input"
-          placeholder="🔍 Digite aqui para filtrar"
-          onChange={this.handleFiltering}
-        />
         <div className="list-box-container">
           <ol className="list-box--list">
             {filteredList.map(itemList => (
