@@ -14,7 +14,7 @@ import ErrorBox from './ErrorBox'
 
 // ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
 
-const Box = ({ content }) => {
+const Box = ({ content, navigateToEntity }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
@@ -60,6 +60,7 @@ const Box = ({ content }) => {
           list={content.external_data}
           image={content.icon}
           source={content.external_data[0].fonte}
+          navigateToEntity={navigateToEntity}
         />
       )
     case 'lista_ordenada':
