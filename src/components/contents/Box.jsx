@@ -8,7 +8,7 @@ import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
 import FilterableList from './FilterableList'
 import Graph from '../graphs/Graph'
-import Person from '../person/Person'
+import People from '../person/People'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
@@ -80,9 +80,12 @@ const Box = ({ content }) => {
           source={content.external_data[0].fonte}
         />
       )
-    case 'person':
+    case 'lista_pessoa':
       return (
-        <Person name={content.name} job={content.job} photo={content.photo} data={content.data} />
+        <People
+          title={content.exibition_field}
+          peopleArray={content.external_data}
+        />
       )
     case 'grafico_pizza':
     case 'grafico_barra_vertical':

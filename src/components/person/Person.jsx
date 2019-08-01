@@ -2,22 +2,33 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Person.scss'
-import Governor from './Governor'
 
-const pickDetail = (job, data) => {
-  switch (job) {
-    case 'governor':
-      return <Governor vice={data.vice} cargo={data.cargo} />
-    default:
-      return null
+const renderDetails = data => {
+  return (
+    <span
+      className="person-details"
+      dangerouslySetInnerHTML={{__html: data.split('@').join('<br/>')}}
+    ></span>
+  )
+}
+
+const renderPhoto = photo => {
+  if (!photo) {
+    return null
   }
+  return (
+    <div className="Person-picture">
+      {' '}
+      <img src={photo} alt="Person" />
+      {' '}
+    </div>
+  )
 }
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  job: PropTypes.string.isRequired,
   photo: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  data: PropTypes.string,
 }
 const defaultProps = {
   photo:
@@ -25,21 +36,16 @@ const defaultProps = {
 }
 
 const Person = ({
-  name, job, photo, data,
+  name, photo, data,
 }) => (
   <div className="Person-container">
-    <div className="Person-picture">
-      {' '}
-      <img src={photo} alt="Person" />
-      {' '}
-    </div>
+    {renderPhoto(photo)}
     <div className="Person-content">
       <div className="Person-main-data">
         <span className="Person-name">{name}</span>
-        <span className="Person-job">{job}</span>
       </div>
       <div className="Person-custom">
-        {pickDetail(job, data)}
+        {renderDetails(data)}
       </div>
     </div>
   </div>
