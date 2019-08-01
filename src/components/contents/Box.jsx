@@ -63,16 +63,8 @@ const Box = ({ content }) => {
         />
       )
     case 'lista_ordenada':
-      // return (
-      //   <OrderedList
-      //     title={content.exibition_field}
-      //     list={content.external_data}
-      //     image={content.icon}
-      //     source={content.external_data[0].fonte}
-      //   />
-      // )
       return (
-        <FilterableList
+        <OrderedList
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
