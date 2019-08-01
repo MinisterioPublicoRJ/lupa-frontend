@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import Person from './Person'
 
+import './People.scss'
+
 const propTypes = {
   title: PropTypes.string,
   peopleArray: PropTypes.arrayOf(
@@ -21,8 +23,10 @@ const People = ({
     return null
   }
   return (
-    <div className="people-container">
-      <div className="people-title">{title}</div>
+    <div className="People--container">
+      <div className="People--header">
+        <div className="People--title">{title}</div>
+      </div>
       {peopleArray.map((person, index) =>
         <Person
           key={index}
