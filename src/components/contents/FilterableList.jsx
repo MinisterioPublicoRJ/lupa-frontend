@@ -12,27 +12,23 @@ const propTypes = {
 }
 
 class FilterableList extends React.Component {
+
+  lowerCaseNoDiacritics = str => str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+
   handleFiltering = e => {
     const value = e.target.value
     let filteredList = this.props.list
     if (value) {
-      this.setState({
-        filteredList: filteredList.filter(
-          item => item.dado
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .includes(
-              value
-              .toLowerCase()
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
-            )
-          )
-      })
-    } else {
-      this.setState({filteredList})
+      filteredList = filteredList.filter(
+        item => this.lowerCaseNoDiacritics(item.dado).includes(
+          this.lowerCaseNoDiacritics(value)
+        )
+      )
     }
+    this.setState({filteredList})
   }
 
   componentWillMount(){
