@@ -53,6 +53,15 @@ const Box = ({ content }) => {
           source={content.external_data.fonte}
         />
       )
+    case 'lista_filtrada':
+      return (
+        <FilterableList
+          title={content.exibition_field}
+          list={content.external_data}
+          image={content.icon}
+          source={content.external_data[0].fonte}
+        />
+      )
     case 'lista_ordenada':
       // return (
       //   <OrderedList
