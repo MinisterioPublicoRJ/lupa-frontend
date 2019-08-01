@@ -9,8 +9,6 @@ import GraphStackedBar from './GraphStackedBar'
 import ErrorBox from '../contents/ErrorBox'
 import { ColorScale } from '../utils/colorScale'
 
-const colorScale = ['#00A5FD', '#388BCB', '#E8E8E8', '#929698', '#34495E', '#FF6347']
-
 const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
     case 'grafico_pizza':
@@ -37,7 +35,6 @@ const propTypes = {
     }),
   ).isRequired,
   source: PropTypes.string,
-  // infoPressed: PropTypes.func,
   sourcePressed: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.string),
   highlight: PropTypes.bool,
@@ -47,7 +44,6 @@ const defaultProps = {
   title: null,
   description: null,
   source: null,
-  // infoPressed: () => {},
   sourcePressed: () => {},
   categories: [],
   highlight: false,
@@ -59,7 +55,6 @@ const graph = ({
   description,
   data,
   source,
-  // infoPressed,
   sourcePressed,
   categories,
   highlight,
@@ -78,9 +73,6 @@ const graph = ({
             </span>
           )}
         </div>
-        {/* <div className="Graph-title-left" onClick={() => infoPressed()}>
-          i
-        </div> */}
       </div>
       <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
         {checkGraphType({ type, data, sortedData })}
