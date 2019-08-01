@@ -31,6 +31,10 @@
   justify-content: center;
   padding-bottom: 10px;
   min-height: 40px;
+
+  &.big {
+    height: 12vh;
+  }
 }
 
 .Name-helper {

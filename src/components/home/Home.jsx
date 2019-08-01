@@ -152,6 +152,10 @@ class Home extends React.Component {
     } = this.state
 
     if (loading) return <FullScreenLoading />
+    let nameContainerClass = 'Name-container'
+    if (name.length > 45) {
+      nameContainerClass += ' big'
+    }
     return (
       <div className="Entity-container">
         <div className="Main-container">
@@ -164,7 +168,7 @@ class Home extends React.Component {
             />
           ) : null}
           <hr />
-          <div className="Name-container">{name}</div>
+          <div className={nameContainerClass}>{name}</div>
           <div className="Name-helper" />
           <Contents error={error} boxes={content} />
         </div>
