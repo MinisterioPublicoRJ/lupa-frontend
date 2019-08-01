@@ -170,9 +170,18 @@ class Home extends React.Component {
           <hr />
           <div className={nameContainerClass}>{name}</div>
           <div className="Name-helper" />
-          <Contents error={error} boxes={content} />
+          <Contents
+            error={error}
+            boxes={content}
+            navigateToEntity={
+              (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+            }
+          />
         </div>
-        <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
+        <Filter
+          active={activeFilter}
+          filterClicked={filter => this.handleFiltering(filter)}
+        />
       </div>
     )
   }
