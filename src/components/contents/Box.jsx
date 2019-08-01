@@ -53,7 +53,7 @@ const Box = ({ content }) => {
           source={content.external_data.fonte}
         />
       )
-    case 'lista_ordenada':
+    case 'lista_sem_ordenacao':
       return (
         <FilterableList
           title={content.exibition_field}
@@ -62,6 +62,7 @@ const Box = ({ content }) => {
           source={content.external_data[0].fonte}
         />
       )
+    case 'lista_ordenada':
       return (
         <OrderedList
           title={content.exibition_field}
@@ -70,7 +71,7 @@ const Box = ({ content }) => {
           source={content.external_data[0].fonte}
         />
       )
-    case 'lista_sem_ordenacao':
+    // case 'lista_sem_ordenacao':
       return (
         <UnorderedList
           title={content.exibition_field}
