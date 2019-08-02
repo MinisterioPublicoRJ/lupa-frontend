@@ -171,7 +171,6 @@ class Home extends React.Component {
               }
             />
           ) : null}
-          <hr />
           <div className="Name-container">{title.toLocaleUpperCase()}</div>
           <div className="Name-helper" />
           <div className="Entity-title-container">{name}</div>
