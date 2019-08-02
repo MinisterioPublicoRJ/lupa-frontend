@@ -91,6 +91,7 @@ const Box = ({ content, navigateToEntity }) => {
     case 'grafico_pizza':
     case 'grafico_barra_vertical':
     case 'grafico_barra_horizontal':
+    case 'grafico_linha_horizontal':
       return (
         <Graph
           type={content.data_type}

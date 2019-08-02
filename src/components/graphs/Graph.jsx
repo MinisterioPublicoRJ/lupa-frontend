@@ -6,6 +6,7 @@ import GraphPie from './GraphPie'
 import GraphBar from './GraphBar'
 import GraphBarHorizontal from './GraphBarHorizontal'
 import GraphStackedBar from './GraphStackedBar'
+import GraphLine from './GraphLine'
 import ErrorBox from '../contents/ErrorBox'
 import { ColorScale } from '../utils/colorScale'
 
@@ -17,6 +18,8 @@ const checkGraphType = ({ type, data, sortedData }) => {
       return <GraphBar data={data} sortedData={sortedData} />
     case 'grafico_barra_horizontal':
       return <GraphBarHorizontal data={data} sortedData={sortedData} colorScale={ColorScale} />
+    case 'grafico_linha_horizontal':
+      return <GraphLine data={data} colorScale={ColorScale} />
     case 'stackedBar':
       return <GraphStackedBar data={data} />
     default:
@@ -47,6 +50,26 @@ const defaultProps = {
   sourcePressed: () => {},
   categories: [],
   highlight: false,
+}
+
+const loadCategories = (data) => {
+  const types = []
+  data
+    .filter(item => item.detalhes)
+    .forEach((item) => {
+      if (types.indexOf(item.detalhes) === -1) {
+        types.push(item.detalhes)
+      }
+    })
+  return types.map((type, i) => (
+    <span className="Graph-categories" key={type}>
+      <span
+        className="Graph-color"
+        style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
+      />
+      {type}
+    </span>
+  ))
 }
 
 const graph = ({
@@ -113,6 +136,7 @@ const graph = ({
               </span>
             ))
             : null}
+          {type === 'grafico_linha_horizontal' ? loadCategories(data) : null}
         </div>
       )}
       {source && (

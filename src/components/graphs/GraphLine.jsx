@@ -14,6 +14,7 @@ const propTypes = {
       link: PropTypes.string,
     }),
   ).isRequired,
+  colorScale: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 const graphStyle = {
@@ -28,15 +29,23 @@ const axisStyles = {
   axis: { stroke: '#696568' },
   tickLabels: {
     angle: 45,
-    // padding: 10,
     fontSize: 9,
     fontFamily: 'Roboto',
     fill: '#696568',
+    textAnchor: 'start',
   },
 }
 
-const graphBar = ({ data }) => {
+const graphLine = ({ data, colorScale }) => {
   const xLabels = data.map(item => item.rotulo)
+  const types = [] // will be filled with unique detalhes string
+  data
+    .filter(item => item.detalhes)
+    .forEach((item) => {
+      if (types.indexOf(item.detalhes) === -1) {
+        types.push(item.detalhes)
+      }
+    })
   return (
     <VictoryChart
       domainPadding={{ x: 50 }}
@@ -47,21 +56,28 @@ const graphBar = ({ data }) => {
         right: 5,
       }}
     >
-      <VictoryLine
+      {types.map((type, i) => (
+        <VictoryLine
+          key={type}
+          data={data.filter(item => item.detalhes === type)}
+          style={{ ...graphStyle, data: { stroke: colorScale[i] } }}
+          x="rotulo"
+          y={item => Number(item.dado)}
+          labels={item => Number(item.dado)
+            .toLocaleString('pt-br')
+          }
+        />
+      ))}
+      <VictoryScatter
         data={data}
-        style={graphStyle}
         x="rotulo"
         y={item => Number(item.dado)}
-        labels={item => Number(item.dado)
-          .toFixed(2)
-          .toLocaleString('pt-br')
-        }
+        style={{ data: { fill: item => colorScale[types.indexOf(item.detalhes)] } }}
       />
-      <VictoryScatter data={data} x="rotulo" y={item => Number(item.dado)} />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
     </VictoryChart>
   )
 }
 
-graphBar.propTypes = propTypes
-export default graphBar
+graphLine.propTypes = propTypes
+export default graphLine
