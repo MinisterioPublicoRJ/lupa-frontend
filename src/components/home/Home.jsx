@@ -76,7 +76,13 @@ class Home extends React.Component {
    */
   checkContent(entityResponse) {
     if (!entityResponse.data_list) {
-      this.setState({ loading: false, error: entityResponse, content: null })
+      this.setState({
+        loading: false,
+        error: entityResponse,
+        content: null,
+        name: null,
+        title: 'Erro',
+      })
       return
     }
 
@@ -90,6 +96,7 @@ class Home extends React.Component {
       content: loadingBoxes,
       geojson: entityResponse.geojson,
       name: entityResponse.exibition_field,
+      title: entityResponse.entity_type,
     })
 
     this.loadBoxes(entityResponse.data_list)
@@ -148,14 +155,11 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error, geojson, name,
+      loading, activeFilter, content, error, geojson, name, title,
     } = this.state
 
     if (loading) return <FullScreenLoading />
-    let nameContainerClass = 'Name-container'
-    if (name.length > 45) {
-      nameContainerClass += ' big'
-    }
+
     return (
       <div className="Entity-container">
         <div className="Main-container">
@@ -168,8 +172,9 @@ class Home extends React.Component {
             />
           ) : null}
           <hr />
-          <div className={nameContainerClass}>{name}</div>
+          <div className="Name-container">{title.toLocaleUpperCase()}</div>
           <div className="Name-helper" />
+          <div className="Entity-title-container">{name}</div>
           <Contents
             error={error}
             boxes={content}
