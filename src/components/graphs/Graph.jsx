@@ -120,7 +120,7 @@ const graph = ({
                   className="Graph-color"
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
-                <div className="Categorie-line">
+                <div className="Category-line">
                   <span>
                     {`${item.rotulo}: `}
                   </span>
@@ -139,7 +139,7 @@ const graph = ({
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
                 <span style={{ color: ColorScale[i % ColorScale.length] }}>{`[${i + 1}]`}</span>
-                  <div className="Categorie-line">
+                  <div className="Category-line">
                     <span>
                       {`${item.rotulo}: `}
                     </span>
