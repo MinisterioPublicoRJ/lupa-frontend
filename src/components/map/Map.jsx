@@ -71,10 +71,11 @@ const map = (props) => {
   const corner2 = [bboxArray[3], bboxArray[2]]
 
   return (
-    <Map bounds={[corner1, corner2]} maxZoom={19} style={{ height: '50%' }} zoomControl={false}>
+    <Map bounds={[corner1, corner2]} maxZoom={18} style={{ height: '50%' }} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
+        detectRetina={true}
       />
       <GeoJSON
         data={geojsonWithAllAreas}
@@ -84,7 +85,7 @@ const map = (props) => {
           })
         }}
       />
-      <MarkerClusterGroup>
+      <MarkerClusterGroup disableClusteringAtZoom={18}>
         {geojsonWithAllPoints.features.map((marker, index) => (
           <Marker
             key={index}
