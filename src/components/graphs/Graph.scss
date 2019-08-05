@@ -57,16 +57,17 @@
 .Graph-categories-container {
   align-items: center;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 0 10px 0 10px;
-  width: 100%;
 }
 
 .Graph-categories {
   align-items: center;
   color: #929698;
   display: flex;
+  flex-wrap: wrap;
   font-family: Roboto; //light
   font-size: 1.7vh;
   margin: 5px 0 5px 0;
@@ -82,4 +83,10 @@
 .Graph-body {
   display: flex;
   width: 100%;
+}
+
+.Category-line {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
 }
