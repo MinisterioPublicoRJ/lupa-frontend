@@ -120,7 +120,8 @@ class Home extends React.Component {
    * @return {void}
    */
   handleFiltering(filter) {
-    this.setState({ activeFilter: filter })
+    // this.setState({ activeFilter: filter })
+    this.handleNavigateToEntity('EST', '33')
   }
 
   handleNavigateToEntity(entityType, entityId) {

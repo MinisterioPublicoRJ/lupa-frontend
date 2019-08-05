@@ -14,6 +14,8 @@ const filter = props => (
     <div className="Filter-button" onClick={() => props.filterClicked('convergencia')}>
       <Convergencia />
       Convergência
+      {'\n'}
+      Estado
     </div>
     <div className="Filter-button Hidden" onClick={() => props.filterClicked('social')}>
       <MapIcon />
