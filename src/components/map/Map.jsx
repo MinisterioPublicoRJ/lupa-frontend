@@ -50,7 +50,7 @@ const propTypes = {
  * @param {Object} props.geojsonArray A GeoJSON object with geographical features to
  *  be displayed on the map
  */
-const map = (props) => {
+const map = props => {
   const { geojsonArray } = props
   const geojsonWithAll = {
     type: 'FeatureCollection',
@@ -69,9 +69,16 @@ const map = (props) => {
   const bboxArray = bbox(geojsonWithAll)
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
+  const bounds = [corner1, corner2]
 
   return (
-    <Map bounds={[corner1, corner2]} maxZoom={18} style={{ height: '50%' }} zoomControl={false}>
+    <Map
+      bounds={bounds}
+      maxBounds={bounds}
+      maxZoom={18}
+      style={{ height: '50%' }}
+      zoomControl={false}
+    >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; Contribuidores do <a href="http://osm.org/copyright">OpenStreetMap</a>'
