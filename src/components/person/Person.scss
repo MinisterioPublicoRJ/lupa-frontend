@@ -16,7 +16,8 @@
   display: flex;
   justify-content: center;
   max-width: 150px;
-  width: 15vh; // para ficar quadrado!
+  width: 12.5vh; // para ficar quadrado!
+  overflow: hidden;
 }
 
 .Person-content {
