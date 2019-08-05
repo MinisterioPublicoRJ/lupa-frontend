@@ -120,7 +120,14 @@ const graph = ({
                   className="Graph-color"
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
-                {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
+                <div className="Categorie-line">
+                  <span>
+                    {`${item.rotulo}: `}
+                  </span>
+                  <span>
+                    {Number(item.dado).toLocaleString('pt-br')}
+                  </span>
+                </div>
               </span>
             ))
             : null}
@@ -132,7 +139,14 @@ const graph = ({
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
                 <span style={{ color: ColorScale[i % ColorScale.length] }}>{`[${i + 1}]`}</span>
-                {`${item.rotulo}: ${Number(item.dado).toLocaleString('pt-br')}`}
+                  <div className="Categorie-line">
+                    <span>
+                      {`${item.rotulo}: `}
+                    </span>
+                    <span>
+                      {Number(item.dado).toLocaleString('pt-br')}
+                    </span>
+                  </div>
               </span>
             ))
             : null}
