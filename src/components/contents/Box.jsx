@@ -70,6 +70,7 @@ const Box = ({ content, navigateToEntity }) => {
           list={content.external_data}
           image={content.icon}
           source={content.external_data[0].fonte}
+          navigateToEntity={navigateToEntity}
         />
       )
     case 'lista_sem_ordenacao':
@@ -79,6 +80,7 @@ const Box = ({ content, navigateToEntity }) => {
           list={content.external_data}
           image={content.icon}
           source={content.external_data[0].fonte}
+          navigateToEntity={navigateToEntity}
         />
       )
     case 'lista_pessoa':

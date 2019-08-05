@@ -9,14 +9,21 @@ const propTypes = {
     .isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
+  navigateToEntity: PropTypes.func,
 }
 const defaultProps = {
   image: null,
   source: null,
 }
 
+const clickToFeature = (event, item, callback) => {
+  if (item && item.link_interno_entidade && item.link_interno_id) {
+    callback(item.link_interno_entidade, item.link_interno_id)
+  }
+}
+
 const UnorderedList = ({
-  title, source, list, image,
+  title, source, list, image, navigateToEntity,
 }) => (
   <div className="box list-box">
     <div className="list-box--header">
@@ -25,7 +32,11 @@ const UnorderedList = ({
     </div>
     <ol className="list-box--list">
       {list.map(itemList => (
-        <li key={`${itemList.label}-${itemList.dado}`} className="list-box--list-item">
+        <li
+          key={`${itemList.label}-${itemList.dado}`}
+          className="list-box--list-item"
+          onClick={event => clickToFeature(event, itemList, navigateToEntity)}
+        >
           {itemList.label ? (
             <div className="list-box--list-item-label">{itemList.label}</div>
           ) : null}

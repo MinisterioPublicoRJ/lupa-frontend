@@ -6,9 +6,11 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
+  image: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
     .isRequired,
   source: PropTypes.string,
+  navigateToEntity: PropTypes.func,
 }
 
 const defaultProps = {
