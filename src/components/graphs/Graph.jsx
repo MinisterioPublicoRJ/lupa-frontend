@@ -13,7 +13,7 @@ import { ColorScale } from '../utils/colorScale'
 const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
     case 'grafico_pizza':
-      return <GraphPie data={data} colorScale={ColorScale} />
+      return <GraphPie data={sortedData} colorScale={ColorScale} />
     case 'grafico_barra_vertical':
       return <GraphBar data={data} sortedData={sortedData} />
     case 'grafico_barra_horizontal':

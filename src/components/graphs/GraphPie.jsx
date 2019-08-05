@@ -49,7 +49,6 @@ const GraphPie = ({ data, colorScale }) => {
       y={item => Number(item.dado)}
       labels={item => renderLabel(item.dado, total)}
       colorScale={colorScale}
-      sortKey="y"
       style={graphStyle}
     />
   )
