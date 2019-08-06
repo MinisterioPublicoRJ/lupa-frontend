@@ -6,7 +6,6 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  image: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
     .isRequired,
   source: PropTypes.string,
@@ -15,11 +14,13 @@ const propTypes = {
 
 const defaultProps = {
   source: null,
+  navigateToEntity: null,
 }
 
 class FilterableList extends React.Component {
   componentWillMount() {
-    this.setState({ filteredList: this.props.list })
+    const { list } = this.props
+    this.setState({ filteredList: list })
   }
 
   clickToFeature = (event, item, callback) => {
@@ -37,7 +38,9 @@ class FilterableList extends React.Component {
     const { value } = e.target
     let filteredList = this.props.list
     if (value) {
-      filteredList = filteredList.filter(item => this.lowerCaseNoDiacritics(item.dado).includes(this.lowerCaseNoDiacritics(value)))
+      filteredList = filteredList.filter(
+        item => this.lowerCaseNoDiacritics(item.dado).includes(this.lowerCaseNoDiacritics(value)),
+      )
     }
     this.setState({ filteredList })
   }
@@ -63,8 +66,8 @@ class FilterableList extends React.Component {
                 className="list-box--list-item"
                 onClick={event => this.clickToFeature(event, itemList, navigateToEntity)}
               >
-                {itemList.label ? (
-                  <div className="list-box--list-item-label">{itemList.label}</div>
+                {itemList.rotulo ? (
+                  <div className="list-box--list-item-label">{itemList.rotulo}</div>
                 ) : null}
                 {itemList.dado ? (
                   <div className="list-box--list-item-value">{itemList.dado}</div>
