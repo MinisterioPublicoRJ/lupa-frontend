@@ -6,7 +6,7 @@ import './Person.scss'
 const renderDetails = data => (
   <span
     className="person-details"
-    dangerouslySetInnerHTML={{ __html: data.split('@').join('<br/>') }}
+    dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }}
   />
 )
 
