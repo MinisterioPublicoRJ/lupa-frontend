@@ -63,9 +63,9 @@ class FilterableList extends React.Component {
         </div>
         <div className="list-box-container">
           <ol className="list-box--list">
-            {filteredList.map(itemList => (
+            {filteredList.map((itemList, index) => (
               <li
-                key={`${itemList.label}-${itemList.dado}`}
+                key={`${index}`}
                 className="list-box--list-item"
                 onClick={event => this.clickToFeature(event, itemList, navigateToEntity)}
               >
