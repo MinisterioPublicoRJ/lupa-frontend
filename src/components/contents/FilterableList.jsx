@@ -39,7 +39,10 @@ class FilterableList extends React.Component {
     let filteredList = this.props.list
     if (value) {
       filteredList = filteredList.filter(
-        item => this.lowerCaseNoDiacritics(item.dado).includes(this.lowerCaseNoDiacritics(value)),
+        (item) => {
+          const filterStr = item.rotulo ? item.rotulo : item.dado
+          return this.lowerCaseNoDiacritics(filterStr).includes(this.lowerCaseNoDiacritics(value))
+        }
       )
     }
     this.setState({ filteredList })
