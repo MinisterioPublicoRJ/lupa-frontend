@@ -34,7 +34,7 @@ const propTypes = {
         PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
       ),
       properties: PropTypes.shape({
-        entity_link_id: PropTypes.number,
+        entity_link_id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         entity_link_type: PropTypes.string,
         name: PropTypes.string,
       }),
