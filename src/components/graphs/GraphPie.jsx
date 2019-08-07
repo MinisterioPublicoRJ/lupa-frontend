@@ -44,8 +44,8 @@ const GraphPie = ({ data, colorScale }) => {
   return (
     <VictoryPie
       data={data}
-      radius={140}
-      labelRadius={145}
+      radius={150}
+      labelRadius={155}
       y={item => Number(item.dado)}
       labels={item => renderLabel(item.dado, total)}
       colorScale={colorScale}

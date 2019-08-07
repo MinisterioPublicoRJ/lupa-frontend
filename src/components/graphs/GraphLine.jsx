@@ -50,7 +50,7 @@ const graphLine = ({ data, colorScale }) => {
     <VictoryChart
       domainPadding={{ x: 50 }}
       padding={{
-        top: 50,
+        top: 10,
         bottom: 50,
         left: 5,
         right: 5,

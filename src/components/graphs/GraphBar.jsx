@@ -55,8 +55,8 @@ const graphBar = ({ data, sortedData }) => {
     <VictoryChart
       domainPadding={{ x: 50 }}
       padding={{
-        top: 50,
-        bottom: 50,
+        top: 10,
+        bottom: 30,
         left: 65,
         right: 50,
       }}
