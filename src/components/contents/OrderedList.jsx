@@ -33,14 +33,14 @@ const OrderedList = ({
     <ol className="list-box--list">
       {list.map((itemList, index) => (
         <li
-          key={`${itemList.label}-${itemList.dado}`}
+          key={`${itemList.rotulo}-${itemList.dado}`}
           className="list-box--list-item"
           onClick={event => clickToFeature(event, itemList, navigateToEntity)}
         >
           <div className="list-box--list-item-position">{index + 1}</div>
           <div className="list-box--list-item-body">
-            {itemList.label ? (
-              <div className="list-box--list-item-label">{itemList.label}</div>
+            {itemList.rotulo ? (
+              <div className="list-box--list-item-label">{itemList.rotulo}</div>
             ) : null}
             {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
           </div>
