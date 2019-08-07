@@ -6,19 +6,17 @@ import Person from './Person'
 import './People.scss'
 
 const propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   peopleArray: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.string,
       detalhes: PropTypes.string,
       photo: PropTypes.string,
-    })
-  ),
+    }),
+  ).isRequired,
 }
 
-const People = ({
-  title, peopleArray
-}) => {
+const People = ({ title, peopleArray }) => {
   if (!peopleArray || peopleArray.length === 0) {
     return null
   }
@@ -27,14 +25,15 @@ const People = ({
       <div className="People--header">
         <div className="People--title">{title}</div>
       </div>
-      {peopleArray.map((person, index) =>
+      {peopleArray.map((person, index, arr) => (
         <Person
           key={index}
           data={person.detalhes}
           name={person.dado}
           photo={person.imagem}
+          last={index === arr.length - 1}
         />
-      )}
+      ))}
     </div>
   )
 }

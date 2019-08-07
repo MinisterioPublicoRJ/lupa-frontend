@@ -1,14 +1,12 @@
 .Person-container {
-  border: 1px solid #E8E8E8;
+  border-bottom: 1px solid #E8E8E8;
   border-radius: 3px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   min-height: 15vh;
   margin: 2.5% 5px 2.5% 5px;
-  max-height: 150px;
   overflow: hidden;
-  // overflow-y: scroll;
-  padding: 5px;
 }
 
 .Person-picture {
@@ -16,21 +14,27 @@
   display: flex;
   justify-content: center;
   max-width: 150px;
-  width: 12.5vh; // para ficar quadrado!
   overflow: hidden;
+  width: 25%;
+}
+
+img {
+  margin: 5px 0 5px 0;
+  width: 100%;
 }
 
 .Person-content {
   display: flex;
   flex-direction: column;
-  flex: 4;
+  width: 75%;
 }
 
 .Person-main-data {
   display: flex;
   flex-direction: column;
-  height: 45%;
+  height: 35%;
   justify-content: space-around;
+  padding: 10px;
 }
 
 .Person-name {
@@ -49,6 +53,7 @@
   align-items: center;
   display: flex;
   flex: 1;
+  padding: 10px;
 }
 
 .Governor-container {
