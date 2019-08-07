@@ -33,12 +33,12 @@ const UnorderedList = ({
     <ol className="list-box--list">
       {list.map(itemList => (
         <li
-          key={`${itemList.label}-${itemList.dado}`}
+          key={`${itemList.rotulo}-${itemList.dado}`}
           className="list-box--list-item"
           onClick={event => clickToFeature(event, itemList, navigateToEntity)}
         >
-          {itemList.label ? (
-            <div className="list-box--list-item-label">{itemList.label}</div>
+          {itemList.rotulo ? (
+            <div className="list-box--list-item-label">{itemList.rotulo}</div>
           ) : null}
           {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
         </li>
