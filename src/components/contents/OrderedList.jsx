@@ -27,7 +27,7 @@ const OrderedList = ({
 }) => (
   <div className="box list-box">
     <div className="list-box--header">
-      {title ? <h1 className="list-box--title">{title}</h1> : null}
+      {title ? <span className="list-box--title">{title}</span> : null}
       {image ? <img src={image} alt="" className="list-box--icon" /> : null}
     </div>
     <ol className="list-box--list">

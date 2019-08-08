@@ -17,7 +17,7 @@ const renderPhoto = (photo) => {
   return (
     <div className="Person-picture">
       {' '}
-      <img src={`data:image/png;base64,${photo}`} alt="Person" />
+      <img src={`data:image/png;base64,${photo}`} alt="Person" style={{ width: '100%' }} />
       {' '}
     </div>
   )
@@ -27,14 +27,18 @@ const propTypes = {
   name: PropTypes.string.isRequired,
   photo: PropTypes.string,
   data: PropTypes.string,
+  last: PropTypes.bool,
 }
 const defaultProps = {
   photo: null,
   data: null,
+  last: false,
 }
 
-const Person = ({ name, photo, data }) => (
-  <div className="Person-container">
+const Person = ({
+  name, photo, data, last,
+}) => (
+  <div className="Person-container" style={last ? { borderBottom: 0 } : null}>
     {renderPhoto(photo)}
     <div className="Person-content">
       <div className="Person-main-data">
