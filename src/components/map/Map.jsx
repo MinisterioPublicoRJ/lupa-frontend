@@ -2,11 +2,12 @@ import React from 'react'
 import bbox from '@turf/bbox'
 import PropTypes from 'prop-types'
 import {
-  GeoJSON, Map, Marker, TileLayer,
+  GeoJSON, Map, Marker, Popup, TileLayer,
 } from 'react-leaflet'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import 'leaflet/dist/leaflet.css'
 import 'react-leaflet-markercluster/dist/styles.min.css'
+import './Map.scss'
 import L from 'leaflet'
 import marker from 'leaflet/dist/images/marker-icon.png'
 import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
@@ -70,11 +71,12 @@ const map = props => {
   const corner1 = [bboxArray[1], bboxArray[0]]
   const corner2 = [bboxArray[3], bboxArray[2]]
   const bounds = [corner1, corner2]
+  const brazilBoundingBox = [[5.2842873, -33.8689056], [-28.6341164, -73.9830625]]
 
   return (
     <Map
       bounds={bounds}
-      maxBounds={bounds}
+      maxBounds={brazilBoundingBox}
       maxZoom={18}
       style={{ height: '50%' }}
       zoomControl={false}
@@ -92,13 +94,14 @@ const map = props => {
           })
         }}
       />
-      <MarkerClusterGroup disableClusteringAtZoom={18}>
+      <MarkerClusterGroup>
         {geojsonWithAllPoints.features.map((marker, index) => (
           <Marker
             key={index}
             position={[marker.geometry.coordinates[1], marker.geometry.coordinates[0]]}
-            onClick={event => clickToFeature(event, props.navigateToEntity, marker.properties)}
-          />
+          >
+            <Popup>{marker.properties.name}<br/><a href={`#/${marker.properties.entity_link_type}/${marker.properties.entity_link_id}`}>Ir</a></Popup>
+          </Marker>
         ))}
       </MarkerClusterGroup>
     </Map>

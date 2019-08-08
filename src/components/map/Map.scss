@@ -1,0 +1,18 @@
+.leaflet-popup-content a {
+  background: #0078A8;
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  margin-top: 2px;
+  display: block;
+  text-align: center;
+  margin: 2px auto;
+  width: 50%;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  font-size: 20px/14px;
+  color: red;
+}
