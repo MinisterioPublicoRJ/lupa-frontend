@@ -22,18 +22,22 @@ const People = ({ title, peopleArray }) => {
   }
   return (
     <div className="People--container">
-      <div className="People--header">
-        <div className="People--title">{title}</div>
+      {title ?
+        <div className="People--header">
+          <div className="People--title">{title}</div>
+        </div>
+      : null}
+      <div className="People--body">
+        {peopleArray.map((person, index, arr) => (
+          <Person
+            key={index}
+            data={person.detalhes}
+            name={person.dado}
+            photo={person.imagem}
+            last={index === arr.length - 1}
+          />
+        ))}
       </div>
-      {peopleArray.map((person, index, arr) => (
-        <Person
-          key={index}
-          data={person.detalhes}
-          name={person.dado}
-          photo={person.imagem}
-          last={index === arr.length - 1}
-        />
-      ))}
     </div>
   )
 }
