@@ -24,7 +24,7 @@ const Api = (() => {
     formData.set('password', password)
 
     axios
-      .post(`${API_URL}/login/`, formData)
+      .post(`${API_URL}/login`, formData)
       .then((response) => {
         callback(response)
       })
