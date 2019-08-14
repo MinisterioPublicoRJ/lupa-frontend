@@ -7,7 +7,7 @@ import Logo from '../icons/logo'
 class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { email: '', password: '', save: false }
+    this.state = { email: '', password: '', error: false }
     this.loginCallback = this.loginCallback.bind(this)
   }
 
@@ -17,6 +17,8 @@ class Login extends React.Component {
       localStorage.setItem('token', response.data)
       const navUrl = (location.state && location.state.prevUrl) ? location.state.prevUrl : '/EST/33'
       history.push(navUrl)
+    } else {
+      this.setState({error: true})
     }
     // colocar mensagem de erro aqui
   }
@@ -41,19 +43,8 @@ class Login extends React.Component {
     this.setState(updatedState)
   }
 
-  /**
-   * Inverts the current state value of the save field
-   * @return {void}
-   */
-  handleSavingChange() {
-    this.setState((prevState) => {
-      const save = !prevState.save
-      return { save }
-    })
-  }
-
   render() {
-    const { email, password } = this.state
+    const { email, password, error } = this.state
     return (
       <div className="wrapper">
         <div className="Login-container">
@@ -78,11 +69,8 @@ class Login extends React.Component {
                 onChange={event => this.handleChange(event, 'password')}
                 required
               />
-              <label htmlFor="save">
-                <input type="checkbox" id="save" onChange={() => this.handleSavingChange()} />
-                Salvar senha
-              </label>
             </div>
+            {error ? <p style={{color: "red"}}>Erro ao acessar o sistema</p> : null}
             <div className="Login-container-button">
               <button type="submit">Entrar</button>
             </div>
