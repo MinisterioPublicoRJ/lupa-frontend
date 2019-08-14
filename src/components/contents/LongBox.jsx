@@ -9,15 +9,19 @@ import './Box.scss'
 const propTypes = {
   contrast: PropTypes.bool,
   source: PropTypes.string,
+  link: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 const defaultProps = {
   contrast: false,
   source: null,
+  link: null,
 }
 
-const LongBox = ({ contrast, source, title, value }) => (
+const LongBox = ({
+  contrast, source, title, value, link,
+}) => (
   <div className="box LongBox" style={contrast ? { backgroundColor: '#009DFD' } : null}>
     <div className="box-icon">
       <Briefcase className="box-img" overlay={contrast ? '#fff' : null} />
@@ -29,7 +33,7 @@ const LongBox = ({ contrast, source, title, value }) => (
       {value}
     </div>
     <div className="box-arrow">
-      <ArrowRight className="box-img" overlay={contrast ? '#fff' : null} />
+      {link ? <ArrowRight className="box-img" overlay={contrast ? '#fff' : null} /> : null}
     </div>
     {source ? <div className="box-source">{source}</div> : null}
   </div>

@@ -37,6 +37,7 @@ const Box = ({ content, navigateToEntity }) => {
     case 'texto_grande':
       return (
         <LongBox
+          link={content.external_data.link_externo}
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.external_data.detalhes}
