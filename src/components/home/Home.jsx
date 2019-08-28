@@ -75,7 +75,7 @@ class Home extends React.Component {
    * @param {Object} entityResponse.geojson GeoJSON of entity to be displayed on the map
    */
   checkContent(entityResponse) {
-    if (!entityResponse.data_list) {
+    if (!entityResponse.theme_list) {
       this.setState({
         loading: false,
         error: entityResponse,
@@ -86,20 +86,35 @@ class Home extends React.Component {
       return
     }
 
-    const loadingBoxes = entityResponse.data_list.map(info => ({
-      id: info.id,
-      data_type: 'loading',
-    }))
+    // if the array isn't a theme, the boxes should be displayed in the home component
+    // else the boxes should be handled by their own theme's components
+    const homeBoxes = []
+    const homeThemes = []
+
+    entityResponse.theme_list.forEach((theme) => {
+      if (!theme.tema) {
+        const loadingBoxes = theme.data_list.map(info => ({
+          id: info.id,
+          data_type: 'loading',
+        }))
+        homeBoxes.push(...loadingBoxes)
+      } else {
+        const themeObj = { name: theme.tema, color: theme.cor, content: theme.data_list }
+        homeThemes.push(themeObj)
+      }
+    })
+
     this.setState({
       loading: false,
       error: null,
-      content: loadingBoxes,
+      content: homeBoxes,
+      themes: homeThemes,
       geojson: entityResponse.geojson,
       name: entityResponse.exibition_field,
       title: entityResponse.entity_type,
     })
 
-    this.loadBoxes(entityResponse.data_list)
+    this.loadBoxes(homeBoxes)
   }
 
   /**
@@ -167,8 +182,7 @@ class Home extends React.Component {
           {geojson ? (
             <Map
               geojsonArray={geojson}
-              navigateToEntity={
-                (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+              navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
               }
             />
           ) : null}
@@ -178,15 +192,11 @@ class Home extends React.Component {
           <Contents
             error={error}
             boxes={content}
-            navigateToEntity={
-              (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
+            navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
             }
           />
         </div>
-        <Filter
-          active={activeFilter}
-          filterClicked={filter => this.handleFiltering(filter)}
-        />
+        <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
       </div>
     )
   }
