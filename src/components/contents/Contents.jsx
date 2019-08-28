@@ -1,20 +1,35 @@
 import React from 'react'
-import Box from './Box'
+import PropTypes from 'prop-types'
 
+import Box from './Box'
+import Theme from './Theme'
 import './Contents.scss'
 import EntityError from '../utils/EntityError'
 
-const Contents = ({ boxes, error, navigateToEntity }) => (
+const propTypes = {
+  boxes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })).isRequired,
+  themes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })).isRequired,
+  error: PropTypes.bool,
+  navigateToEntity: PropTypes.func,
+}
+
+const defaultProps = {
+  error: false,
+  navigateToEntity: null,
+}
+
+const Contents = ({
+  boxes, themes, error, navigateToEntity,
+}) => (
   <div className="contents">
     {error ? <EntityError errorInfo={error} /> : null}
-    {boxes ? boxes.map((d, key) => (
-      <Box
-        key={key}
-        content={d}
-        navigateToEntity={navigateToEntity}
-      />
-    )) : null}
+    {boxes
+      ? boxes.map(box => <Box key={box.id} content={box} navigateToEntity={navigateToEntity} />)
+      : null}
+    {themes ? themes.map(item => <Theme />) : null}
   </div>
 )
 
+Contents.propTypes = propTypes
+Contents.defaultProps = defaultProps
 export default Contents

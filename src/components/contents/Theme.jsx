@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const propTypes = {}
 
-class Theme extends React.component {
+class Theme extends React.Component {
   // constructor(props) {
   //   super(props)
   // }

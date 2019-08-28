@@ -171,7 +171,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, activeFilter, content, error, geojson, name, title,
+      loading, activeFilter, content, error, geojson, name, title, themes,
     } = this.state
 
     if (loading) return <FullScreenLoading />
@@ -192,6 +192,7 @@ class Home extends React.Component {
           <Contents
             error={error}
             boxes={content}
+            themes={themes}
             navigateToEntity={(entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
             }
           />
