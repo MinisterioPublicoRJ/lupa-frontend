@@ -7,7 +7,7 @@ import './Contents.scss'
 import EntityError from '../utils/EntityError'
 
 const propTypes = {
-  boxes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })).isRequired,
+  boxes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
   themes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })).isRequired,
   error: PropTypes.bool,
   navigateToEntity: PropTypes.func,
@@ -26,7 +26,7 @@ const Contents = ({
     {boxes
       ? boxes.map(box => <Box key={box.id} content={box} navigateToEntity={navigateToEntity} />)
       : null}
-    {themes ? themes.map(item => <Theme />) : null}
+    {themes ? themes.map(item => <Theme key={item.id} />) : null}
   </div>
 )
 

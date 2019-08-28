@@ -20,18 +20,18 @@ const Box = ({ content, navigateToEntity }) => {
       return (
         <SmallBox
           title={content.exibition_field}
-          value={content.external_data.dado}
+          value={content.external_data.data}
           description={content.external_data.detalhes}
-          source={content.external_data.fonte}
+          source={content.external_data.source}
         />
       )
     case 'texto_pequeno_destaque':
       return (
         <SmallBoxContrast
           title={content.exibition_field}
-          value={content.external_data.dado}
+          value={content.external_data.data}
           description={content.external_data.detalhes}
-          source={content.external_data.fonte}
+          source={content.external_data.source}
         />
       )
     case 'texto_grande':
@@ -39,9 +39,9 @@ const Box = ({ content, navigateToEntity }) => {
         <LongBox
           link={content.external_data.link_externo}
           title={content.exibition_field}
-          value={content.external_data.dado}
+          value={content.external_data.data}
           description={content.external_data.detalhes}
-          source={content.external_data.fonte}
+          source={content.external_data.source}
         />
       )
     case 'long-box-contrast':
@@ -49,9 +49,9 @@ const Box = ({ content, navigateToEntity }) => {
         <LongBox
           contrast
           title={content.exibition_field}
-          value={content.external_data.dado}
+          value={content.external_data.data}
           description={content.external_data.detalhes}
-          source={content.external_data.fonte}
+          source={content.external_data.source}
         />
       )
     case 'lista_filtrada':
@@ -60,7 +60,7 @@ const Box = ({ content, navigateToEntity }) => {
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
-          source={content.external_data[0].fonte}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
           navigateToEntity={navigateToEntity}
         />
       )
@@ -70,7 +70,7 @@ const Box = ({ content, navigateToEntity }) => {
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
-          source={content.external_data[0].fonte}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
           navigateToEntity={navigateToEntity}
         />
       )
@@ -80,17 +80,12 @@ const Box = ({ content, navigateToEntity }) => {
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
-          source={content.external_data[0].fonte}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
           navigateToEntity={navigateToEntity}
         />
       )
     case 'lista_pessoa':
-      return (
-        <People
-          title={content.exibition_field}
-          peopleArray={content.external_data}
-        />
-      )
+      return <People title={content.exibition_field} peopleArray={content.external_data} />
     case 'grafico_pizza':
     case 'grafico_barra_vertical':
     case 'grafico_barra_horizontal':
@@ -100,7 +95,7 @@ const Box = ({ content, navigateToEntity }) => {
           type={content.data_type}
           title={content.exibition_field}
           data={content.external_data}
-          source={content.external_data[0].fonte}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
         />
       )
     case 'loading':

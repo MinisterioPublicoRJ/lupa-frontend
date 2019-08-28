@@ -5,8 +5,8 @@ import { VictoryPie } from 'victory'
 const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -34,20 +34,22 @@ const graphStyle = {
  * @return {string || null}
  */
 const renderLabel = (valueStr, total) => {
+  console.log(valueStr, total);
   const percentage = (Number(valueStr) * 100) / total
   if (percentage > 3) return `${percentage.toFixed(2)}%`
   return null
 }
 
 const GraphPie = ({ data, colorScale }) => {
-  const total = data.reduce((soma, item) => soma + Number(item.dado), 0)
+  const total = data.reduce((soma, item) => soma + Number(item.data), 0)
+  console.log(total);
   return (
     <VictoryPie
       data={data}
       radius={150}
       labelRadius={155}
-      y={item => Number(item.dado)}
-      labels={item => renderLabel(item.dado, total)}
+      y={item => Number(item.data)}
+      labels={item => {console.log('item', item); return renderLabel(item.data, total)}}
       colorScale={colorScale}
       style={graphStyle}
     />
