@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Box from './Box'
 import Theme from './Theme'
 import './Contents.scss'
 import EntityError from '../utils/EntityError'
 
 const propTypes = {
-  boxes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
   themes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })).isRequired,
   error: PropTypes.bool,
   navigateToEntity: PropTypes.func,
@@ -18,15 +16,22 @@ const defaultProps = {
   navigateToEntity: null,
 }
 
-const Contents = ({
-  boxes, themes, error, navigateToEntity,
-}) => (
+const Contents = ({ themes, error, navigateToEntity, entityType, entityId }) => (
   <div className="contents">
     {error ? <EntityError errorInfo={error} /> : null}
-    {boxes
-      ? boxes.map(box => <Box key={box.id} content={box} navigateToEntity={navigateToEntity} />)
+    {themes
+      ? themes.map((item, i) => (
+        <Theme
+          key={`item.tema${i}`}
+          content={item.data_list}
+          color={item.cor}
+          name={item.tema}
+          entityType={entityType}
+          entityId={entityId}
+          navigateToEntity={navigateToEntity}
+        />
+      ))
       : null}
-    {themes ? themes.map(item => <Theme key={item.id} />) : null}
   </div>
 )
 
