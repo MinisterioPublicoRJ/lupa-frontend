@@ -6,7 +6,7 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string })).isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, data: PropTypes.string })).isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
   navigateToEntity: PropTypes.func,
@@ -33,7 +33,7 @@ const OrderedList = ({
     <ol className="list-box--list">
       {list.map((itemList, index) => (
         <li
-          key={`${itemList.rotulo}-${itemList.dado}`}
+          key={`${itemList.rotulo}-${itemList.data}`}
           className="list-box--list-item"
           onClick={event => clickToFeature(event, itemList, navigateToEntity)}
         >
@@ -42,7 +42,7 @@ const OrderedList = ({
             {itemList.rotulo ? (
               <div className="list-box--list-item-label">{itemList.rotulo}</div>
             ) : null}
-            {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
+            {itemList.data ? <div className="list-box--list-item-value">{itemList.data}</div> : null}
           </div>
         </li>
       ))}

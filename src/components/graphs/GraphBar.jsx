@@ -6,7 +6,7 @@ const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -15,7 +15,7 @@ const propTypes = {
   sortedData: PropTypes.arrayOf(
     PropTypes.shape({
       data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -64,7 +64,7 @@ const graphBar = ({ data, sortedData }) => {
       <VictoryBar
         data={data}
         style={graphStyle}
-        x="label"
+        x="rotulo"
         y={item => Number(item.data)}
         labels={item => Number(item.data).toLocaleString('pt-br')}
         domain={yDomain}

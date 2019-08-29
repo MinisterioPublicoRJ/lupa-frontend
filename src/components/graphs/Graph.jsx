@@ -115,14 +115,14 @@ const graph = ({
             : null}
           {type === 'grafico_pizza'
             ? sortedData.map((item, i) => (
-              <span className="Graph-categories" key={item.label}>
+              <span className="Graph-categories" key={item.rotulo}>
                 <span
                   className="Graph-color"
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
                 <div className="Category-line">
                   <span>
-                    {`${item.label}: `}
+                    {`${item.rotulo}: `}
                   </span>
                   <span>
                     {Number(item.data).toLocaleString('pt-br')}
