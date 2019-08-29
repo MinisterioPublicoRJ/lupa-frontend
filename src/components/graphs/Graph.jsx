@@ -125,7 +125,7 @@ const graph = ({
                     {`${item.rotulo}: `}
                   </span>
                   <span>
-                    {Number(item.data).toLocaleString('pt-br')}
+                    {Number(item.dado).toLocaleString('pt-br')}
                   </span>
                 </div>
               </span>

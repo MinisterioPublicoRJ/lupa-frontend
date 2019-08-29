@@ -20,7 +20,7 @@ const Box = ({ content, navigateToEntity }) => {
       return (
         <SmallBox
           title={content.exibition_field}
-          value={content.external_data.data}
+          value={content.external_data.dado}
           description={content.external_data.detalhes}
           source={content.external_data.source}
         />
@@ -29,7 +29,7 @@ const Box = ({ content, navigateToEntity }) => {
       return (
         <SmallBoxContrast
           title={content.exibition_field}
-          value={content.external_data.data}
+          value={content.external_data.dado}
           description={content.external_data.detalhes}
           source={content.external_data.source}
         />
@@ -39,7 +39,7 @@ const Box = ({ content, navigateToEntity }) => {
         <LongBox
           link={content.external_data.link_externo}
           title={content.exibition_field}
-          value={content.external_data.data}
+          value={content.external_data.dado}
           description={content.external_data.detalhes}
           source={content.external_data.source}
         />
@@ -49,7 +49,7 @@ const Box = ({ content, navigateToEntity }) => {
         <LongBox
           contrast
           title={content.exibition_field}
-          value={content.external_data.data}
+          value={content.external_data.dado}
           description={content.external_data.detalhes}
           source={content.external_data.source}
         />

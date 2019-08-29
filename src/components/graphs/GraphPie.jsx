@@ -5,7 +5,7 @@ import { VictoryPie } from 'victory'
 const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
@@ -40,15 +40,15 @@ const renderLabel = (valueStr, total) => {
 }
 
 const GraphPie = ({ data, colorScale }) => {
-  const total = data.reduce((soma, item) => soma + Number(item.data), 0)
+  const total = data.reduce((soma, item) => soma + Number(item.dado), 0)
 
   return (
     <VictoryPie
       data={data}
       radius={150}
       labelRadius={155}
-      y={item => Number(item.data)}
-      labels={item => renderLabel(item.data, total)}
+      y={item => Number(item.dado)}
+      labels={item => renderLabel(item.dado, total)}
       colorScale={colorScale}
       style={graphStyle}
     />
