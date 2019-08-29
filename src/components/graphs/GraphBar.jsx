@@ -49,7 +49,7 @@ const calculateYDomain = (data) => {
 }
 
 const graphBar = ({ data, sortedData }) => {
-  const xLabels = data.map(item => item.rotulo)
+  const xLabels = data.map(item => item.label)
   const yDomain = calculateYDomain(sortedData)
   return (
     <VictoryChart
