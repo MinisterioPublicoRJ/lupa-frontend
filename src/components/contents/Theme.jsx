@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Api from '../api/Api'
 import Box from './Box'
-import './Contents.scss'
+import '../home/Home.scss'
 
 const propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
@@ -12,7 +12,7 @@ const propTypes = {
 class Theme extends React.Component {
   constructor(props) {
     super(props)
-    const content = props.content.map(box => ({id: box.id, data_type: 'loading'}))
+    const content = props.content.map(box => ({ id: box.id, data_type: 'loading' }))
     this.state = { content }
     this.renderBox = this.renderBox.bind(this)
     this.loadBoxes(props.content)
@@ -58,9 +58,7 @@ class Theme extends React.Component {
 
     return (
       <div className="contents">
-        {content
-          ? content.map(box => <Box key={box.id} content={box} />)
-          : null}
+        {content ? content.map(box => <Box key={box.id} content={box} />) : null}
       </div>
     )
   }

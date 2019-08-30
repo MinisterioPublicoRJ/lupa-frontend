@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Home.scss'
-import Contents from '../contents/Contents'
+import Theme from '../contents/Theme'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
+import EntityError from '../utils/EntityError'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
 
@@ -119,28 +120,36 @@ class Home extends React.Component {
     const { entityType, entityId } = this.props.match.params
 
     if (loading) return <FullScreenLoading />
-    console.log('themes', themes);
+
     return (
       <div className="Entity-container">
         <div className="Main-container">
           {geojson ? (
             <Map
               geojsonArray={geojson}
-              navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)
-              }
+              navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
             />
           ) : null}
           <div className="Name-container">{title.toLocaleUpperCase()}</div>
           <div className="Name-helper" />
           <div className="Entity-title-container">{name}</div>
-          <Contents
-            error={error}
-            themes={themes}
-            entityType={entityType}
-            entityId={entityId}
-            navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)
-            }
-          />
+
+          <div className="contents">
+            {error ? <EntityError errorInfo={error} /> : null}
+            {themes
+              ? themes.map((item, i) => (
+                <Theme
+                  key={`item.tema${i}`}
+                  content={item.data_list}
+                  color={item.cor}
+                  name={item.tema}
+                  entityType={entityType}
+                  entityId={entityId}
+                  navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+                />
+              ))
+              : null}
+          </div>
         </div>
         <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
       </div>
