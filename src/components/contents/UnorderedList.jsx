@@ -9,11 +9,13 @@ const propTypes = {
     .isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
+  color: PropTypes.string,
   navigateToEntity: PropTypes.func,
 }
 const defaultProps = {
   image: null,
   source: null,
+  color: null,
 }
 
 const clickToFeature = (event, item, callback) => {
@@ -23,10 +25,10 @@ const clickToFeature = (event, item, callback) => {
 }
 
 const UnorderedList = ({
-  title, source, list, image, navigateToEntity,
+  title, source, list, image, navigateToEntity, color,
 }) => (
   <div className="box list-box">
-    <div className="list-box--header">
+    <div className="list-box--header" style={color && { backgroundColor: color }}>
       {title ? <h1 className="list-box--title">{title}</h1> : null}
       {image ? <img src={image} alt="" className="list-box--icon" /> : null}
     </div>
@@ -40,7 +42,11 @@ const UnorderedList = ({
           {itemList.rotulo ? (
             <div className="list-box--list-item-label">{itemList.rotulo}</div>
           ) : null}
-          {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
+          {itemList.dado ? (
+            <div className="list-box--list-item-value">
+              {isNaN(itemList.dado) ? itemList.dado : Number(itemList.dado).toLocaleString('pt-br')}
+            </div>
+          ) : null}
         </li>
       ))}
     </ol>

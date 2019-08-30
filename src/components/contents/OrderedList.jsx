@@ -6,14 +6,17 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string })).isRequired,
+  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
+    .isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
-  navigateToEntity: PropTypes.func,
+  color: PropTypes.string,
+  navigateToEntity: PropTypes.func.isRequired,
 }
 const defaultProps = {
   image: null,
   source: null,
+  color: null,
 }
 
 const clickToFeature = (event, item, callback) => {
@@ -23,10 +26,10 @@ const clickToFeature = (event, item, callback) => {
 }
 
 const OrderedList = ({
-  title, source, list, image, navigateToEntity,
+  title, source, list, image, navigateToEntity, color,
 }) => (
   <div className="box list-box">
-    <div className="list-box--header">
+    <div className="list-box--header" style={color && { backgroundColor: color }}>
       {title ? <span className="list-box--title">{title}</span> : null}
       {image ? <img src={image} alt="" className="list-box--icon" /> : null}
     </div>
@@ -42,7 +45,13 @@ const OrderedList = ({
             {itemList.rotulo ? (
               <div className="list-box--list-item-label">{itemList.rotulo}</div>
             ) : null}
-            {itemList.dado ? <div className="list-box--list-item-value">{itemList.dado}</div> : null}
+            {itemList.dado ? (
+              <div className="list-box--list-item-value">
+                {isNaN(itemList.dado)
+                  ? itemList.dado
+                  : Number(itemList.dado).toLocaleString('pt-br')}
+              </div>
+            ) : null}
           </div>
         </li>
       ))}

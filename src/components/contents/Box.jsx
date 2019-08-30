@@ -54,6 +54,7 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_filtrada':
       return (
         <FilterableList
+          color={color}
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
@@ -64,6 +65,7 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_ordenada':
       return (
         <OrderedList
+          color={color}
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
@@ -74,6 +76,7 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_sem_ordenacao':
       return (
         <UnorderedList
+          color={color}
           title={content.exibition_field}
           list={content.external_data}
           image={content.icon}
