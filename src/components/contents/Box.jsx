@@ -51,16 +51,6 @@ const Box = ({ content, navigateToEntity, color }) => {
           source={content.external_data.source}
         />
       )
-    case 'long-box-contrast':
-      return (
-        <LongBox
-          contrast
-          title={content.exibition_field}
-          value={content.external_data.dado}
-          description={content.external_data.detalhes}
-          source={content.external_data.source}
-        />
-      )
     case 'lista_filtrada':
       return (
         <FilterableList

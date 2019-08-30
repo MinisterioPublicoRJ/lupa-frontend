@@ -7,35 +7,35 @@ import ArrowRight from '../icons/arrowRight'
 import './Box.scss'
 
 const propTypes = {
-  contrast: PropTypes.bool,
   source: PropTypes.string,
+  color: PropTypes.string,
   link: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 const defaultProps = {
-  contrast: false,
   source: null,
   link: null,
+  color: null,
 }
 
 const LongBox = ({
-  contrast, source, title, value, link,
+  source, title, value, link, color,
 }) => (
-  <div className="box LongBox" style={contrast ? { backgroundColor: '#009DFD' } : null}>
+  <div className="box LongBox" style={color ? { backgroundColor: color } : null}>
     <div className="box-icon">
-      <Briefcase className="box-img" overlay={contrast ? '#fff' : null} />
+      <Briefcase className="box-img" overlay={color ? 'white' : null} />
     </div>
-    <div className="box-title" style={contrast ? { color: 'white' } : null}>
+    <div className="box-title" style={color ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
-    <div className="box-value" style={contrast ? { color: 'white' } : null}>
-      {value}
+    <div className="box-value" style={color ? { color: 'white' } : null}>
+      {isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
     </div>
     <div className="box-arrow">
-      {link ? <ArrowRight className="box-img" overlay={contrast ? '#fff' : null} /> : null}
+      {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
     </div>
-    {source ? <div className="box-source">{source}</div> : null}
+    {source ? <div className="box-source" style={color ? { color: 'white' } : null}>{source}</div> : null}
   </div>
 )
 
