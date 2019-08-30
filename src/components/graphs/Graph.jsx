@@ -38,9 +38,9 @@ const propTypes = {
     }),
   ).isRequired,
   source: PropTypes.string,
+  color: PropTypes.string,
   sourcePressed: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.string),
-  highlight: PropTypes.bool,
 }
 
 const defaultProps = {
@@ -49,7 +49,6 @@ const defaultProps = {
   source: null,
   sourcePressed: () => {},
   categories: [],
-  highlight: false,
 }
 
 const loadCategories = (data) => {
@@ -73,38 +72,21 @@ const loadCategories = (data) => {
 }
 
 const graph = ({
-  type,
-  title,
-  description,
-  data,
-  source,
-  sourcePressed,
-  categories,
-  highlight,
+  type, title, description, data, source, sourcePressed, categories, color,
 }) => {
   const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
+
   return (
-    <div className="Graph-container" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
-      <div className="Graph-header">
+    <div className="Graph-container">
+      <div className="Graph-header" style={{ backgroundColor: color || '#00a5fd' }}>
         <div className="Graph-title-right">
-          <span className="Graph-name" style={highlight ? { color: '#FFFFFF' } : null}>
-            {title.toLocaleUpperCase('pt-br')}
-          </span>
-          {description && (
-            <span className="Graph-description" style={highlight ? { color: '#FFFFFF' } : null}>
-              {description}
-            </span>
-          )}
+          <span className="Graph-name">{title.toLocaleUpperCase('pt-br')}</span>
+          {description && <span className="Graph-description">{description}</span>}
         </div>
       </div>
-      <div className="Graph-body" style={highlight ? { backgroundColor: '#35B1FD' } : null}>
-        {checkGraphType({ type, data, sortedData })}
-      </div>
+      <div className="Graph-body">{checkGraphType({ type, data, sortedData })}</div>
       {categories && (
-        <div
-          className="Graph-categories-container"
-          style={highlight ? { backgroundColor: '#35B1FD' } : null}
-        >
+        <div className="Graph-categories-container">
           {categories
             ? categories.map((item, i) => (
               <span className="Graph-categories">
@@ -121,12 +103,8 @@ const graph = ({
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
                 <div className="Category-line">
-                  <span>
-                    {`${item.rotulo}: `}
-                  </span>
-                  <span>
-                    {Number(item.dado).toLocaleString('pt-br')}
-                  </span>
+                  <span>{`${item.rotulo}: `}</span>
+                  <span>{Number(item.dado).toLocaleString('pt-br')}</span>
                 </div>
               </span>
             ))
@@ -138,15 +116,11 @@ const graph = ({
                   className="Graph-color"
                   style={{ backgroundColor: ColorScale[i % ColorScale.length] }}
                 />
-              <span style={{ color: ColorScale[i % ColorScale.length] }}>{`${i + 1}`}</span>
-                  <div className="Category-line">
-                    <span>
-                      {`- ${item.rotulo}: `}
-                    </span>
-                    <span>
-                      {Number(item.dado).toLocaleString('pt-br')}
-                    </span>
-                  </div>
+                <span style={{ color: ColorScale[i % ColorScale.length] }}>{`${i + 1}`}</span>
+                <div className="Category-line">
+                  <span>{`- ${item.rotulo}: `}</span>
+                  <span>{Number(item.dado).toLocaleString('pt-br')}</span>
+                </div>
               </span>
             ))
             : null}
@@ -157,7 +131,7 @@ const graph = ({
         <span
           className="Graph-source"
           onClick={() => sourcePressed()}
-          style={highlight ? { color: '#FFFFFF' } : null}
+          style={{ color: color || '#00a5fd' }}
         >
           {source}
         </span>

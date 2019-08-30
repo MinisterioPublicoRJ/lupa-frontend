@@ -110,6 +110,7 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'grafico_linha_horizontal':
       return (
         <Graph
+          color={color}
           type={content.data_type}
           title={content.exibition_field}
           data={content.external_data}
