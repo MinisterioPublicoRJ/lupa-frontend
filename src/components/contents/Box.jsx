@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import './Box.scss'
 import SmallBox from './SmallBox'
-import SmallBoxContrast from './SmallBoxContrast'
 import LongBox from './LongBox'
 import OrderedList from './OrderedList'
 import UnorderedList from './UnorderedList'
@@ -41,18 +40,10 @@ const Box = ({ content, navigateToEntity, color }) => {
           source={content.external_data.source}
         />
       )
-    case 'texto_pequeno_destaque':
-      return (
-        <SmallBoxContrast
-          title={content.exibition_field}
-          value={content.external_data.dado}
-          description={content.external_data.detalhes}
-          source={content.external_data.source}
-        />
-      )
     case 'texto_grande':
       return (
         <LongBox
+          color={color}
           link={content.external_data.link_externo}
           title={content.exibition_field}
           value={content.external_data.dado}

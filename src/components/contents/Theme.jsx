@@ -8,7 +8,7 @@ import '../home/Home.scss'
 const propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
   color: PropTypes.string,
-  name: PropTypes.string,
+  // name: PropTypes.string,
   entityType: PropTypes.string.isRequired,
   entityId: PropTypes.string.isRequired,
   navigateToEntity: PropTypes.func.isRequired,
@@ -59,7 +59,7 @@ class Theme extends React.Component {
 
   render() {
     const { content } = this.state
-    const { color, name, navigateToEntity } = this.props
+    const { color, navigateToEntity } = this.props
 
     return (
       <div className="contents">
