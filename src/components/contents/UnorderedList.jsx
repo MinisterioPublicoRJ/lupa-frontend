@@ -10,7 +10,7 @@ const propTypes = {
   image: PropTypes.node,
   source: PropTypes.string,
   color: PropTypes.string,
-  navigateToEntity: PropTypes.func,
+  navigateToEntity: PropTypes.func.isRequired,
 }
 const defaultProps = {
   image: null,

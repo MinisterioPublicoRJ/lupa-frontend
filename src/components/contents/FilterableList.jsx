@@ -26,8 +26,8 @@ class FilterableList extends React.Component {
   }
 
   clickToFeature = (event, item, callback) => {
-    if (item && item.link_interno_entidade && item.link_interno_id) {
-      callback(item.link_interno_entidade, item.link_interno_id)
+    if (item && item.entidade_interna && item.id_interna) {
+      callback(item.entidade_interna, item.id_interna)
     }
   }
 
@@ -76,7 +76,9 @@ class FilterableList extends React.Component {
                 ) : null}
                 {itemList.dado ? (
                   <div className="list-box--list-item-value">
-                    {isNaN(itemList.dado) ? itemList.dado : Number(itemList.dado).toLocaleString('pt-br')}
+                    {isNaN(itemList.dado)
+                      ? itemList.dado
+                      : Number(itemList.dado).toLocaleString('pt-br')}
                   </div>
                 ) : null}
               </li>
