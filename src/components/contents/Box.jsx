@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './Box.scss'
 import SmallBox from './SmallBox'
@@ -12,13 +13,28 @@ import People from '../person/People'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
-// ADICIONAR PROPTYPES CONFORME FOR LIGANDO COM O BACK!
+const propTypes = {
+  color: PropTypes.string,
+  navigateToEntity: PropTypes.func.isRequired,
+  // content: PropTypes.shape({
+  //   data_type: PropTypes.string,
+  //   exibition_field: PropTypes.string,
+  //   external_data: PropTypes.shape({
+  //     dado: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  //     source: PropTypes.string,
+  //   }),
+  // }).isRequired,
+}
+const defaultProps = {
+  color: null,
+}
 
-const Box = ({ content, navigateToEntity }) => {
+const Box = ({ content, navigateToEntity, color }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
         <SmallBox
+          color={color}
           title={content.exibition_field}
           value={content.external_data.dado}
           description={content.external_data.detalhes}
@@ -85,7 +101,9 @@ const Box = ({ content, navigateToEntity }) => {
         />
       )
     case 'lista_pessoa':
-      return <People title={content.exibition_field} peopleArray={content.external_data} />
+      return (
+        <People title={content.exibition_field} peopleArray={content.external_data} color={color} />
+      )
     case 'grafico_pizza':
     case 'grafico_barra_vertical':
     case 'grafico_barra_horizontal':
@@ -99,10 +117,11 @@ const Box = ({ content, navigateToEntity }) => {
         />
       )
     case 'loading':
-      return <LoadingBox />
+      return <LoadingBox color={color} />
     default:
-      return <ErrorBox />
+      return <ErrorBox color={color} />
   }
 }
-
+Box.propTypes = propTypes
+Box.defaultProps = defaultProps
 export default Box

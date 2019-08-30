@@ -17,8 +17,8 @@ const defaultProps = {
 }
 
 const clickToFeature = (event, item, callback) => {
-  if (item && item.link_interno_entidade && item.link_interno_id) {
-    callback(item.link_interno_entidade, item.link_interno_id)
+  if (item && item.entidade_interna && item.id_interna) {
+    callback(item.entidade_interna, item.id_interna)
   }
 }
 

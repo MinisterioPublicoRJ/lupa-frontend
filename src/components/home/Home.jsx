@@ -94,8 +94,6 @@ class Home extends React.Component {
       name: entityResponse.exibition_field,
       title: entityResponse.entity_type,
     })
-
-    // this.loadBoxes(homeBoxes)
   }
 
   /**

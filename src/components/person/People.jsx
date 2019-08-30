@@ -10,28 +10,32 @@ const propTypes = {
   peopleArray: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.string,
-      detalhes: PropTypes.string,
+      details: PropTypes.string,
       photo: PropTypes.string,
     }),
   ).isRequired,
+  color: PropTypes.string,
 }
 
-const People = ({ title, peopleArray }) => {
+const defaultProps = { color: 'null' }
+
+const People = ({ title, peopleArray, color }) => {
   if (!peopleArray || peopleArray.length === 0) {
     return null
   }
+
   return (
     <div className="People--container">
-      {title ?
-        <div className="People--header">
+      {title ? (
+        <div className="People--header" style={color && { backgroundColor: color }}>
           <div className="People--title">{title}</div>
         </div>
-      : null}
+      ) : null}
       <div className="People--body">
         {peopleArray.map((person, index, arr) => (
           <Person
-            key={index}
-            data={person.detalhes}
+            key={person.id}
+            data={person.details}
             name={person.dado}
             photo={person.imagem}
             last={index === arr.length - 1}
@@ -43,4 +47,5 @@ const People = ({ title, peopleArray }) => {
 }
 
 People.propTypes = propTypes
+People.defaultProps = defaultProps
 export default People
