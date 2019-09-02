@@ -47,7 +47,7 @@ const OrderedList = ({
             ) : null}
             {itemList.dado ? (
               <div className="list-box--list-item-value">
-                {isNaN(itemList.dado)
+                {Number.isNaN(itemList.dado)
                   ? itemList.dado
                   : Number(itemList.dado).toLocaleString('pt-br')}
               </div>
