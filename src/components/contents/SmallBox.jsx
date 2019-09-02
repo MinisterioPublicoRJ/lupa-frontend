@@ -24,7 +24,7 @@ const SmallBox = ({
       {title && title.toLocaleUpperCase('pt-br')}
     </div>
     <div className="box-value" style={color && { color: 'white' }}>
-      {Number.isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
+      {isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
     </div>
     {description && (
       <div className="box-description" style={color && { color: 'white' }}>

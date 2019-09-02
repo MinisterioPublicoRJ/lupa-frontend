@@ -76,7 +76,7 @@ class FilterableList extends React.Component {
                 ) : null}
                 {itemList.dado ? (
                   <div className="list-box--list-item-value">
-                    {Number.isNaN(itemList.dado)
+                    {isNaN(itemList.dado)
                       ? itemList.dado
                       : Number(itemList.dado).toLocaleString('pt-br')}
                   </div>

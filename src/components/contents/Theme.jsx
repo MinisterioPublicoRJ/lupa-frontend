@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Api from '../api/Api'
 import Box from './Box'
-import '../home/Home.scss'
+import './Theme.scss'
 
 const propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
@@ -12,6 +12,10 @@ const propTypes = {
   entityType: PropTypes.string.isRequired,
   entityId: PropTypes.string.isRequired,
   navigateToEntity: PropTypes.func.isRequired,
+}
+
+const defaultProps = {
+  color: null,
 }
 
 class Theme extends React.Component {
@@ -74,4 +78,5 @@ class Theme extends React.Component {
 }
 
 Theme.propTypes = propTypes
+Theme.defaultProps = defaultProps
 export default Theme

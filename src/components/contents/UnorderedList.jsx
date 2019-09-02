@@ -44,7 +44,7 @@ const UnorderedList = ({
           ) : null}
           {itemList.dado ? (
             <div className="list-box--list-item-value">
-              {Number.isNaN(itemList.dado) ? itemList.dado : Number(itemList.dado).toLocaleString('pt-br')}
+              {isNaN(itemList.dado) ? itemList.dado : Number(itemList.dado).toLocaleString('pt-br')}
             </div>
           ) : null}
         </li>
