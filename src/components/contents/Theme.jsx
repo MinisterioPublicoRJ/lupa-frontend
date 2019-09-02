@@ -7,6 +7,11 @@ import '../home/Home.scss'
 
 const propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
+  color: PropTypes.string,
+  // name: PropTypes.string,
+  entityType: PropTypes.string.isRequired,
+  entityId: PropTypes.string.isRequired,
+  navigateToEntity: PropTypes.func.isRequired,
 }
 
 class Theme extends React.Component {
@@ -53,12 +58,16 @@ class Theme extends React.Component {
   }
 
   render() {
-    const { navigateToEntity } = this.props
     const { content } = this.state
+    const { color, navigateToEntity } = this.props
 
     return (
       <div className="contents">
-        {content ? content.map(box => <Box key={box.id} content={box} />) : null}
+        {content
+          ? content.map(box => (
+            <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
+          ))
+          : null}
       </div>
     )
   }
