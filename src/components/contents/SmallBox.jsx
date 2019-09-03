@@ -7,19 +7,35 @@ const propTypes = {
   description: PropTypes.string,
   source: PropTypes.string,
   title: PropTypes.string.isRequired,
+  color: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 const defaultProps = {
   description: null,
   source: null,
+  color: null,
 }
 
-const SmallBox = ({ description, source, title, value }) => (
-  <div className="box SmallBox">
-    <div className="box-title">{title ? title.toLocaleUpperCase('pt-br') : null}</div>
-    <div className="box-value">{value}</div>
-    {description && <div className="box-description">{description}</div>}
-    {source ? <div className="box-source">{source}</div> : null}
+const SmallBox = ({
+  description, source, title, value, color,
+}) => (
+  <div className="box SmallBox" style={color && { backgroundColor: color }}>
+    <div className="box-title" style={color && { color: 'white' }}>
+      {title && title.toLocaleUpperCase('pt-br')}
+    </div>
+    <div className="box-value" style={color && { color: 'white' }}>
+      {isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
+    </div>
+    {description && (
+      <div className="box-description" style={color && { color: 'white' }}>
+        {description}
+      </div>
+    )}
+    {source ? (
+      <div className="box-source" style={color && { color: 'white' }}>
+        {source}
+      </div>
+    ) : null}
   </div>
 )
 

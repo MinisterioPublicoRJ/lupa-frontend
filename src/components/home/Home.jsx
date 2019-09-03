@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Home.scss'
-import Contents from '../contents/Contents'
+import Theme from '../contents/Theme'
 import Map from '../map/Map'
 import Filter from '../filter/Filter'
+import EntityError from '../utils/EntityError'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
 
@@ -22,7 +23,6 @@ class Home extends React.Component {
     super(props)
     this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
     this.checkContent = this.checkContent.bind(this)
-    this.renderBox = this.renderBox.bind(this)
   }
 
   componentDidMount() {
@@ -75,42 +75,25 @@ class Home extends React.Component {
    * @param {Object} entityResponse.geojson GeoJSON of entity to be displayed on the map
    */
   checkContent(entityResponse) {
-    if (!entityResponse.data_list) {
+    if (!entityResponse.theme_list) {
       this.setState({
         loading: false,
         error: entityResponse,
-        content: null,
         name: null,
+        themes: null,
         title: 'Erro',
       })
       return
     }
 
-    const loadingBoxes = entityResponse.data_list.map(info => ({
-      id: info.id,
-      data_type: 'loading',
-    }))
     this.setState({
       loading: false,
       error: null,
-      content: loadingBoxes,
+      themes: entityResponse.theme_list,
       geojson: entityResponse.geojson,
       name: entityResponse.exibition_field,
       title: entityResponse.entity_type,
     })
-
-    this.loadBoxes(entityResponse.data_list)
-  }
-
-  /**
-   * Creates promises to get the boxes' content from the database
-   * @param  {array} dataList Array of jsons with the boxes id's
-   * @return {void}
-   */
-  loadBoxes(dataList) {
-    const { match } = this.props
-    const { entityType, entityId } = match.params
-    dataList.forEach(item => Api.getBoxData(this.renderBox, entityType, entityId, item.id))
   }
 
   /**
@@ -119,45 +102,20 @@ class Home extends React.Component {
    * @param  {string} filter filter name
    * @return {void}
    */
-  handleFiltering(filter) {
-    // this.setState({ activeFilter: filter })
-    this.handleNavigateToEntity('EST', '33')
-  }
+  // handleFiltering(filter) {
+  //   this.handleNavigateToEntity('EST', '33')
+  // }
 
   handleNavigateToEntity(entityType, entityId) {
     const { history } = this.props
     history.push(`/${entityType}/${entityId}`)
   }
 
-  /**
-   * Callback from the getBoxData function
-   * Receives the box info after the promise is resolved
-   * and updates the state with the new data
-   * @param  {json} updatedBox actual box content
-   * @param  {string} boxId    id (only comes if the request fails)
-   * @return {void}
-   */
-  renderBox(updatedBox, boxId) {
-    const { content } = this.state
-    let newContent
-    if (boxId) {
-      newContent = content.filter(box => box.id !== boxId)
-    } else {
-      newContent = content.map((box) => {
-        if (box.id === updatedBox.id) return updatedBox
-
-        return box
-      })
-    }
-    // const newBox = boxId ? null : updatedBox
-
-    this.setState({ content: newContent })
-  }
-
   render() {
     const {
-      loading, activeFilter, content, error, geojson, name, title,
+      loading, activeFilter, error, geojson, name, title, themes,
     } = this.state
+    const { entityType, entityId } = this.props.match.params
 
     if (loading) return <FullScreenLoading />
 
@@ -167,26 +125,31 @@ class Home extends React.Component {
           {geojson ? (
             <Map
               geojsonArray={geojson}
-              navigateToEntity={
-                (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
-              }
+              navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
             />
           ) : null}
           <div className="Name-container">{title.toLocaleUpperCase()}</div>
           <div className="Name-helper" />
           <div className="Entity-title-container">{name}</div>
-          <Contents
-            error={error}
-            boxes={content}
-            navigateToEntity={
-              (entityType, entityId) => this.handleNavigateToEntity(entityType, entityId)
-            }
-          />
+
+          <div className="contents">
+            {error ? <EntityError errorInfo={error} /> : null}
+            {themes
+              ? themes.map((item, i) => (
+                <Theme
+                  key={`item.tema${i}`}
+                  content={item.data_list}
+                  color={item.cor}
+                  name={item.tema}
+                  entityType={entityType}
+                  entityId={entityId}
+                  navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+                />
+              ))
+              : null}
+          </div>
         </div>
-        <Filter
-          active={activeFilter}
-          filterClicked={filter => this.handleFiltering(filter)}
-        />
+        <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
       </div>
     )
   }

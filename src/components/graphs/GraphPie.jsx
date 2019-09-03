@@ -6,7 +6,7 @@ const propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
       detalhes: PropTypes.string,
       link: PropTypes.string,
@@ -41,6 +41,7 @@ const renderLabel = (valueStr, total) => {
 
 const GraphPie = ({ data, colorScale }) => {
   const total = data.reduce((soma, item) => soma + Number(item.dado), 0)
+
   return (
     <VictoryPie
       data={data}
