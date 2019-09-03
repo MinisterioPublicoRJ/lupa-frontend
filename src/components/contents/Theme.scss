@@ -2,15 +2,14 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  // transition: all 0.5s;
+  transition: all 0.4s linear;
 
   &.open {
+    flex-wrap: wrap;
     max-width: 800px;
     margin-top: 3vh;
     margin-bottom: 2vh;
     padding: 0;
-    flex-wrap: wrap;
-    width: 100%;
   }
 
   &.closed{
@@ -72,17 +71,17 @@
   }
 
   &--content {
-    transition: all 0.5s;
+    display: flex;
 
     &.open {
-      display: flex;
       flex: 1;
       flex-wrap: wrap;
       justify-content: space-between;
+      visibility: visible;
     }
 
     &.closed {
-      display: none;
+      visibility: collapse;
     }
   }
 }
