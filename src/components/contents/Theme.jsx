@@ -8,7 +8,7 @@ import './Theme.scss'
 const propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
   color: PropTypes.string,
-  // name: PropTypes.string,
+  name: PropTypes.string,
   entityType: PropTypes.string.isRequired,
   entityId: PropTypes.string.isRequired,
   navigateToEntity: PropTypes.func.isRequired,
@@ -22,7 +22,7 @@ class Theme extends React.Component {
   constructor(props) {
     super(props)
     const content = props.content.map(box => ({ id: box.id, data_type: 'loading' }))
-    this.state = { content }
+    this.state = { open: !props.name, content }
     this.renderBox = this.renderBox.bind(this)
     this.loadBoxes(props.content)
   }
@@ -61,17 +61,37 @@ class Theme extends React.Component {
     this.setState({ content: newContent })
   }
 
-  render() {
-    const { content } = this.state
-    const { color, navigateToEntity } = this.props
+  handleToggle() {
+    this.setState(prevState => ({ open: !prevState.open }))
+  }
 
+  render() {
+    const { content, open } = this.state
+    const { color, navigateToEntity, name } = this.props
+    const themeStatus = open ? 'open' : 'closed'
+    // console.log(open);
     return (
-      <div className="contents">
-        {content
-          ? content.map(box => (
-            <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
-          ))
-          : null}
+      <div
+        className={`theme ${themeStatus}`}
+        style={!open ? { backgroundColor: color, borderColor: color } : null}
+      >
+        {name ? (
+          <div
+            className={`theme--header ${themeStatus}`}
+            onClick={() => this.handleToggle()}
+            style={{ backgroundColor: color }}
+          >
+            <span className={`theme--header--title ${themeStatus}`}>{name.toLocaleUpperCase()}</span>
+            <span className={`theme--header--count ${themeStatus}`}>{`${content.length} Temas`}</span>
+          </div>
+        ) : null}
+        {content && open ? (
+          <div className={`theme--content ${themeStatus}`}>
+            {content.map(box => (
+              <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
+            ))}
+          </div>
+        ) : null}
       </div>
     )
   }
