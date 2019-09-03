@@ -60,10 +60,11 @@
 
 .contents {
   display: flex;
+  // flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   margin:auto;
   max-width: 800px;
   padding: 0;
-  padding-bottom: 15vh;
+  padding-bottom: 10vh;
 }
