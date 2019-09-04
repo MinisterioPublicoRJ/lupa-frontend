@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-// const API_URL = 'http://10.1.248.104:8080'
-const API_URL = 'http://d-apimpmapas-devmpmapas.devcloud.mprj.mp.br' // DEV
-// const API_URL = 'https://apimpmapas.mprj.mp.br'
-
 const Api = (() => {
+  const API_URL = process.env.REACT_APP_API_URL
   function buildings(callback) {
     axios.get(`${API_URL}/buildings`).then((response) => {
       callback(response)
@@ -42,8 +39,7 @@ const Api = (() => {
    * @return {void}
    */
   function getEntityData(callback, type, id) {
-    // axios.get(`${API_URL}/api/${type}/${id}?format=json`)
-    axios.get(`${API_URL}/lupa/${type}/${id}?format=json`) // ESTEVAN
+    axios.get(`${API_URL}/lupa/${type}/${id}?format=json`)
       .then(response => callback(response.data))
       .catch(error => callback(error))
   }
@@ -57,8 +53,7 @@ const Api = (() => {
    * @return {void}
    */
   function getBoxData(callback, entityType, entityId, boxId) {
-    // axios.get(`${API_URL}/api/${entityType}/${entityId}/${boxId}`)
-    axios.get(`${API_URL}/lupa/${entityType}/${entityId}/${boxId}`) // ESTEVAN
+    axios.get(`${API_URL}/lupa/${entityType}/${entityId}/${boxId}`)
       .then(response => callback(response.data))
       .catch(error => callback(error, boxId))
   }

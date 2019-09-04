@@ -72,6 +72,7 @@ class Theme extends React.Component {
     // console.log(open);
     return (
       <div
+        ontransitionstart={e => console.log(e)}
         className={`theme ${themeStatus}`}
         style={!open ? { backgroundColor: color, borderColor: color } : null}
       >
@@ -85,7 +86,7 @@ class Theme extends React.Component {
             <span className={`theme--header--count ${themeStatus}`}>{`${content.length} Temas`}</span>
           </div>
         ) : null}
-        {content && open ? (
+        {content ? (
           <div className={`theme--content ${themeStatus}`}>
             {content.map(box => (
               <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
