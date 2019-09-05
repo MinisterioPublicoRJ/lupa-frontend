@@ -9,6 +9,7 @@
     max-width: 800px;
     margin-top: 3vh;
     margin-bottom: 2vh;
+    width: 100%;
     padding: 0;
   }
 
@@ -48,6 +49,7 @@
     }
 
     &--title {
+      text-align: center;
       font-weight: 500; //medium
 
       &.open {

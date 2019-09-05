@@ -25,7 +25,7 @@ L.Icon.Default.mergeOptions({
 
 const clickToFeature = (e, callback, markerProperties) => {
   const objectProperties = markerProperties || e.target.feature.properties
-  callback(objectProperties.entity_link_type, objectProperties.entity_link_id)
+  callback(objectProperties.entidade_interna, objectProperties.id_interna)
 }
 
 const propTypes = {
@@ -35,8 +35,8 @@ const propTypes = {
         PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
       ),
       properties: PropTypes.shape({
-        entity_link_id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-        entity_link_type: PropTypes.string,
+        id_interna: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        entidade_interna: PropTypes.string,
         name: PropTypes.string,
       }),
       type: PropTypes.string,
@@ -100,7 +100,7 @@ const map = props => {
             key={index}
             position={[marker.geometry.coordinates[1], marker.geometry.coordinates[0]]}
           >
-            <Popup>{marker.properties.name}<br/><a href={`#/${marker.properties.entity_link_type}/${marker.properties.entity_link_id}`}>Ir</a></Popup>
+            <Popup>{marker.properties.name}<br/><a href={`#/${marker.properties.entidade_interna}/${marker.properties.id_interna}`}>Ir</a></Popup>
           </Marker>
         ))}
       </MarkerClusterGroup>
