@@ -36,7 +36,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           color={color}
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.external_data.detalhes}
+          description={content.external_data.details}
           source={content.external_data.source}
         />
       )
@@ -47,7 +47,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           link={content.external_data.link_externo}
           title={content.exibition_field}
           value={content.external_data.dado}
-          description={content.external_data.detalhes}
+          description={content.external_data.details}
           source={content.external_data.source}
         />
       )
