@@ -10,7 +10,7 @@ const propTypes = {
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       fonte: PropTypes.string,
-      detalhes: PropTypes.string,
+      details: PropTypes.string,
       link: PropTypes.string,
     }),
   ).isRequired,
@@ -38,12 +38,12 @@ const axisStyles = {
 
 const graphLine = ({ data, colorScale }) => {
   const xLabels = data.map(item => item.rotulo)
-  const types = [] // will be filled with unique detalhes string
+  const types = [] // will be filled with unique details string
   data
-    .filter(item => item.detalhes)
+    .filter(item => item.details)
     .forEach((item) => {
-      if (types.indexOf(item.detalhes) === -1) {
-        types.push(item.detalhes)
+      if (types.indexOf(item.details) === -1) {
+        types.push(item.details)
       }
     })
   return (
@@ -59,7 +59,7 @@ const graphLine = ({ data, colorScale }) => {
       {types.map((type, i) => (
         <VictoryLine
           key={type}
-          data={data.filter(item => item.detalhes === type)}
+          data={data.filter(item => item.details === type)}
           style={{ ...graphStyle, data: { stroke: colorScale[i] } }}
           x="rotulo"
           y={item => Number(item.dado)}
@@ -72,7 +72,7 @@ const graphLine = ({ data, colorScale }) => {
         data={data}
         x="rotulo"
         y={item => Number(item.dado)}
-        style={{ data: { fill: item => colorScale[types.indexOf(item.detalhes)] } }}
+        style={{ data: { fill: item => colorScale[types.indexOf(item.details)] } }}
       />
       <VictoryAxis tickValues={xLabels} style={axisStyles} />
     </VictoryChart>
