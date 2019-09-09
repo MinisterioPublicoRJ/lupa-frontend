@@ -83,7 +83,7 @@
     }
 
     &.closed {
-      visibility: collapse;
+      display: none;
     }
   }
 }
