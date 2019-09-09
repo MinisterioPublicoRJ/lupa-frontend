@@ -1,6 +1,6 @@
 .theme {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   flex-wrap: wrap;
   transition: all 0.4s linear;
 
@@ -39,6 +39,7 @@
       max-height: 70px;
       margin: 0 5px 0 5px;
       padding: 5px;
+      width: 100%;
     }
 
     &.closed {
@@ -76,10 +77,9 @@
     display: flex;
 
     &.open {
-      flex: 1;
+      width: 100%;
       flex-wrap: wrap;
       justify-content: space-between;
-      visibility: visible;
     }
 
     &.closed {
