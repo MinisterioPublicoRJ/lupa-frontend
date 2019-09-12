@@ -4,8 +4,8 @@ const Api = (() => {
   const API_URL = process.env.REACT_APP_API_URL
 
   /**
-   * [loadParams description]
-   * @return {[type]} [description]
+   * If there is a stored token, returns it with the right format for the requisition
+   * @return {json} eiter empty object or formatted obj with the user's token
    */
   function loadParams() {
     const params = {}
