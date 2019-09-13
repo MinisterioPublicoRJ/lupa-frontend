@@ -77,7 +77,7 @@ const map = props => {
     <Map
       bounds={bounds}
       maxBounds={brazilBoundingBox}
-      maxZoom={18}
+      maxZoom={15}
       style={{ height: '50%' }}
       zoomControl={false}
     >
