@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import './Home.scss'
 import Theme from '../contents/Theme'
 import Map from '../map/Map'
-import Filter from '../filter/Filter'
 import EntityError from '../utils/EntityError'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
+import Menu from '../menu/Menu'
 
 const propTypes = {
   match: PropTypes.shape({
@@ -21,7 +21,7 @@ const propTypes = {
 class Home extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { loading: true, activeFilter: 'CONVERGENCIA' }
+    this.state = { loading: true, menuOpen: false }
     this.checkContent = this.checkContent.bind(this)
   }
 
@@ -111,11 +111,17 @@ class Home extends React.Component {
     history.push(`/${entityType}/${entityId}`)
   }
 
+  navigateToLogin() {
+    const { history } = this.props
+    history.push('/login')
+  }
+
   render() {
     const {
-      loading, activeFilter, error, geojson, name, title, themes,
+      loading, menuOpen, error, geojson, name, title, themes,
     } = this.state
-    const { entityType, entityId } = this.props.match.params
+    const { match } = this.props
+    const { entityType, entityId } = match.params
 
     if (loading) return <FullScreenLoading />
 
@@ -148,8 +154,13 @@ class Home extends React.Component {
               ))
               : null}
           </div>
+          <Menu
+            isOpen={menuOpen}
+            toggle={newState => this.setState({ menuOpen: newState })}
+            login={() => this.navigateToLogin()}
+            navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
+          />
         </div>
-        <Filter active={activeFilter} filterClicked={filter => this.handleFiltering(filter)} />
       </div>
     )
   }

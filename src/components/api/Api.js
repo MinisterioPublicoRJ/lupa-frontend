@@ -55,7 +55,6 @@ const Api = (() => {
    */
   function getEntityData(callback, type, id) {
     const params = loadParams()
-    console.log('token', params);
     axios.get(`${API_URL}/lupa/${type}/${id}?format=json`, params)
       .then(response => callback(response.data))
       .catch(error => callback(error))
