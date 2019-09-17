@@ -2,8 +2,23 @@ import axios from 'axios'
 
 const Api = (() => {
   const API_URL = process.env.REACT_APP_API_URL
+
+  /**
+   * If there is a stored token, returns it with the right format for the requisition
+   * @return {json} eiter empty object or formatted obj with the user's token
+   */
+  function loadParams() {
+    const params = {}
+    const userToken = localStorage.getItem('token')
+    if (userToken) {
+      params.params = { auth_token: userToken }
+    }
+    return params
+  }
+
   function buildings(callback) {
-    axios.get(`${API_URL}/buildings`).then((response) => {
+    const params = loadParams()
+    axios.get(`${API_URL}/buildings`, params).then((response) => {
       callback(response)
     })
   }
@@ -39,7 +54,9 @@ const Api = (() => {
    * @return {void}
    */
   function getEntityData(callback, type, id) {
-    axios.get(`${API_URL}/lupa/${type}/${id}?format=json`)
+    const params = loadParams()
+    console.log('token', params);
+    axios.get(`${API_URL}/lupa/${type}/${id}?format=json`, params)
       .then(response => callback(response.data))
       .catch(error => callback(error))
   }
@@ -53,7 +70,8 @@ const Api = (() => {
    * @return {void}
    */
   function getBoxData(callback, entityType, entityId, boxId) {
-    axios.get(`${API_URL}/lupa/${entityType}/${entityId}/${boxId}`)
+    const params = loadParams()
+    axios.get(`${API_URL}/lupa/${entityType}/${entityId}/${boxId}`, params)
       .then(response => callback(response.data))
       .catch(error => callback(error, boxId))
   }
