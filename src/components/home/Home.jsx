@@ -153,13 +153,13 @@ class Home extends React.Component {
                 />
               ))
               : null}
+            <Menu
+              isOpen={menuOpen}
+              toggle={newState => this.setState({ menuOpen: newState })}
+              login={() => this.navigateToLogin()}
+              navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
+            />
           </div>
-          <Menu
-            isOpen={menuOpen}
-            toggle={newState => this.setState({ menuOpen: newState })}
-            login={() => this.navigateToLogin()}
-            navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
-          />
         </div>
       </div>
     )
