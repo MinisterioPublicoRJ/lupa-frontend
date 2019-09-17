@@ -2,7 +2,11 @@ import React from 'react'
 import posed from 'react-pose'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faBars, faChalkboardTeacher, faTimes, faHome,
+  faBars,
+  faChalkboardTeacher,
+  faTimes,
+  faHome,
+  faArrowUp,
 } from '@fortawesome/free-solid-svg-icons'
 import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-menu'
 
@@ -12,7 +16,6 @@ const Menu = ({
   isOpen, toggle, login, navigateToEntity,
 }) => {
   const FaButtons = ({ type }) => <FontAwesomeIcon icon={type} className="icons" />
-// let isMoving
   return (
     <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={isOpen} className="outerMenu">
       <MainButton
@@ -20,7 +23,7 @@ const Menu = ({
         iconResting={<FaButtons type={faBars} />}
         iconActive={<FaButtons type={faTimes} />}
         background="#00A5FD"
-        onClick={(event) => { console.log('click', event.movementX, event.movementY, event); toggle(!isOpen) }}
+        onClick={() => toggle(!isOpen)}
         size={56}
       />
       <ChildButton
@@ -35,14 +38,27 @@ const Menu = ({
         size={40}
         onClick={navigateToEntity}
       />
+      <ChildButton
+        icon={<FaButtons type={faArrowUp} />}
+        background="#00A5FD"
+        size={40}
+        onClick={() => window.scrollTo(0, 0)}
+      />
     </FloatingMenu>
   )
 }
 
-const WrapperDiv = posed.div({ draggable: true })
+const WrapperDiv = posed.div({
+  draggable: true,
+  init: {
+    bottom: '20px', right: '20px', position: 'absolute', scale: 1,
+  },
+  pressable: true,
+  press: { scale: 0.8 },
+})
 
 const WrappedMenu = props => (
-  <WrapperDiv className="menu-wrapper">
+  <WrapperDiv>
     <Menu {...props} />
   </WrapperDiv>
 )
