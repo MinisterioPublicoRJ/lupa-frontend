@@ -100,7 +100,14 @@ const map = props => {
             key={index}
             position={[marker.geometry.coordinates[1], marker.geometry.coordinates[0]]}
           >
-            <Popup>{marker.properties.name}<br/><a href={`#/${marker.properties.entidade_interna}/${marker.properties.id_interna}`}>Ir</a></Popup>
+            <Popup>
+              {marker.properties.rotulo}<br/>
+              {
+                marker.properties.entidade_interna && marker.properties.id_interna ?
+                  <a href={`#/${marker.properties.entidade_interna}/${marker.properties.id_interna}`}>Ir</a>
+                : null
+              }
+            </Popup>
           </Marker>
         ))}
       </MarkerClusterGroup>
