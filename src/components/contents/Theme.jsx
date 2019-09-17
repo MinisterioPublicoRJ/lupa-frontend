@@ -69,10 +69,9 @@ class Theme extends React.Component {
     const { content, open } = this.state
     const { color, navigateToEntity, name } = this.props
     const themeStatus = open ? 'open' : 'closed'
-    
+
     return (
       <div
-        ontransitionstart={e => console.log(e)}
         className={`theme ${themeStatus}`}
         style={!open ? { backgroundColor: color, borderColor: color } : null}
       >
