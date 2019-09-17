@@ -42,7 +42,7 @@ const Menu = ({
 const WrapperDiv = posed.div({ draggable: true })
 
 const WrappedMenu = props => (
-  <WrapperDiv className="wrapper">
+  <WrapperDiv className="menu-wrapper">
     <Menu {...props} />
   </WrapperDiv>
 )
