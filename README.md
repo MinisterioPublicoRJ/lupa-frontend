@@ -1,15 +1,10 @@
 # How to install
 
     npm i
-    npm i -g json-server
 
 # How to run (development mode)
 
     npm start
-
-if you want to run mock APIs (on another terminal tab):
-
-    json-server --watch api-mock.json --port 5000
 
 # How to run build dev
 
