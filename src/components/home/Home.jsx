@@ -112,6 +112,10 @@ class Home extends React.Component {
     history.push(`/${entityType}/${entityId}`)
   }
 
+  handleSearch() {
+    console.log("I'm searching!")
+  }
+
   navigateToLogin() {
     const { history } = this.props
     history.push('/login')
@@ -129,7 +133,10 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          <Search />
+          <Search
+            homePressed={() => this.handleNavigateToEntity('EST', '33')}
+            searchPressed={() => this.handleSearch()}
+          />
           {geojson ? (
             <Map
               geojsonArray={geojson}

@@ -37,11 +37,13 @@
 
 .Search-input {
   border: none;
+  box-sizing: border-box;
   border-radius: 7px;
   display: flex;
   flex: 1;
   height: 100%;
   margin: 0 10px 0 10px;
+  padding: 0 10px 0 10px;
 }
 
 .Search-body {
