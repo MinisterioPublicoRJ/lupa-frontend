@@ -133,10 +133,12 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          <Search
-            homePressed={() => this.handleNavigateToEntity('EST', '33')}
-            searchPressed={() => this.handleSearch()}
-          />
+          {!error ? (
+            <Search
+              homePressed={() => this.handleNavigateToEntity('EST', '33')}
+              searchPressed={() => this.handleSearch()}
+            />
+          ) : null}
           {geojson ? (
             <Map
               geojsonArray={geojson}
