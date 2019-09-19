@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
+import { ReactComponent as MapIcon } from '../icons/stateMap.svg'
 import './Search.scss'
 
 const propTypes = {
-  menuPressed: PropTypes.func.isRequired,
+  homePressed: PropTypes.func.isRequired,
   searchPressed: PropTypes.func.isRequired,
 }
 
@@ -16,13 +17,14 @@ function search(props) {
     <div className="Search-container">
       <div className="Search-view">
         <div className="Search-button">
-          <FontAwesomeIcon
-            className="Search-icon"
-            icon={faBars}
-            onClick={() => props.menuPressed()}
-          />
+          <MapIcon />
         </div>
-        <input className="Search-input" placeholder={text} />
+        <input
+          className="Search-input"
+          placeholder={text}
+          onFocus={() => console.log('look at me!')}
+          onBlur={() => console.log('i was blurred')}
+        />
         <div className="Search-button">
           <FontAwesomeIcon
             className="Search-icon"
@@ -31,6 +33,9 @@ function search(props) {
           />
         </div>
       </div>
+      {/*<div className="Search-body">
+        i am here
+      </div>*/}
     </div>
   )
 }

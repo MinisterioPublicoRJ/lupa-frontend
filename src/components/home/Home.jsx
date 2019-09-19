@@ -8,6 +8,7 @@ import EntityError from '../utils/EntityError'
 import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
 import Menu from '../menu/Menu'
+import Search from '../search/Search'
 
 const propTypes = {
   match: PropTypes.shape({
@@ -128,6 +129,7 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
+          <Search />
           {geojson ? (
             <Map
               geojsonArray={geojson}
