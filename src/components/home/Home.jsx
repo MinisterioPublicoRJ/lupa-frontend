@@ -97,23 +97,9 @@ class Home extends React.Component {
     })
   }
 
-  /**
-   * NOT FOR VERSION ONE
-   * Changes the current filter applied to the content
-   * @param  {string} filter filter name
-   * @return {void}
-   */
-  // handleFiltering(filter) {
-  //   this.handleNavigateToEntity('EST', '33')
-  // }
-
   handleNavigateToEntity(entityType, entityId) {
     const { history } = this.props
     history.push(`/${entityType}/${entityId}`)
-  }
-
-  handleSearch() {
-    console.log("I'm searching!")
   }
 
   navigateToLogin() {
@@ -136,7 +122,6 @@ class Home extends React.Component {
           {!error ? (
             <Search
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
-              searchPressed={() => this.handleSearch()}
             />
           ) : null}
           {geojson ? (

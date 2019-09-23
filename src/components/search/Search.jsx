@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import posed from 'react-pose'
 
+import Api from '../api/Api'
 import { ReactComponent as MapIcon } from '../icons/stateMap.svg'
 import './Search.scss'
 
@@ -17,35 +18,52 @@ const WrapperDiv = posed.div({
   press: { scale: 0.6 },
 })
 
-function search({ homePressed, searchPressed }) {
-  const text = 'Pesquise Municípios, Prédios e Órgãos'
-  return (
-    <div className="Search-container">
-      <div className="Search-view">
-        <div className="Search-button">
-          <WrapperDiv>
-            <MapIcon onClick={homePressed} />
-          </WrapperDiv>
-        </div>
-        <input
-          className="Search-input"
-          placeholder={text}
-          onFocus={() => console.log('look at me!')}
-          onBlur={() => console.log('i was blurred')}
-        />
-        <div className="Search-button">
-          <WrapperDiv>
-            <FontAwesomeIcon
-              className="Search-icon"
-              icon={faSearch}
-              onClick={() => searchPressed()}
-            />
-          </WrapperDiv>
+class Search extends React.Component {
+  state = { open: false }
+
+  handleSearch(inputText) {
+    Api.getSearchData(this.searchCallback, inputText)
+    this.setState({ waiting: true })
+    console.log('input', inputText)
+  }
+
+  searchCallback(res) {
+    console.log('res', res);
+    this.setState({ waiting: false })
+  }
+
+  render() {
+    const { homePressed } = this.props
+
+    const placeholder = 'Pesquise Municípios, Prédios e Órgãos'
+    return (
+      <div className="Search-container">
+        <div className="Search-view">
+          <div className="Search-button">
+            <WrapperDiv>
+              <MapIcon onClick={homePressed} />
+            </WrapperDiv>
+          </div>
+          <input
+            onChange={event => this.setState({ query: event.target.value })}
+            className="Search-input"
+            placeholder={placeholder}
+            onFocus={() => this.setState({ open: true })}
+          />
+          <div className="Search-button">
+            <WrapperDiv>
+              <FontAwesomeIcon
+                className="Search-icon"
+                icon={faSearch}
+                onClick={() => this.handleSearch(this.state.query)}
+              />
+            </WrapperDiv>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
-search.propTypes = propTypes
+Search.propTypes = propTypes
 
-export default search
+export default Search
