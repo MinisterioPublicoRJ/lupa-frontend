@@ -65,6 +65,7 @@ class Search extends React.Component {
   searchCallback(response) {
     console.log(response)
     this.setState({ waiting: false })
+    this.setState({ searchResponse: response })
   }
 
   /**
@@ -119,6 +120,26 @@ class Search extends React.Component {
               />
             </WrapperDiv>
           </div>
+          {
+            this.state.open && !this.state.waiting && this.state.searchResponse ?
+              <div className="search-result">
+                <ul className="search-result-list">
+                  {
+                    this.state.searchResponse ?
+                      this.state.searchResponse.map((response, index) => {
+                        return <li key={index} className="search-result-list-item">
+                          {response.properties.name}
+                          <small className="search-result-list-item-city">
+                            {response.properties.city}
+                          </small>
+                        </li>
+                      })
+                    : null
+                  }
+                </ul>
+              </div>
+            : null
+          }
         </div>
       </div>
     )
