@@ -24,6 +24,7 @@ class Home extends React.Component {
     super(props)
     this.state = { loading: true, menuOpen: false }
     this.checkContent = this.checkContent.bind(this)
+    this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
   }
 
   componentDidMount() {
@@ -107,6 +108,11 @@ class Home extends React.Component {
     history.push('/login')
   }
 
+  selectSearchItemCallback(response) {
+    this.props.history.push(`/${response.abreviation}/${response.entity_id}`)
+    console.log("response: ", response)
+  }
+
   render() {
     const {
       loading, menuOpen, error, geojson, name, title, themes,
@@ -122,6 +128,7 @@ class Home extends React.Component {
           {!error ? (
             <Search
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
+              searchCallback={response => this.selectSearchItemCallback(response)}
             />
           ) : null}
           {geojson ? (
