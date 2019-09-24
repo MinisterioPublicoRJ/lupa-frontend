@@ -13,7 +13,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import './Menu.scss'
 
 const Menu = ({
-  isOpen, toggle, login, navigateToEntity,
+  isOpen, toggle, onLogin, onLogout, navigateToEntity, isLogged,
 }) => {
   const FaButtons = ({ type, text }) => (
     <div>
@@ -34,10 +34,10 @@ const Menu = ({
         size={56}
       />
       <ChildButton
-        icon={<FaButtons type={faChalkboardTeacher} text="Login" />}
+        icon={<FaButtons type={faChalkboardTeacher} text={isLogged ? 'Logout' : 'Login'} />}
         background="#00A5FD"
         size={40}
-        onClick={login}
+        onClick={isLogged ? onLogout : onLogin}
       />
       <ChildButton
         icon={<FaButtons type={faHome} text="Estado" />}
@@ -58,7 +58,7 @@ const Menu = ({
 const WrapperDiv = posed.div({
   draggable: true,
   init: {
-    bottom: '20px', left: '20px', position: 'absolute', scale: 1,
+    bottom: '20px', left: '20px', position: 'sticky', scale: 1, zIndex: 500,
   },
   pressable: true,
   press: { scale: 0.8 },
