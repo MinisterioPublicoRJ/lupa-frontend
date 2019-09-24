@@ -2,8 +2,23 @@ import axios from 'axios'
 
 const Api = (() => {
   const API_URL = process.env.REACT_APP_API_URL
+
+  /**
+   * If there is a stored token, returns it with the right format for the requisition
+   * @return {json} eiter empty object or formatted obj with the user's token
+   */
+  function loadParams() {
+    const params = {}
+    const userToken = localStorage.getItem('token')
+    if (userToken) {
+      params.params = { auth_token: userToken }
+    }
+    return params
+  }
+
   function buildings(callback) {
-    axios.get(`${API_URL}/buildings`).then((response) => {
+    const params = loadParams()
+    axios.get(`${API_URL}/buildings`, params).then((response) => {
       callback(response)
     })
   }
@@ -39,7 +54,8 @@ const Api = (() => {
    * @return {void}
    */
   function getEntityData(callback, type, id) {
-    axios.get(`${API_URL}/lupa/${type}/${id}?format=json`)
+    const params = loadParams()
+    axios.get(`${API_URL}/lupa/entidade/${type}/${id}?format=json`, params)
       .then(response => callback(response.data))
       .catch(error => callback(error))
   }
@@ -53,9 +69,36 @@ const Api = (() => {
    * @return {void}
    */
   function getBoxData(callback, entityType, entityId, boxId) {
-    axios.get(`${API_URL}/lupa/${entityType}/${entityId}/${boxId}`)
+    const params = loadParams()
+    axios.get(`${API_URL}/lupa/dado/${entityType}/${entityId}/${boxId}`, params)
       .then(response => callback(response.data))
       .catch(error => callback(error, boxId))
+  }
+
+  /**
+   * Search for a list of contents on OSM
+   * @param  {Function} callback
+   * @param  {string}   inputValue The value typed by the user
+   * @return {void}
+   */
+  function getSearchData(callback, inputValue) {
+    axios.get(`${API_URL}/lupa/search/mapsearch/${inputValue}`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error, inputValue))
+  }
+
+  /**
+   * Search for a list of contents on OSM
+   * @param  {Function} callback
+   * @param  {number}   lat   Place latitude
+   * @param  {number}   lng   Place longitude
+   * @param  {string}   value OSM result value tag
+   * @return {void}
+   */
+  function getGeospacialData(callback, lat, lng, value) {
+    axios.get(`${API_URL}/lupa/geospatial/entity/${lat}/${lng}/${value}`)
+      .then(response => callback(response.data))
+      .catch(error => callback(error, value))
   }
 
   return {
@@ -63,6 +106,8 @@ const Api = (() => {
     login,
     getEntityData,
     getBoxData,
+    getSearchData,
+    getGeospacialData,
   }
 })()
 
