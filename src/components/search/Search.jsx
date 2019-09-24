@@ -84,6 +84,12 @@ class Search extends React.Component {
     this.setState({ open: true })
   }
 
+  handleSelectSearchItem(lat, lng, value) {
+    Api.getGeospacialData(this.props.searchCallback, lat, lng, value)
+  }
+
+
+
   render() {
     const { homePressed } = this.props
     const { query, open } = this.state
@@ -128,10 +134,21 @@ class Search extends React.Component {
                     this.state.searchResponse ?
                       this.state.searchResponse.map((response, index) => {
                         return <li key={index} className="search-result-list-item">
-                          {response.properties.name}
-                          <small className="search-result-list-item-city">
-                            {response.properties.city}
-                          </small>
+                          <a
+                            role="button"
+                            onClick={
+                              () => this.handleSelectSearchItem(
+                                response.geometry.coordinates[1],
+                                response.geometry.coordinates[0],
+                                response.properties.osm_value
+                              )
+                            }
+                          >
+                            {response.properties.name}
+                            <small className="search-result-list-item-city">
+                              {response.properties.osm_value}
+                            </small>
+                          </a>
                         </li>
                       })
                     : null

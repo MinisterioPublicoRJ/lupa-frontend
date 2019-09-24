@@ -14,6 +14,7 @@
 .Search-view {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   height: 80vh;
   justify-content: space-between;
   max-height: 40px;
@@ -43,6 +44,7 @@
   flex: 1;
   height: 100%;
   margin: 0 10px 0 10px;
+  max-width: calc(80% - 20px);
   padding: 0 10px 0 10px;
 }
 
@@ -58,9 +60,10 @@
 
 .search-result {
   background: white;
+  left: 12%;
   position: absolute;
   top: 65px;
-  width: 93%;
+  width: 76%;
 
   &-list {
     list-style-type: none;

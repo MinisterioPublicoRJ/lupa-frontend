@@ -1,0 +1,41 @@
+Entidade:
+{
+    id (number),
+    titulo (string),
+    tipo (string),
+    geoJSON (objeto),
+    listaCaixinhas (array)
+}
+
+Caixinha:
+{
+    id (number),
+    titulo (string),
+    tipo (string),
+    conteudo (objeto)
+}
+
+Conteudo (depende do tipo):
+Quantidade:
+{
+    quantidade (number),
+    link (string)
+}
+
+Gráfico:
+{
+    tipo (string),
+    array_chave_valor (objeto) {
+        x,
+        y
+    }
+}
+
+Lista:
+{
+    array_chave_valor (objeto) {
+        nome (string),
+        link (string),
+        tipo (string)
+    }
+}

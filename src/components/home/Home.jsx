@@ -30,6 +30,7 @@ class Home extends React.Component {
       isLogged: !!localStorage.getItem('token'),
     }
     this.checkContent = this.checkContent.bind(this)
+    this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
   }
 
   componentDidMount() {
@@ -115,6 +116,11 @@ class Home extends React.Component {
     history.push('/login')
   }
 
+  selectSearchItemCallback(response) {
+    this.props.history.push(`/${response.abreviation}/${response.entity_id}`)
+    console.log("response: ", response)
+  }
+
   handleLogout() {
     localStorage.removeItem('token')
     this.setState({ isLogged: false })
@@ -132,7 +138,12 @@ class Home extends React.Component {
     return (
       <div className="Entity-container">
         <div className="Main-container">
-          {!error ? <Search homePressed={() => this.handleNavigateToEntity('EST', '33')} /> : null}
+          {!error ? (
+            <Search
+              homePressed={() => this.handleNavigateToEntity('EST', '33')}
+              searchCallback={response => this.selectSearchItemCallback(response)}
+            />
+          ) : null}
           {geojson ? (
             <Map
               geojsonArray={geojson}
