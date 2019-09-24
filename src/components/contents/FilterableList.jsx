@@ -6,7 +6,7 @@ import './Lists.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
+  list: PropTypes.arrayOf(PropTypes.shape({ rotulo: PropTypes.string, dado: PropTypes.string }))
     .isRequired,
   source: PropTypes.string,
   color: PropTypes.string,
@@ -20,9 +20,9 @@ const defaultProps = {
 }
 
 class FilterableList extends React.Component {
-  componentWillMount() {
-    const { list } = this.props
-    this.setState({ filteredList: list })
+  constructor(props) {
+    super(props)
+    this.state = { filteredList: props.list }
   }
 
   clickToFeature = (event, item, callback) => {
@@ -41,10 +41,11 @@ class FilterableList extends React.Component {
     let filteredList = this.props.list
     if (value) {
       filteredList = filteredList.filter((item) => {
-        const filterStr = item.rotulo ? item.rotulo : item.dado
+        const filterStr = item.rotulo ? item.rotulo : item.dado ? item.dado : 'erro de cadastro?'
         return this.lowerCaseNoDiacritics(filterStr).includes(this.lowerCaseNoDiacritics(value))
       })
     }
+    console.log("filtered list: ", filteredList)
     this.setState({ filteredList })
   }
 

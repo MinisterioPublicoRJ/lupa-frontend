@@ -20,9 +20,15 @@ const propTypes = {
 }
 
 class Home extends React.Component {
+  storageListener = null
+
   constructor(props) {
     super(props)
-    this.state = { loading: true, menuOpen: false }
+    this.state = {
+      loading: true,
+      menuOpen: false,
+      isLogged: !!localStorage.getItem('token'),
+    }
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
   }
@@ -30,6 +36,7 @@ class Home extends React.Component {
   componentDidMount() {
     const { loading } = this.state
     const { match } = this.props
+
     if (loading) {
       this.loadEntityData(match.params.entityType, match.params.entityId)
     }
@@ -104,6 +111,7 @@ class Home extends React.Component {
   }
 
   navigateToLogin() {
+    console.log('login')
     const { history } = this.props
     history.push('/login')
   }
@@ -113,9 +121,14 @@ class Home extends React.Component {
     console.log("response: ", response)
   }
 
+  handleLogout() {
+    localStorage.removeItem('token')
+    this.setState({ isLogged: false })
+  }
+
   render() {
     const {
-      loading, menuOpen, error, geojson, name, title, themes,
+      loading, menuOpen, error, geojson, name, title, themes, isLogged,
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
@@ -157,9 +170,11 @@ class Home extends React.Component {
               ))
               : null}
             <Menu
+              isLogged={isLogged}
               isOpen={menuOpen}
               toggle={newState => this.setState({ menuOpen: newState })}
-              login={() => this.navigateToLogin()}
+              onLogin={() => this.navigateToLogin()}
+              onLogout={() => this.handleLogout()}
               navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
             />
           </div>
