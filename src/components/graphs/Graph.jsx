@@ -72,7 +72,7 @@ const loadCategories = (data) => {
 }
 
 const graph = ({
-  type, title, description, data, source, sourcePressed, categories, color,
+  type, title, description, data, source, sourcePressed, categories, color, sourceLink,
 }) => {
   const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
 
@@ -130,7 +130,7 @@ const graph = ({
       {source && (
         <span
           className="Graph-source"
-          onClick={() => sourcePressed()}
+          onClick={() => (sourceLink ? window.open(sourceLink) : null)}
           style={{ color: color || '#00a5fd' }}
         >
           {source}
