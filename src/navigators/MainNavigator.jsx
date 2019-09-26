@@ -37,9 +37,9 @@ export default function mainNavigator() {
   // <PrivateRoute path="/:entityType/:entityId" component={Home} />
   return (
     <Router basename="/">
-      <Redirect exact from="/" to="/EST/33" />
-      <LoginRoute exact path="/login" component={Login} />
       <Route path="/:entityType/:entityId" component={Home} />
+      <Route exact path="/" render={() => <Redirect to="/EST/33" />} />
+      <LoginRoute exact path="/login" component={Login} />
     </Router>
   )
 }
