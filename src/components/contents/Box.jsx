@@ -38,6 +38,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           value={content.external_data.dado}
           description={content.external_data.details}
           source={content.external_data.source}
+          sourceLink={content.external_data.link_externo}
         />
       )
     case 'texto_grande':
