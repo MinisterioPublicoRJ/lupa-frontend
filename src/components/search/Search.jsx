@@ -22,6 +22,15 @@ const WrapperDiv = posed.div({
   press: { scale: 0.6 },
 })
 
+const Spinner = () => (
+  <div className="lds-ring">
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
+)
+
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -88,11 +97,11 @@ class Search extends React.Component {
     Api.getGeospacialData(this.props.searchCallback, lat, lng, value)
   }
 
-
-
   render() {
     const { homePressed } = this.props
-    const { query, open } = this.state
+    const {
+      query, open, searchResponse, waiting,
+    } = this.state
 
     const placeholder = 'Pesquise Municípios, Prédios e Órgãos'
     return (
@@ -126,37 +135,38 @@ class Search extends React.Component {
               />
             </WrapperDiv>
           </div>
-          {
-            this.state.open && !this.state.waiting && this.state.searchResponse ?
-              <div className="search-result">
-                <ul className="search-result-list">
-                  {
-                    this.state.searchResponse ?
-                      this.state.searchResponse.map((response, index) => {
-                        return <li key={index} className="search-result-list-item">
-                          <a
-                            role="button"
-                            onClick={
-                              () => this.handleSelectSearchItem(
-                                response.geometry.coordinates[1],
-                                response.geometry.coordinates[0],
-                                response.properties.osm_value
-                              )
-                            }
-                          >
-                            {response.properties.name}
-                            <small className="search-result-list-item-city">
-                              {response.properties.osm_value}
-                            </small>
-                          </a>
-                        </li>
-                      })
-                    : null
-                  }
-                </ul>
+          {this.state.open && (
+            <div className="search-result">
+              <div className="search-result-indicator">
+                {!searchResponse && !waiting && (
+                  <span className="search-result-placeholder">Nenhum resultado ainda...</span>
+                )}
+                {waiting && <Spinner />}
               </div>
-            : null
-          }
+              {this.state.searchResponse
+                ? this.state.searchResponse.map((response, index) => (
+                  <ul className="search-result-list">
+                    <li key={index} className="search-result-list-item">
+                      <a
+                        role="button"
+                        onClick={() => this.handleSelectSearchItem(
+                          response.geometry.coordinates[1],
+                          response.geometry.coordinates[0],
+                          response.properties.osm_value,
+                        )
+                          }
+                      >
+                        {response.properties.name}
+                        <small className="search-result-list-item-city">
+                          {response.properties.osm_value}
+                        </small>
+                      </a>
+                    </li>
+                  </ul>
+                ))
+                : null}
+            </div>
+          )}
         </div>
       </div>
     )
