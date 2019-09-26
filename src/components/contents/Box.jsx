@@ -38,6 +38,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           value={content.external_data.dado}
           description={content.external_data.details}
           source={content.external_data.source}
+          sourceLink={content.external_data.link_externo}
         />
       )
     case 'texto_grande':
@@ -49,6 +50,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           value={content.external_data.dado}
           description={content.external_data.details}
           source={content.external_data.source}
+          sourceLink={content.external_data.link_externo}
         />
       )
     case 'lista_filtrada':
@@ -99,6 +101,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           title={content.exibition_field}
           data={content.external_data}
           source={content.external_data[0].source ? content.external_data[0].source : null}
+          sourceLink={content.external_data[0].link_externo ? content.external_data[0].link_externo : null}
         />
       )
     case 'loading':
