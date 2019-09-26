@@ -20,7 +20,7 @@ const defaultProps = {
 }
 
 const LongBox = ({
-  source, title, value, link, color,
+  source, title, value, link, color, sourceLink,
 }) => (
   <div className="box LongBox" style={color ? { backgroundColor: color } : null}>
     <div className="box-icon">
@@ -35,7 +35,15 @@ const LongBox = ({
     <div className="box-arrow">
       {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
     </div>
-    {source ? <div className="box-source" style={color ? { color: 'white' } : null}>{source}</div> : null}
+    {source ? (
+      <div
+        className="box-source"
+        style={color ? { color: 'white' } : null}
+        onClick={() => (sourceLink ? window.open(sourceLink) : null)}
+      >
+        {source}
+      </div>
+    ) : null}
   </div>
 )
 

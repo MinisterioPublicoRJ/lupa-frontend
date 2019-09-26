@@ -17,7 +17,7 @@ const defaultProps = {
 }
 
 const SmallBox = ({
-  description, source, title, value, color,
+  description, source, title, value, color, sourceLink,
 }) => (
   <div className="box SmallBox" style={color && { backgroundColor: color }}>
     <div className="box-title" style={color && { color: 'white' }}>
@@ -29,7 +29,11 @@ const SmallBox = ({
     <div className="box-description" style={color && { color: 'white' }}>
       {description || null}
     </div>
-    <div className="box-source" style={color && { color: 'white' }}>
+    <div
+      className="box-source"
+      style={color && { color: 'white' }}
+      onClick={() => (sourceLink ? window.open(sourceLink) : null)}
+    >
       {source || null}
     </div>
   </div>

@@ -37,7 +37,10 @@ const UnorderedList = ({
         <li
           key={`${itemList.rotulo}-${itemList.dado}`}
           className="list-box--list-item"
-          onClick={event => clickToFeature(event, itemList, navigateToEntity)}
+          onClick={event => (itemList.link_externo
+            ? window.open(itemList.link_externo)
+            : clickToFeature(event, itemList, navigateToEntity))
+          }
         >
           {itemList.rotulo ? (
             <div className="list-box--list-item-label">{itemList.rotulo}</div>
