@@ -143,11 +143,12 @@ class Search extends React.Component {
                 )}
                 {waiting && <Spinner />}
               </div>
-              {this.state.searchResponse
-                ? this.state.searchResponse.map((response, index) => (
-                  <ul className="search-result-list">
+              <ul className="search-result-list">
+                {this.state.searchResponse
+                  ? this.state.searchResponse.map((response, index) => (
                     <li key={index} className="search-result-list-item">
                       <a
+                        className="search-result-list-item-title"
                         role="button"
                         onClick={() => this.handleSelectSearchItem(
                           response.geometry.coordinates[1],
@@ -162,9 +163,9 @@ class Search extends React.Component {
                         </small>
                       </a>
                     </li>
-                  </ul>
-                ))
-                : null}
+                  ))
+                  : null}
+              </ul>
             </div>
           )}
         </div>
