@@ -58,7 +58,7 @@ const Menu = ({
 const WrapperDiv = posed.div({
   draggable: true,
   init: {
-    bottom: '20px', left: '20px', position: 'sticky', scale: 1, zIndex: 500,
+    bottom: '20px', left: '20px', position: 'fixed', scale: 1, zIndex: 500,
   },
   pressable: true,
   press: { scale: 0.8 },
