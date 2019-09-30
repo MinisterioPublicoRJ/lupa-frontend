@@ -32,13 +32,26 @@ const graphStyle = {
   },
 }
 
-const axisStyles = {
+const yAxisStyles = {
   axis: { stroke: '#696568' },
   tickLabels: {
     padding: 5,
     fontSize: 10,
     fontFamily: 'Roboto',
     fill: '#696568',
+  },
+}
+
+const xAxisStyles = {
+  axis: { stroke: '#696568' },
+  tickLabels: {
+    angle: 45,
+    fill: '#696568',
+    fontSize: 10,
+    fontFamily: 'Roboto',
+    padding: 5,
+    verticalAnchor: 'middle',
+    textAnchor: 'start',
   },
 }
 
@@ -69,8 +82,12 @@ const graphBar = ({ data, sortedData }) => {
         labels={item => Number(item.dado).toLocaleString('pt-br')}
         domain={yDomain}
       />
-      <VictoryAxis tickValues={xLabels} style={axisStyles} />
-      <VictoryAxis dependentAxis style={axisStyles} tickFormat={tick => tick.toLocaleString('pt-br')} />
+      <VictoryAxis tickValues={xLabels} style={xAxisStyles} />
+      <VictoryAxis
+        dependentAxis
+        style={yAxisStyles}
+        tickFormat={tick => tick.toLocaleString('pt-br')}
+      />
     </VictoryChart>
   )
 }
