@@ -8,6 +8,8 @@ import Api from '../api/Api'
 import { ReactComponent as MapIcon } from '../icons/stateMap.svg'
 import './Search.scss'
 
+const DEBOUNCE_TIME = 1000 //ms
+
 const propTypes = {
   homePressed: PropTypes.func.isRequired,
 }
@@ -45,14 +47,14 @@ class Search extends React.Component {
    * @return {[void]}
    */
   handleTyping(event) {
-    // fisrt, clean all previous timeouts
+    // first, clean all previous timeouts
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
 
     // now, handle the new input that was typed
     const query = event.target.value
-    this.timeout = setTimeout(this.manageSearch, 2000, query)
+    this.timeout = setTimeout(this.manageSearch, DEBOUNCE_TIME, query)
     this.setState({ query })
   }
 
