@@ -32,13 +32,26 @@ const graphStyle = {
   },
 }
 
-const axisStyles = {
+const yAxisStyles = {
   axis: { stroke: '#696568' },
   tickLabels: {
     padding: 5,
     fontSize: 10,
     fontFamily: 'Roboto',
     fill: '#696568',
+  },
+}
+
+const xAxisStyles = {
+  axis: { stroke: '#696568' },
+  tickLabels: {
+    angle: 45,
+    fill: '#696568',
+    fontSize: 10,
+    fontFamily: 'Roboto',
+    padding: 5,
+    verticalAnchor: 'middle',
+    textAnchor: 'start',
   },
 }
 
@@ -79,11 +92,11 @@ const graphBarHorizontal = ({ data, sortedData, colorScale }) => {
         }}
       />
       <VictoryAxis
-        style={axisStyles}
+        style={xAxisStyles}
       />
       <VictoryAxis
         dependentAxis
-        style={axisStyles}
+        style={yAxisStyles}
         tickFormat={tick => tick.toLocaleString('pt-br')}
       />
     </VictoryChart>
