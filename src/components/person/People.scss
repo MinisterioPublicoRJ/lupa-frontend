@@ -17,6 +17,8 @@
   &--body {
     border: 1px solid #E8E8E8;
     border-radius: 0 0 3px 3px;
+    max-height: 70vh;
+    overflow-x: scroll;
   }
 
   &--title {
