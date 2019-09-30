@@ -115,7 +115,8 @@ class Search extends React.Component {
         )
     }
 
-    const placeholder = 'Pesquise Municípios, Prédios e Órgãos'
+    const placeholder = 'Pesquise locais'
+
     return (
       <div className="Search-container">
         <div className="Search-view">
