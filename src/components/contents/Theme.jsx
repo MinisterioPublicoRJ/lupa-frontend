@@ -82,7 +82,7 @@ class Theme extends React.Component {
             style={{ backgroundColor: color, borderColor: color }}
           >
             <span className={`theme--header--title ${themeStatus}`}>{name.toLocaleUpperCase()}</span>
-            <span className={`theme--header--count ${themeStatus}`}>{`${content.length} Temas`}</span>
+            <span className={`theme--header--count ${themeStatus}`}>{`${content.length} Tema`}{content.length > 1 ? 's':''}</span>
           </div>
         ) : null}
         {content ? (
