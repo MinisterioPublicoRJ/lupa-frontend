@@ -105,6 +105,16 @@ class Search extends React.Component {
       query, open, searchResponse, waiting,
     } = this.state
 
+    // suburbs should come on top
+    let sortedSearchResponse = []
+    if (searchResponse && searchResponse.length > 0) {
+      sortedSearchResponse = searchResponse
+        .filter(r => r.properties.osm_value === 'suburb')
+        .concat(
+          searchResponse.filter(r => r.properties.osm_value !== 'suburb')
+        )
+    }
+
     const placeholder = 'Pesquise Municípios, Prédios e Órgãos'
     return (
       <div className="Search-container">
@@ -146,8 +156,8 @@ class Search extends React.Component {
                 {waiting && <Spinner />}
               </div>
               <ul className="search-result-list">
-                {this.state.searchResponse
-                  ? this.state.searchResponse.map((response, index) => (
+                {sortedSearchResponse
+                  ? sortedSearchResponse.map((response, index) => (
                     <li key={index} className="search-result-list-item">
                       <a
                         className="search-result-list-item-title"
@@ -168,6 +178,7 @@ class Search extends React.Component {
                     </li>
                   ))
                   : null}
+                  {searchResponse && searchResponse.length === 0 ? 'Não há resultados para o termo buscado.' : null}
               </ul>
             </div>
           )}
