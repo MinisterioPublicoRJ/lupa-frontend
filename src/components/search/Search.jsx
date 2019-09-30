@@ -160,6 +160,7 @@ class Search extends React.Component {
                           }
                       >
                         {response.properties.name}
+                        {response.properties.osm_value === 'suburb' ? ` (${response.properties.city})` : null}
                         <small className="search-result-list-item-city">
                           {response.properties.osm_value}
                         </small>
