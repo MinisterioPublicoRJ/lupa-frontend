@@ -30,7 +30,7 @@ const LongBox = ({
       {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
     <div className="box-value" style={color ? { color: 'white' } : null}>
-      {isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
+      {value && isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
     </div>
     <div className="box-arrow">
       {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
