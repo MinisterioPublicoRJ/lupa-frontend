@@ -99,6 +99,29 @@ class Search extends React.Component {
     Api.getGeospacialData(this.props.searchCallback, lat, lng, value)
   }
 
+  translateOsmType(type) {
+    switch (type) {
+      case "suburb":
+        return "Bairro"
+      case "wood":
+        return "Floresta"
+      case "beach":
+        return "Praia"
+      case "protected_area":
+        return "Área de proteção"
+      case "peak":
+        return "Morro"
+      case "farm":
+        return "Fazenda"
+      case "river":
+        return "Rio"
+      case "village":
+        return "Vilarejo"
+      default:
+        return type
+    }
+  }
+
   render() {
     const { homePressed } = this.props
     const {
@@ -173,7 +196,7 @@ class Search extends React.Component {
                         {response.properties.name}
                         {response.properties.osm_value === 'suburb' ? ` (${response.properties.city})` : null}
                         <small className="search-result-list-item-city">
-                          {response.properties.osm_value}
+                          {this.translateOsmType(response.properties.osm_value)}
                         </small>
                       </a>
                     </li>
