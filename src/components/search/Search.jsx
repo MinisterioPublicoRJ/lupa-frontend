@@ -101,22 +101,26 @@ class Search extends React.Component {
 
   translateOsmType(type) {
     switch (type) {
-      case "suburb":
-        return "Bairro"
-      case "wood":
-        return "Floresta"
       case "beach":
         return "Praia"
-      case "protected_area":
-        return "Área de proteção"
-      case "peak":
-        return "Morro"
+      case "city":
+        return "Cidade"
       case "farm":
         return "Fazenda"
+      case "municipality":
+        return "Município"
+      case "peak":
+        return "Morro"
+      case "protected_area":
+        return "Área de proteção"
       case "river":
         return "Rio"
+      case "suburb":
+        return "Bairro"
       case "village":
         return "Vilarejo"
+      case "wood":
+        return "Floresta"
       default:
         return type
     }
