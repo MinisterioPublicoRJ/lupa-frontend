@@ -122,7 +122,7 @@ class Search extends React.Component {
       case "wood":
         return "Floresta"
       default:
-        return type
+        return "Bairro"
     }
   }
 
