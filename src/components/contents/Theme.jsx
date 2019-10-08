@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import posed from 'react-pose'
 
 import Api from '../api/Api'
 import Box from './Box'
@@ -16,7 +17,15 @@ const propTypes = {
 
 const defaultProps = {
   color: null,
+  name: null,
 }
+
+const ContentWrapper = (
+  posed.div({
+    closed: { height: 0 },
+    open: { height: 'auto', staggerChildren: 100 },
+  })
+)
 
 class Theme extends React.Component {
   constructor(props) {
@@ -25,6 +34,10 @@ class Theme extends React.Component {
     this.state = { open: !props.name, content }
     this.renderBox = this.renderBox.bind(this)
     this.loadBoxes(props.content)
+  }
+
+  handleToggle() {
+    this.setState(prevState => ({ open: !prevState.open }))
   }
 
   /**
@@ -61,36 +74,34 @@ class Theme extends React.Component {
     this.setState({ content: newContent })
   }
 
-  handleToggle() {
-    this.setState(prevState => ({ open: !prevState.open }))
-  }
-
   render() {
     const { content, open } = this.state
     const { color, navigateToEntity, name } = this.props
     const themeStatus = open ? 'open' : 'closed'
 
     return (
-      <div
-        className={`theme ${themeStatus}`}
-        style={!open ? { backgroundColor: color, borderColor: color } : null}
-      >
+      <div className="theme">
         {name ? (
           <div
             className={`theme--header ${themeStatus}`}
             onClick={() => this.handleToggle()}
             style={{ backgroundColor: color, borderColor: color }}
           >
-            <span className={`theme--header--title ${themeStatus}`}>{name.toLocaleUpperCase()}</span>
-            <span className={`theme--header--count ${themeStatus}`}>{`${content.length} Tema`}{content.length > 1 ? 's':''}</span>
+            <span className={`theme--header--title ${themeStatus}`} >
+              {name.toLocaleUpperCase()}
+            </span>
+            <span className={`theme--header--count ${themeStatus}`}>
+              {`${content.length} Tema`}
+              {content.length > 1 ? 's' : ''}
+            </span>
           </div>
         ) : null}
         {content ? (
-          <div className={`theme--content ${themeStatus}`}>
+          <ContentWrapper className="theme--content" pose={themeStatus}>
             {content.map(box => (
               <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
             ))}
-          </div>
+          </ContentWrapper>
         ) : null}
       </div>
     )

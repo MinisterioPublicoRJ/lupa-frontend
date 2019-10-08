@@ -111,14 +111,12 @@ class Home extends React.Component {
   }
 
   navigateToLogin() {
-    console.log('login')
     const { history } = this.props
     history.push('/login')
   }
 
   selectSearchItemCallback(response) {
     this.props.history.push(`/${response.abreviation}/${response.entity_id}`)
-    console.log("response: ", response)
   }
 
   handleLogout() {
