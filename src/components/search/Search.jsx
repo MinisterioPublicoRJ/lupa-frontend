@@ -74,7 +74,6 @@ class Search extends React.Component {
    * @return {[void]}
    */
   searchCallback(response) {
-    console.log(response)
     this.setState({ waiting: false })
     this.setState({ searchResponse: response })
   }

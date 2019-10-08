@@ -15,7 +15,7 @@ const renderPhoto = (photo) => {
     return null
   }
   const photoSrcString = photo.includes('http') || photo.includes('www') ? photo : `data:image/png;base64,${photo}`
-  console.log(photoSrcString);
+  
   return (
     <div className="Person-picture">
       {' '}
