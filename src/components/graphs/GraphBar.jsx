@@ -77,7 +77,7 @@ const graphBar = ({ data, sortedData }) => {
       <VictoryBar
         data={data}
         style={graphStyle}
-        x="rotulo"
+        x={item => typeof item.rotulo === 'number' ? JSON.stringify(item.rotulo) : item.rotulo}
         y={item => Number(item.dado)}
         labels={item => Number(item.dado).toLocaleString('pt-br')}
         domain={yDomain}
