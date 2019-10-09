@@ -17,6 +17,7 @@
     .box-source {
       align-items: center;
       color: #929698;
+      cursor: pointer;
       display: flex;
       font-family: Roboto;
       font-weight: 400; //light
@@ -24,6 +25,7 @@
       justify-content: flex-end;
       text-align: right;
       width: 100%;
+      text-decoration: underline;
     }
   }
 
@@ -47,7 +49,6 @@
       font-weight: 500; //medium
       font-size: 2.5vh;
       justify-content: center;
-      max-height: 30%;
       padding: 10px;
       text-align: center;
       width: calc(100% - 20px);
@@ -104,14 +105,15 @@
       }
 
       .box-source {
-        color: white;
+        color: #FFF;
+        cursor: pointer;
+        margin: -8px 5px 3px 0;
+        text-decoration: underline;
       }
     }
   }
 
   &.LongBox {
-    height: 10vh;
-    max-height: 70px;
     padding: 5px 0 5px 0;
     width: 100%;
 
@@ -139,6 +141,11 @@
       padding-right: 10px;
     }
 
+    .box-link {
+      display: flex;
+      text-decoration: none;
+    }
+
     .box-value {
       align-items: center;
       color: #009DFD;
@@ -162,7 +169,9 @@
     }
 
     .box-source {
+      cursor: pointer;
       margin: -8px 5px 3px 0;
+      text-decoration: underline;
     }
   }
 }
