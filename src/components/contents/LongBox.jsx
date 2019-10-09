@@ -19,6 +19,27 @@ const defaultProps = {
   color: null,
 }
 
+const checkIfLinkExists = (link, value, color) => {
+  if (link) {
+    return <a className="box-link" href={link} target="_blank">
+      <div className="box-value" style={color ? { color: 'white' } : null}>
+        {value && isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
+      </div>
+      <div className="box-arrow">
+        {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
+      </div>
+    </a>
+  }
+  return <React.Fragment>
+    <div className="box-value" style={color ? { color: 'white' } : null}>
+        {value && isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
+    </div>
+    <div className="box-arrow">
+      {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
+    </div>
+  </React.Fragment>
+}
+
 const LongBox = ({
   source, title, value, link, color, sourceLink,
 }) => (
@@ -29,12 +50,7 @@ const LongBox = ({
     <div className="box-title" style={color ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
     </div>
-    <div className="box-value" style={color ? { color: 'white' } : null}>
-      {value && isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
-    </div>
-    <div className="box-arrow">
-      {link ? <ArrowRight className="box-img" overlay={color ? 'white' : null} /> : null}
-    </div>
+    {checkIfLinkExists(link, value, color)}
     {source ? (
       <div
         className="box-source"
