@@ -14,8 +14,8 @@ const renderPhoto = (photo) => {
   if (!photo) {
     return null
   }
-  const photoSrcString = photo.includes('http') || photo.includes('www') ? photo : `data:image/png;base64,${photo}`
-  
+  const photoSrcString = `data:image/png;base64,${photo}`
+
   return (
     <div className="Person-picture">
       {' '}
@@ -43,9 +43,12 @@ const Person = ({
   <div className="Person-container" style={last ? { borderBottom: 0 } : null}>
     {renderPhoto(photo)}
     <div className="Person-content">
-      <div className="Person-main-data">
-        <span className="Person-name">{name}</span>
-      </div>
+      {
+        name ? <div className="Person-main-data">
+          <span className="Person-name">{name}</span>
+        </div>
+        : null
+      }
       <div className="Person-custom">{renderDetails(data)}</div>
     </div>
   </div>
