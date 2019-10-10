@@ -17,8 +17,8 @@ function cleanError(errorInfo) {
 }
 
 const EntityError = ({ errorInfo }) => {
-  console.log('errorInfo', errorInfo.status, errorInfo.message)
   const { title, body } = cleanError(errorInfo)
+  
   return (
     <div className="Error-container">
       <span className="Error-title">{title}</span>

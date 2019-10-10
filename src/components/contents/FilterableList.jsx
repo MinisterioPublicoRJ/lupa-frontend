@@ -45,7 +45,7 @@ class FilterableList extends React.Component {
         return this.lowerCaseNoDiacritics(filterStr).includes(this.lowerCaseNoDiacritics(value))
       })
     }
-    console.log("filtered list: ", filteredList)
+    
     this.setState({ filteredList })
   }
 

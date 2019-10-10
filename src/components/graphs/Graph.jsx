@@ -54,10 +54,10 @@ const defaultProps = {
 const loadCategories = (data) => {
   const types = []
   data
-    .filter(item => item.detalhes)
+    .filter(item => item.details)
     .forEach((item) => {
-      if (types.indexOf(item.detalhes) === -1) {
-        types.push(item.detalhes)
+      if (types.indexOf(item.details) === -1) {
+        types.push(item.details)
       }
     })
   return types.map((type, i) => (
