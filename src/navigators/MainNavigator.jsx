@@ -17,12 +17,7 @@ const LoginRoute = ({ component, ...rest }) => (
   />
 )
 
-// const mainRoute = ({ component, ...rest }) => (
-//   <Route />
-// )
-
 export default function mainNavigator() {
-  // <PrivateRoute path="/:entityType/:entityId" component={Home} />
   return (
     <Router basename="/">
       <Route path="/:entityType/:entityId" component={Home} />
