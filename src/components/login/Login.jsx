@@ -7,7 +7,6 @@ import Logo from '../icons/logo'
 class Login extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = { email: '', password: '', error: false }
     this.loginCallback = this.loginCallback.bind(this)
   }
