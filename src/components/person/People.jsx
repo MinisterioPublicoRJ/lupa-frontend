@@ -38,6 +38,7 @@ const People = ({ title, peopleArray, color }) => {
             data={person.details}
             name={person.dado}
             photo={person.imagem}
+            photoLink={person.linkimagem}
             last={index === arr.length - 1}
           />
         ))}
