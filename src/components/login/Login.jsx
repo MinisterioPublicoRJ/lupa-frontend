@@ -7,18 +7,18 @@ import Logo from '../icons/logo'
 class Login extends React.Component {
   constructor(props) {
     super(props)
+    console.log(props)
     this.state = { email: '', password: '', error: false }
     this.loginCallback = this.loginCallback.bind(this)
   }
 
   loginCallback(response) {
     if (response.status === 200) {
-      const { history, location } = this.props
+      const { history } = this.props
       localStorage.setItem('token', response.data)
-      const navUrl = (location.state && location.state.prevUrl) ? location.state.prevUrl : '/EST/33'
-      history.push(navUrl)
+      history.goBack()
     } else {
-      this.setState({error: true})
+      this.setState({ error: true })
     }
     // colocar mensagem de erro aqui
   }
@@ -70,7 +70,7 @@ class Login extends React.Component {
                 required
               />
             </div>
-            {error ? <p style={{color: "red"}}>Erro ao acessar o sistema</p> : null}
+            {error ? <p style={{ color: 'red' }}>Erro ao acessar o sistema</p> : null}
             <div className="Login-container-button">
               <button type="submit">Entrar</button>
             </div>
