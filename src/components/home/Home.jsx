@@ -167,8 +167,8 @@ class Home extends React.Component {
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
                 />
               ))
-              : null}
-              <OuvidoriaBox/>
+            : null}
+            <OuvidoriaBox/>
             <Menu
               isLogged={isLogged}
               isOpen={menuOpen}
