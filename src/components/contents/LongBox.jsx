@@ -21,7 +21,7 @@ const defaultProps = {
 
 const checkIfLinkExists = (link, value, color) => {
   if (link) {
-    return <a className="box-link" href={link} target="_blank">
+    return <a className="box-link" href={link} target="_blank" rel="noopener noreferrer">
       <div className="box-value" style={color ? { color: 'white' } : null}>
         {value && isNaN(value) ? value : Number(value).toLocaleString('pt-br')}
       </div>

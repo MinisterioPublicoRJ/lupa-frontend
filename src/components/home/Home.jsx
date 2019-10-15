@@ -9,6 +9,7 @@ import FullScreenLoading from '../utils/FullScreenLoading'
 import Api from '../api/Api'
 import Menu from '../menu/Menu'
 import Search from '../search/Search'
+import OuvidoriaBox from '../contents/OuvidoriaBox'
 
 const propTypes = {
   match: PropTypes.shape({
@@ -166,7 +167,8 @@ class Home extends React.Component {
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
                 />
               ))
-              : null}
+            : null}
+            <OuvidoriaBox/>
             <Menu
               isLogged={isLogged}
               isOpen={menuOpen}
