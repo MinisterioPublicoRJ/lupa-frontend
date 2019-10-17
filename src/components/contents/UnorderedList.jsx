@@ -24,12 +24,22 @@ const clickToFeature = (event, item, callback) => {
   }
 }
 
+const listCount = list => {
+  if (!list || list.length === 1) {
+    return null
+  }
+  if (isNaN(list[0].dado)) {
+    return ` (${list.length})`
+  }
+  return ` (${list.map(list => Number(list.dado)).reduce((a, b) => a + b, 0).toLocaleString('pt-br')})`
+}
+
 const UnorderedList = ({
   title, source, list, image, navigateToEntity, color,
 }) => (
   <div className="box list-box">
     <div className="list-box--header" style={color && { backgroundColor: color }}>
-      {title ? <h1 className="list-box--title">{title}</h1> : null}
+      {title ? <h1 className="list-box--title">{title}{listCount(list)}</h1> : null}
       {image ? <img src={image} alt="" className="list-box--icon" /> : null}
     </div>
     <ol className="list-box--list">

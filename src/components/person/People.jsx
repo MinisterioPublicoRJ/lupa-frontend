@@ -28,7 +28,10 @@ const People = ({ title, peopleArray, color }) => {
     <div className="People--container">
       {title ? (
         <div className="People--header" style={color && { backgroundColor: color }}>
-          <div className="People--title">{title}</div>
+          <div className="People--title">
+            {title}
+            {peopleArray.length > 1 ? ` (${peopleArray.length})` : null}
+          </div>
         </div>
       ) : null}
       <div className="People--body">
