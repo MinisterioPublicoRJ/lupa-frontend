@@ -1,0 +1,41 @@
+.List {
+  display: flex;
+  flex-direction: column;
+  margin: 5% 5px 5% 5px;
+  max-width: 800px;
+  padding: 0;
+  width: 100%;
+
+  &--container {
+
+  }
+
+  &--filter {
+    align-items: center;
+    background-color: #00a5fd;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &--input {
+    // border: none;
+    // border-bottom: 1px solid #eee;
+    // display: flex;
+    // font-size: 1em;
+    // flex: 1;
+    height: calc(80% - 20px);
+    min-height: 10px;
+    max-height: 30px;
+    margin: 1.3vh;
+    // justify-content: center;
+    // margin-right: 5px;
+    // margin-top: 3px;
+    // min-width: 0;
+    // padding: 10px;
+    width: 95%;
+  }
+}

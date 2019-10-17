@@ -12,6 +12,8 @@ import People from '../person/People'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
+import List from './lists/List'
+
 const propTypes = {
   color: PropTypes.string,
   navigateToEntity: PropTypes.func.isRequired,
@@ -66,7 +68,7 @@ const Box = ({ content, navigateToEntity, color }) => {
       )
     case 'lista_ordenada':
       return (
-        <OrderedList
+        <List
           color={color}
           title={content.exibition_field}
           list={content.external_data}
@@ -75,6 +77,16 @@ const Box = ({ content, navigateToEntity, color }) => {
           navigateToEntity={navigateToEntity}
         />
       )
+      // return (
+      //   <OrderedList
+      //     color={color}
+      //     title={content.exibition_field}
+      //     list={content.external_data}
+      //     image={content.icon}
+      //     source={content.external_data[0].source ? content.external_data[0].source : null}
+      //     navigateToEntity={navigateToEntity}
+      //   />
+      // )
     case 'lista_sem_ordenacao':
       return (
         <UnorderedList

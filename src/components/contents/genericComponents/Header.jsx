@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import './GenericComponents.scss'
 
@@ -11,7 +13,7 @@ const propTypes = {
 const defaultProps = { color: null }
 
 const Header = ({
-  title, image, color, type,
+  title, image, color, type, onSearchPressed,
 }) => (
   <div className="Generic-Header" style={color && { backgroundColor: color }}>
     <div className="Generic-Header--icon-container">
@@ -19,6 +21,15 @@ const Header = ({
     </div>
     <div className="Generic-Header--title-container">
       {title ? <span className="Generic-Header--title">{title.toLocaleUpperCase()}</span> : null}
+    </div>
+    <div className="Generic-Header--search-container">
+      {onSearchPressed ? (
+        <FontAwesomeIcon
+          style={{ color: 'white' }}
+          icon={faSearch}
+          onClick={() => onSearchPressed()}
+        />
+      ) : null}
     </div>
   </div>
 )
