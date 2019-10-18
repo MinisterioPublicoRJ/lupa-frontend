@@ -67,6 +67,7 @@ const Box = ({ content, navigateToEntity, color }) => {
         />
       )
     case 'lista_ordenada':
+    case 'lista_sem_ordenacao':
       return (
         <List
           type={content.data_type}
@@ -88,17 +89,17 @@ const Box = ({ content, navigateToEntity, color }) => {
       //     navigateToEntity={navigateToEntity}
       //   />
       // )
-    case 'lista_sem_ordenacao':
-      return (
-        <UnorderedList
-          color={color}
-          title={content.exibition_field}
-          list={content.external_data}
-          image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
-          navigateToEntity={navigateToEntity}
-        />
-      )
+    // case 'lista_sem_ordenacao':
+    //   return (
+    //     <UnorderedList
+    //       color={color}
+    //       title={content.exibition_field}
+    //       list={content.external_data}
+    //       image={content.icon}
+    //       source={content.external_data[0].source ? content.external_data[0].source : null}
+    //       navigateToEntity={navigateToEntity}
+    //     />
+    //   )
     case 'lista_pessoa':
       return (
         <People title={content.exibition_field} peopleArray={content.external_data} color={color} />

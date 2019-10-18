@@ -45,9 +45,21 @@
     display: flex;
     width: 100%;
   }
+
+  &--source {
+    align-items: center;
+    color: #929698;
+    display: flex;
+    font-family: Roboto;
+    font-weight: 400; //light
+    font-size: 1.5vh;
+    justify-content: flex-end;
+    margin: 3px 5px 3px 0;
+    text-align: right;
+  }
 }
 
-.Oli {
+.Rli {
   align-items: center;
   border-bottom: 1px solid #f8f8f8;
   color: #929698;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import posed from 'react-pose'
 
 import Header from '../genericComponents/Header'
-import Oli from './OrderedListItem'
+import RegularListItem from './RegularListItem'
 
 import '../Box.scss'
 import './List.scss'
@@ -29,7 +29,7 @@ const SearchWrapper = posed.div({
 })
 
 const List = ({
-  title, image, color, list, type,
+  title, image, color, list, type, source
 }) => {
   const [filteredList, setList] = useState(list)
   const [searchStatus, setSearchStatus] = useState(false)
@@ -60,7 +60,8 @@ const List = ({
   const renderListItem = (item, i) => {
     switch (type) {
       case 'lista_ordenada':
-        return <Oli item={{ ...item, position: i }} />
+      case 'lista_sem_ordenacao':
+        return <RegularListItem item={{ ...item, position: i, ordered: type === 'lista_ordenada'}} />
       // default:
       //
     }
@@ -84,6 +85,7 @@ const List = ({
       <ol className="List--container">
         {filteredList.map((item, i) => <li className="List--item">{renderListItem(item, i)}</li>)}
       </ol>
+      {source && <div className="List--source">{source}</div> }
     </div>
   )
 }
