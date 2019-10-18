@@ -8,19 +8,20 @@ const propTypes = {
   photo: PropTypes.string,
   photoLink: PropTypes.string,
   data: PropTypes.string,
-  last: PropTypes.bool,
+  externalLink: PropTypes.string,
+  internalLink: PropTypes.shape({ entidade: PropTypes.string, id: PropTypes.string }),
+  navigateToEntity: PropTypes.func.isRequired,
 }
 const defaultProps = {
   photo: null,
   photoLink: null,
   data: null,
-  last: false,
+  externalLink: null,
+  internalLink: null,
 }
 
 const renderDetails = data => (
-  <span
-    dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }}
-  />
+  <span dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }} />
 )
 
 const renderPhoto = (photo, photoLink) => {
@@ -39,20 +40,32 @@ const renderPhoto = (photo, photoLink) => {
 }
 
 const Person = ({
-  name, photo, photoLink, data, last,
-}) => (
-  <div className="Pli" style={last ? { borderBottom: 0 } : null}>
-    {renderPhoto(photo, photoLink)}
-    <div className="Pli--content">
-      {name ? (
-        <div className="Pli--data">
-          <span className="Pli--name">{name}</span>
-        </div>
-      ) : null}
-      <div className="Pli--custom">{renderDetails(data)}</div>
+  name, photo, photoLink, data, externalLink, internalLink, navigateToEntity,
+}) => {
+  const clickable = externalLink || internalLink
+
+  const handleLink = () => (externalLink
+    ? window.open(externalLink)
+    : navigateToEntity(internalLink.entidade, internalLink.id))
+
+  return (
+    <div className="Pli">
+      {renderPhoto(photo, photoLink)}
+      <div
+        className="Pli--content"
+        onClick={clickable ? handleLink : null}
+        style={clickable && { cursor: 'pointer' }}
+      >
+        {name ? (
+          <div className="Pli--data">
+            <span className="Pli--name">{name}</span>
+          </div>
+        ) : null}
+        <div className="Pli--custom">{renderDetails(data)}</div>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 Person.propTypes = propTypes
 Person.defaultProps = defaultProps

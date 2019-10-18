@@ -45,3 +45,14 @@
     font-size: 2.3vh;
   }
 }
+
+.Source {
+  color: #929698;
+  display: grid;
+  font-family: Roboto; //light
+  font-size: 2vh;
+  margin: 5px;
+  text-align: right;
+  width: calc(100% - 10px);
+  overflow: hidden;
+}

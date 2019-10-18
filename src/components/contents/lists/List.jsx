@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import posed from 'react-pose'
 
 import Header from '../genericComponents/Header'
+import Source from '../genericComponents/Source'
 import RegularListItem from './RegularListItem'
 import PersonListItem from './PersonListItem'
 
@@ -16,6 +17,7 @@ const propTypes = {
   image: PropTypes.node,
   source: PropTypes.string,
   color: PropTypes.string,
+  sourceLink: PropTypes.string,
   type: PropTypes.string.isRequired,
   navigateToEntity: PropTypes.func.isRequired,
 }
@@ -23,6 +25,7 @@ const defaultProps = {
   image: null,
   source: null,
   color: null,
+  sourceLink: null,
 }
 
 const SearchWrapper = posed.div({
@@ -31,7 +34,7 @@ const SearchWrapper = posed.div({
 })
 
 const List = ({
-  title, image, color, list, type, source,
+  title, image, color, list, type, source, navigateToEntity, sourceLink,
 }) => {
   const [filteredList, setList] = useState(list)
   const [searchStatus, setSearchStatus] = useState(false)
@@ -69,6 +72,13 @@ const List = ({
             name={item.dado}
             photo={item.imagem}
             photoLink={item.linkimagem}
+            externalLink={item.link_externo}
+            internalLink={
+              item.entidade_interna && item.id_interna
+                ? { entidade: item.entidade_interna, id: item.id_interna }
+                : null
+            }
+            navigateToEntity={navigateToEntity}
           />
         )
       // OrderedList
@@ -81,6 +91,13 @@ const List = ({
             position={i}
             label={item.rotulo}
             data={item.dado}
+            externalLink={item.link_externo}
+            internalLink={
+              item.entidade_interna && item.id_interna
+                ? { entidade: item.entidade_interna, id: item.id_interna }
+                : null
+            }
+            navigateToEntity={navigateToEntity}
           />
         )
     }
@@ -106,7 +123,7 @@ const List = ({
           <li className="List--item">{renderListItem(item, i)}</li>
         ))}
       </ol>
-      {source && <div className="List--source">{source}</div>}
+      {source && <Source link={sourceLink} text={source} color={color} />}
     </div>
   )
 }

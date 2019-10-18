@@ -64,6 +64,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           image={content.icon}
           source={content.external_data[0].source ? content.external_data[0].source : null}
           navigateToEntity={navigateToEntity}
+          sourceLink={content.external_data.link_externo}
         />
       )
     case 'grafico_pizza':
