@@ -4,6 +4,7 @@ import posed from 'react-pose'
 
 import Header from '../genericComponents/Header'
 import RegularListItem from './RegularListItem'
+import PersonListItem from './PersonListItem'
 
 import '../Box.scss'
 import './List.scss'
@@ -29,7 +30,7 @@ const SearchWrapper = posed.div({
 })
 
 const List = ({
-  title, image, color, list, type, source
+  title, image, color, list, type, source,
 }) => {
   const [filteredList, setList] = useState(list)
   const [searchStatus, setSearchStatus] = useState(false)
@@ -59,11 +60,23 @@ const List = ({
 
   const renderListItem = (item, i) => {
     switch (type) {
-      case 'lista_ordenada':
-      case 'lista_sem_ordenacao':
-        return <RegularListItem item={{ ...item, position: i, ordered: type === 'lista_ordenada'}} />
-      // default:
-      //
+      case 'lista_pessoa':
+        return (
+          <PersonListItem
+            key={item.id}
+            data={item.details}
+            name={item.dado}
+            photo={item.imagem}
+            photoLink={item.linkimagem}
+          />
+        )
+      // OrderedList
+      // UnorderedList
+      // FilterableList
+      default:
+        return (
+          <RegularListItem item={{ ...item, position: i, ordered: type === 'lista_ordenada' }} />
+        )
     }
   }
 
@@ -83,9 +96,11 @@ const List = ({
         <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
       </SearchWrapper>
       <ol className="List--container">
-        {filteredList.map((item, i) => <li className="List--item">{renderListItem(item, i)}</li>)}
+        {filteredList.map((item, i) => (
+          <li className="List--item">{renderListItem(item, i)}</li>
+        ))}
       </ol>
-      {source && <div className="List--source">{source}</div> }
+      {source && <div className="List--source">{source}</div>}
     </div>
   )
 }
