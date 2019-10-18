@@ -87,13 +87,13 @@ class Theme extends React.Component {
             onClick={() => this.handleToggle()}
             style={{ backgroundColor: color, borderColor: color }}
           >
-            <span className={`theme--header--title ${themeStatus}`} >
+            <h3 className={`theme--header--title ${themeStatus}`} >
               {name.toLocaleUpperCase()}
-            </span>
-            <span className={`theme--header--count ${themeStatus}`}>
+            </h3>
+            <small className={`theme--header--count ${themeStatus}`}>
               {`${content.length} Tema`}
               {content.length > 1 ? 's' : ''}
-            </span>
+            </small>
           </div>
         ) : null}
         {content ? (
