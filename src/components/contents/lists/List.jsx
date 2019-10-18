@@ -16,6 +16,7 @@ const propTypes = {
   image: PropTypes.node,
   source: PropTypes.string,
   color: PropTypes.string,
+  type: PropTypes.string.isRequired,
   navigateToEntity: PropTypes.func.isRequired,
 }
 const defaultProps = {
@@ -75,7 +76,12 @@ const List = ({
       // FilterableList
       default:
         return (
-          <RegularListItem item={{ ...item, position: i, ordered: type === 'lista_ordenada' }} />
+          <RegularListItem
+            ordered={type === 'lista_ordenada'}
+            position={i}
+            label={item.rotulo}
+            data={item.dado}
+          />
         )
     }
   }
