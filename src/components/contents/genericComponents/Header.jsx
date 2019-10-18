@@ -13,14 +13,15 @@ const propTypes = {
 const defaultProps = { color: null }
 
 const Header = ({
-  title, image, color, type, onSearchPressed,
+  title, image, color, type, onSearchPressed, total,
 }) => (
   <div className="Generic-Header" style={color && { backgroundColor: color }}>
     <div className="Generic-Header--icon-container">
-      {image ? <img src={image} alt="" className="Generic-Header--icon" /> : null}
+      {image && <img src={image} alt="" className="Generic-Header--icon" />}
     </div>
     <div className="Generic-Header--title-container">
-      {title ? <span className="Generic-Header--title">{title.toLocaleUpperCase()}</span> : null}
+      {title && <span className="Generic-Header--title">{title.toLocaleUpperCase()}</span>}
+      {total && <span className="Generic-Header--title">{total}</span>}
     </div>
     <div className="Generic-Header--search-container">
       {onSearchPressed ? (

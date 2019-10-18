@@ -103,10 +103,24 @@ const List = ({
     }
   }
 
+  const listCount = () => {
+    if (!list || list.length === 1) {
+      return null
+    }
+    if (isNaN(list[0].dado)) {
+      return ` (${list.length})`
+    }
+    return ` (${list
+      .map(list => Number(list.dado))
+      .reduce((a, b) => a + b, 0)
+      .toLocaleString('pt-br')})`
+  }
+
   return (
     <div className="box List">
       <Header
         title={title}
+        total={listCount()}
         image={image}
         color={color}
         onSearchPressed={() => setSearchStatus(!searchStatus)}
