@@ -27,10 +27,12 @@
   display: flex;
   font-size: 3vh;
   font-family: Roboto;
+  font-weight: normal;
   height: 7vh;
   justify-content: center;
-  padding-bottom: 10px;
+  margin: 0;
   min-height: 40px;
+  padding-bottom: 10px;
 
   &.big {
     height: 12vh;
@@ -52,8 +54,9 @@
   flex-wrap: wrap;
   font-size: 2.5vh;
   font-family: Roboto;
+  font-weight: normal;
   justify-content: center;
-  margin:auto;
+  margin: auto;
   max-width: 800px;
   text-align: left;
   padding: 0;

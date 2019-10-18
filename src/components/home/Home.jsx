@@ -149,9 +149,9 @@ class Home extends React.Component {
               navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
             />
           ) : null}
-          <div className="Name-container">{title.toLocaleUpperCase()}</div>
+          <h1 className="Name-container">{title.toLocaleUpperCase()}</h1>
           <div className="Name-helper" />
-          <div className="Entity-title-container">{name}</div>
+          <h2 className="Entity-title-container">{name}</h2>
 
           <div className="contents">
             {error ? <EntityError errorInfo={error} /> : null}
