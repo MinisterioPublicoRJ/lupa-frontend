@@ -101,6 +101,12 @@
   overflow: hidden;
   width: 100%;
 
+  img {
+    border: 1px solid #EBEBEB;
+    margin: 5px 0 5px 0;
+    width: 100%;
+  }
+
   &--content {
     display: flex;
     flex-direction: column;
@@ -126,5 +132,14 @@
     display: flex;
     flex: 1;
     padding: 10px;
+  }
+
+  &--picture {
+    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    max-width: 150px;
+    overflow: hidden;
+    width: 25%;
   }
 }

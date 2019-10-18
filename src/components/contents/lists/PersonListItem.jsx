@@ -19,7 +19,6 @@ const defaultProps = {
 
 const renderDetails = data => (
   <span
-    className="person-details"
     dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }}
   />
 )
@@ -31,7 +30,7 @@ const renderPhoto = (photo, photoLink) => {
   const photoSrc = photo ? `data:image/png;base64,${photo}` : photoLink
 
   return (
-    <div className="Person-picture">
+    <div className="Pli--picture">
       {' '}
       <img src={photoSrc} alt="Person" style={{ width: '100%' }} />
       {' '}

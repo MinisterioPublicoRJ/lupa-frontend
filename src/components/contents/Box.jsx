@@ -4,11 +4,7 @@ import PropTypes from 'prop-types'
 import './Box.scss'
 import SmallBox from './SmallBox'
 import LongBox from './LongBox'
-import OrderedList from './OrderedList'
-import UnorderedList from './UnorderedList'
-import FilterableList from './FilterableList'
 import Graph from '../graphs/Graph'
-import People from '../person/People'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
@@ -56,16 +52,6 @@ const Box = ({ content, navigateToEntity, color }) => {
         />
       )
     case 'lista_filtrada':
-      // return (
-      //   <FilterableList
-      //     color={color}
-      //     title={content.exibition_field}
-      //     list={content.external_data}
-      //     image={content.icon}
-      //     source={content.external_data[0].source ? content.external_data[0].source : null}
-      //     navigateToEntity={navigateToEntity}
-      //   />
-      // )
     case 'lista_ordenada':
     case 'lista_sem_ordenacao':
     case 'lista_pessoa':
@@ -80,31 +66,6 @@ const Box = ({ content, navigateToEntity, color }) => {
           navigateToEntity={navigateToEntity}
         />
       )
-      // return (
-      //   <OrderedList
-      //     color={color}
-      //     title={content.exibition_field}
-      //     list={content.external_data}
-      //     image={content.icon}
-      //     source={content.external_data[0].source ? content.external_data[0].source : null}
-      //     navigateToEntity={navigateToEntity}
-      //   />
-      // )
-    // case 'lista_sem_ordenacao':
-    //   return (
-    //     <UnorderedList
-    //       color={color}
-    //       title={content.exibition_field}
-    //       list={content.external_data}
-    //       image={content.icon}
-    //       source={content.external_data[0].source ? content.external_data[0].source : null}
-    //       navigateToEntity={navigateToEntity}
-    //     />
-    //   )
-    // case 'lista_pessoa':
-    //   return (
-    //     <People title={content.exibition_field} peopleArray={content.external_data} color={color} />
-    //   )
     case 'grafico_pizza':
     case 'grafico_barra_vertical':
     case 'grafico_barra_horizontal':
