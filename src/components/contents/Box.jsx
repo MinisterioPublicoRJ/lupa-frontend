@@ -69,6 +69,7 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_ordenada':
       return (
         <List
+          type={content.data_type}
           color={color}
           title={content.exibition_field}
           list={content.external_data}
