@@ -37,7 +37,7 @@ const People = ({ title, peopleArray, color }) => {
       <div className="People--body">
         {peopleArray.map((person, index, arr) => (
           <Person
-            key={person.id}
+            key={index}
             data={person.details}
             name={person.dado}
             photo={person.imagem}
