@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Source from './genericComponents/Source'
 import './Box.scss'
 
 const propTypes = {
@@ -9,11 +10,13 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  sourceLink: PropTypes.string,
 }
 const defaultProps = {
   description: null,
   source: null,
   color: null,
+  sourceLink: null,
 }
 
 const SmallBox = ({
@@ -29,13 +32,7 @@ const SmallBox = ({
     <div className="box-description" style={color && { color: 'white' }}>
       {description || null}
     </div>
-    <div
-      className="box-source"
-      style={color && { color: 'white' }}
-      onClick={() => (sourceLink ? window.open(sourceLink) : null)}
-    >
-      {source || null}
-    </div>
+    { source && <Source link={sourceLink} text={source} color={color} />}
   </div>
 )
 
