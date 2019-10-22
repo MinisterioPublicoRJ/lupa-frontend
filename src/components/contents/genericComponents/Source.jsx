@@ -9,14 +9,14 @@ const propTypes = {
 const defaultProps = { link: null, color: null }
 
 const Source = ({ link, text, color }) => {
-  console.log(color)
+
   return (
     <div
       className="Source"
-      onClick={link ? window.open(link) : null}
-      style={link && { cursor: 'pointer' }}
+      onClick={link ? () => window.open(link) : null}
+      style={link && { cursor: 'pointer', textDecoration: 'underline' }}
     >
-      <div style={{ color: color || '#929698' }}>{text}</div>
+      <div style={{ color: color ? 'white' : '#929698' }}>{text}</div>
     </div>
   )
 }
