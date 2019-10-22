@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import './Person.scss'
 
 const renderDetails = data => (
-  <span
-    className="person-details"
+  <pre
+    className="Person-details"
     dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }}
   />
 )
@@ -45,13 +45,8 @@ const Person = ({
   <div className="Person-container" style={last ? { borderBottom: 0 } : null}>
     {renderPhoto(photo, photoLink)}
     <div className="Person-content">
-      {
-        name ? <div className="Person-main-data">
-          <span className="Person-name">{name}</span>
-        </div>
-        : null
-      }
-      <div className="Person-custom">{renderDetails(data)}</div>
+      { name ? <h5 className="Person-name">{name}</h5> : null }
+      { renderDetails(data) }
     </div>
   </div>
 )

@@ -27,9 +27,9 @@ const People = ({ title, peopleArray, color }) => {
   return (
     <div className="People--container">
       {title ? (
-        <div className="People--header" style={color && { backgroundColor: color }}>
-          <div className="People--title">{title}</div>
-        </div>
+        <h4 className="People--title" style={color && { backgroundColor: color }}>
+          {title}
+        </h4>
       ) : null}
       <div className="People--body">
         {peopleArray.map((person, index, arr) => (

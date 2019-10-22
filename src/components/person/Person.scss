@@ -29,21 +29,17 @@ img {
 .Person-content {
   display: flex;
   flex-direction: column;
-  width: 75%;
-}
-
-.Person-main-data {
-  display: flex;
-  flex-direction: column;
-  height: 35%;
-  justify-content: space-around;
-  padding: 10px;
+  padding: 5px;
+  width: 70%;
 }
 
 .Person-name {
   color: #706E6E;
-  font-family: 'Roboto';
+  display: flex;
+  font-family: Roboto;
   font-size: 2.5vh;
+  font-weight: normal;
+  margin: 0 0 10px;
 }
 
 .Person-job {
@@ -52,11 +48,11 @@ img {
   font-size: 2vh;
 }
 
-.Person-custom {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  padding: 10px;
+.Person-details {
+  font-size: 2.5vh;
+  font-family: Roboto;
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 .Governor-container {
