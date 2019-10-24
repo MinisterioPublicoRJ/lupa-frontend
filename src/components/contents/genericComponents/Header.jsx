@@ -19,10 +19,10 @@ const Header = ({
     <div className="Generic-Header--icon-container">
       {image && <img src={image} alt="" className="Generic-Header--icon" />}
     </div>
-    <div className="Generic-Header--title-container">
-      {title && <span className="Generic-Header--title">{title.toLocaleUpperCase()}</span>}
-      {total && <span className="Generic-Header--title">{total}</span>}
-    </div>
+    <h4 className="Generic-Header--title-container Generic-Header--title">
+      {title && title.toLocaleUpperCase()}
+      {total && <small className="Generic-Header--title">{total}</small>}
+    </h4>
     <div className="Generic-Header--search-container">
       {onSearchPressed ? (
         <FontAwesomeIcon

@@ -101,6 +101,10 @@
   overflow: hidden;
   width: 100%;
 
+  &:last-child {
+    border: 0;
+  }
+
   img {
     border: 1px solid #EBEBEB;
     margin: 5px 0 5px 0;
@@ -110,7 +114,8 @@
   &--content {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    padding: 5px;
+    width: 70%;
   }
 
   &--data {
@@ -123,8 +128,11 @@
 
   &--name {
     color: #706E6E;
-    font-family: 'Roboto';
+    display: flex;
+    font-family: Roboto;
     font-size: 2.5vh;
+    font-weight: normal;
+    margin: 0 0 10px;
   }
 
   &--custom {
@@ -141,6 +149,13 @@
     max-width: 150px;
     overflow: hidden;
     width: 25%;
+  }
+
+  &--details {
+    font-size: 2.5vh;
+    font-family: Roboto;
+    margin: 0;
+    white-space: pre-wrap;
   }
 }
 

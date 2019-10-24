@@ -121,17 +121,21 @@ const List = ({
       <Header
         title={title}
         total={listCount()}
-        image={image}
+        image={list.length > 1 ? image : null}
         color={color}
-        onSearchPressed={() => setSearchStatus(!searchStatus)}
+        listLength={list.length}
+        onSearchPressed={list.length > 1 ? () => setSearchStatus(!searchStatus) : null}
       />
-      <SearchWrapper
-        pose={searchStatus ? 'show' : 'hide'}
-        className="List--filter"
-        style={color && { backgroundColor: color }}
-      >
-        <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
-      </SearchWrapper>
+      {
+        list.length > 1 && <SearchWrapper
+          pose={searchStatus ? 'show' : 'hide'}
+          className="List--filter"
+          style={color && { backgroundColor: color }}
+          >
+            <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
+          </SearchWrapper>
+      }
+
       <ol className="List--container">
         {filteredList.map((item, i) => (
           <li className="List--item">{renderListItem(item, i)}</li>

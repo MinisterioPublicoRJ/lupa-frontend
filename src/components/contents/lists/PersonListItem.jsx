@@ -22,7 +22,7 @@ const defaultProps = {
 
 const renderDetails = data => (
   <pre
-    className="Person-details"
+    className="Pli--details"
     dangerouslySetInnerHTML={{ __html: data && data.split('@').join('<br/>') }}
   />
 )
@@ -59,7 +59,7 @@ const Person = ({
         onClick={clickable ? handleLink : null}
         style={clickable && { cursor: 'pointer' }}
       >
-        { name ? <h5 className="Pli-name">{name}</h5> : null }
+        { name ? <h5 className="Pli--name">{name}</h5> : null }
         { renderDetails(data) }
       </div>
     </div>
