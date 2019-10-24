@@ -7,8 +7,11 @@ import GraphBar from './GraphBar'
 import GraphBarHorizontal from './GraphBarHorizontal'
 import GraphStackedBar from './GraphStackedBar'
 import GraphLine from './GraphLine'
-import ErrorBox from '../contents/ErrorBox'
-import { ColorScale } from '../utils/colorScale'
+import { ColorScale } from '../../utils/colorScale'
+
+import ErrorBox from '../ErrorBox'
+import Header from '../genericComponents/Header'
+import Source from '../genericComponents/Source'
 
 const checkGraphType = ({ type, data, sortedData }) => {
   switch (type) {
@@ -72,18 +75,17 @@ const loadCategories = (data) => {
 }
 
 const graph = ({
-  type, title, description, data, source, sourcePressed, categories, color, sourceLink,
+  type, title, description, data, source, categories, color, image, sourceLink,
 }) => {
   const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
 
   return (
     <div className="Graph-container">
-      <div className="Graph-header" style={{ backgroundColor: color || '#00a5fd' }}>
-        <div className="Graph-title-right">
-          <span className="Graph-name">{title.toLocaleUpperCase('pt-br')}</span>
-          {description && <span className="Graph-description">{description}</span>}
-        </div>
-      </div>
+      <Header
+        title={title}
+        image={image}
+        color={color}
+      />
       <div className="Graph-body">{checkGraphType({ type, data, sortedData })}</div>
       {categories && (
         <div className="Graph-categories-container">
@@ -127,15 +129,7 @@ const graph = ({
           {type === 'grafico_linha_horizontal' ? loadCategories(data) : null}
         </div>
       )}
-      {source && (
-        <span
-          className="Graph-source"
-          onClick={() => (sourceLink ? window.open(sourceLink) : null)}
-          style={{ color: color || '#00a5fd' }}
-        >
-          {source}
-        </span>
-      )}
+      {source && <Source link={sourceLink} text={source} />}
     </div>
   )
 }
