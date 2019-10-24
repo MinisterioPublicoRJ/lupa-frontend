@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Home.scss'
+import Modal from '../modal/Modal'
 import Theme from '../contents/Theme'
 import Map from '../map/Map'
 import EntityError from '../utils/EntityError'
@@ -111,6 +112,19 @@ class Home extends React.Component {
     history.push(`/${entityType}/${entityId}`)
   }
 
+  handleOpenModal(params){
+    console.log('handleOpenModal', params)
+    let boxData = params.content.filter(box => box.id === params.boxId)[0]
+    let boxDetailsArray = boxData.detalhe
+    console.log(boxDetailsArray)
+
+    if (!boxDetailsArray || boxDetailsArray.length === 0) {
+      return console.log("Sem detalhes para exibir.")
+    }
+
+    boxDetailsArray.forEach(detail => Api.getDetailData(data => console.log(data), params.entityType, params.entityId, detail.id))
+  }
+
   navigateToLogin() {
     const { history } = this.props
     history.push('/login')
@@ -136,6 +150,7 @@ class Home extends React.Component {
 
     return (
       <div className="Entity-container">
+        {/* <Modal/> */}
         <div className="Main-container">
           {!error ? (
             <Search
@@ -165,6 +180,7 @@ class Home extends React.Component {
                   entityType={entityType}
                   entityId={entityId}
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+                  openModal={params => this.handleOpenModal({...params, theme: item})}
                 />
               ))
             : null}
