@@ -31,27 +31,28 @@ const checkGraphType = ({ type, data, sortedData }) => {
 }
 
 const propTypes = {
-  type: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  categories: PropTypes.arrayOf(PropTypes.string),
+  color: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       rotulo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   ).isRequired,
+  image: PropTypes.node,
   source: PropTypes.string,
-  color: PropTypes.string,
-  sourcePressed: PropTypes.func,
-  categories: PropTypes.arrayOf(PropTypes.string),
+  sourceLink: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  title: PropTypes.string,
 }
 
 const defaultProps = {
-  title: null,
-  description: null,
-  source: null,
-  sourcePressed: () => {},
   categories: [],
+  color: null,
+  image: null,
+  source: null,
+  sourceLink: null,
+  title: null,
 }
 
 const loadCategories = (data) => {
@@ -75,20 +76,17 @@ const loadCategories = (data) => {
 }
 
 const graph = ({
-  type, title, description, data, source, categories, color, image, sourceLink,
+  type, title, data, source, categories, color, image, sourceLink,
 }) => {
   const sortedData = [...data].sort((a, b) => Number(a.dado) - Number(b.dado))
 
   return (
     <div className="Graph-container">
-      <Header
-        title={title}
-        image={image}
-        color={color}
-      />
+      <Header title={title} image={image} color={color} />
       <div className="Graph-body">{checkGraphType({ type, data, sortedData })}</div>
       {categories && (
         <div className="Graph-categories-container">
+          {type === 'grafico_linha_horizontal' && loadCategories(data)}
           {categories
             ? categories.map((item, i) => (
               <span className="Graph-categories">
@@ -98,7 +96,7 @@ const graph = ({
             ))
             : null}
           {type === 'grafico_pizza'
-            ? sortedData.map((item, i) => (
+            && sortedData.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
                 <span
                   className="Graph-color"
@@ -109,10 +107,9 @@ const graph = ({
                   <span>{Number(item.dado).toLocaleString('pt-br')}</span>
                 </div>
               </span>
-            ))
-            : null}
+            ))}
           {type === 'grafico_barra_horizontal'
-            ? data.map((item, i) => (
+            && data.map((item, i) => (
               <span className="Graph-categories" key={item.rotulo}>
                 <span
                   className="Graph-color"
@@ -124,9 +121,7 @@ const graph = ({
                   <span>{Number(item.dado).toLocaleString('pt-br')}</span>
                 </div>
               </span>
-            ))
-            : null}
-          {type === 'grafico_linha_horizontal' ? loadCategories(data) : null}
+            ))}
         </div>
       )}
       {source && <Source link={sourceLink} text={source} />}

@@ -35,6 +35,7 @@ const graphStyle = {
 const yAxisStyles = {
   axis: { stroke: '#696568' },
   tickLabels: {
+    // angle: 45,
     padding: 5,
     fontSize: 10,
     fontFamily: 'Roboto',
@@ -45,7 +46,6 @@ const yAxisStyles = {
 const xAxisStyles = {
   axis: { stroke: '#696568' },
   tickLabels: {
-    angle: 45,
     fill: '#696568',
     fontSize: 10,
     fontFamily: 'Roboto',
