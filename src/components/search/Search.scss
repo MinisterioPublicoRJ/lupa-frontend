@@ -36,17 +36,21 @@
   color: #C1C1C1;
 }
 
+.Search-form {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
 .Search-input {
   border: none;
   box-sizing: border-box;
   border-radius: 7px;
-  display: flex;
-  flex: 1;
   height: 100%;
-  margin: 0 10px 0 10px;
-  max-width: calc(80% - 20px);
-  min-width: 70%;
-  padding: 0 10px 0 10px;
+  margin: 0 10px;
+  padding: 0 10px;
+  width: calc(100% - 20px);
 }
 
 .Search-body {

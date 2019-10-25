@@ -106,12 +106,19 @@ class Search extends React.Component {
         return "Cidade"
       case "farm":
         return "Fazenda"
+      case "government":
+        return "Órgão Governamental"
+      case "island":
+      case "islet":
+        return "Ilha"
       case "municipality":
         return "Município"
       case "peak":
         return "Morro"
       case "protected_area":
         return "Área de proteção"
+      case "residential":
+        return "Residencial"
       case "river":
         return "Rio"
       case "suburb":
@@ -121,7 +128,7 @@ class Search extends React.Component {
       case "wood":
         return "Floresta"
       default:
-        return "Bairro"
+        return type
     }
   }
 
@@ -159,12 +166,14 @@ class Search extends React.Component {
               )}
             </WrapperDiv>
           </div>
-          <input
-            onChange={event => this.handleTyping(event)}
-            className="Search-input"
-            placeholder={placeholder}
-            onFocus={() => this.setState({ open: true })}
-          />
+          <form className="Search-form">
+            <input
+              onChange={event => this.handleTyping(event)}
+              placeholder={placeholder}
+              className="Search-input"
+              onFocus={() => this.setState({ open: true })}
+            />
+          </form>
           <div className="Search-button">
             <WrapperDiv>
               <FontAwesomeIcon
@@ -178,7 +187,7 @@ class Search extends React.Component {
             <div className="search-result">
               <div className="search-result-indicator">
                 {!searchResponse && !waiting && (
-                  <span className="search-result-placeholder">Nenhum resultado ainda...</span>
+                  <p className="search-result-placeholder">Nenhum resultado ainda...</p>
                 )}
                 {waiting && <Spinner />}
               </div>
