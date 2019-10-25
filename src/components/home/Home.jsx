@@ -28,8 +28,10 @@ class Home extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      menuOpen: false,
       isLogged: !!localStorage.getItem('token'),
+      menuOpen: false,
+      modalInfo: {},
+      modalOpen: false,
     }
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
@@ -113,16 +115,22 @@ class Home extends React.Component {
   }
 
   handleOpenModal(params){
-    console.log('handleOpenModal', params)
     let boxData = params.content.filter(box => box.id === params.boxId)[0]
     let boxDetailsArray = boxData.detalhe
-    console.log(boxDetailsArray)
 
     if (!boxDetailsArray || boxDetailsArray.length === 0) {
       return console.log("Sem detalhes para exibir.")
     }
 
-    boxDetailsArray.forEach(detail => Api.getDetailData(data => console.log(data), params.entityType, params.entityId, detail.id))
+    this.setState({
+      modalInfo: {
+        boxData,
+        boxDetailsArray,
+        entityId: params.entityId,
+        entityType: params.entityType,
+      },
+      modalOpen: true,
+    })
   }
 
   navigateToLogin() {
@@ -141,7 +149,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      loading, menuOpen, error, geojson, name, title, themes, isLogged,
+      error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes, 
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
@@ -150,7 +158,7 @@ class Home extends React.Component {
 
     return (
       <div className="Entity-container">
-        {/* <Modal/> */}
+        <Modal modalInfo={modalInfo} modalOpen={modalOpen} />
         <div className="Main-container">
           {!error ? (
             <Search
