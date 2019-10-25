@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './Box.scss'
 import SmallBox from './SmallBox'
 import LongBox from './LongBox'
-import Graph from '../graphs/Graph'
+import Graph from './graphs/Graph'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
@@ -57,14 +57,14 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_pessoa':
       return (
         <List
-          type={content.data_type}
           color={color}
-          title={content.exibition_field}
-          list={content.external_data}
           image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
+          list={content.external_data}
           navigateToEntity={navigateToEntity}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
           sourceLink={content.external_data.link_externo}
+          type={content.data_type}
+          title={content.exibition_field}
         />
       )
     case 'grafico_pizza':
@@ -74,11 +74,13 @@ const Box = ({ content, navigateToEntity, color }) => {
       return (
         <Graph
           color={color}
-          type={content.data_type}
-          title={content.exibition_field}
           data={content.external_data}
+          image={content.icon}
+          navigateToEntity={navigateToEntity}
           source={content.external_data[0].source ? content.external_data[0].source : null}
           sourceLink={content.external_data[0].link_externo ? content.external_data[0].link_externo : null}
+          type={content.data_type}
+          title={content.exibition_field}
         />
       )
     case 'loading':
