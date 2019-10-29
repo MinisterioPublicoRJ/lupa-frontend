@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import Api from '../api/Api'
 
 import './Login.scss'
@@ -19,11 +21,12 @@ class Login extends React.Component {
     } else {
       this.setState({ error: true })
     }
-    // colocar mensagem de erro aqui
+    this.setState({ loading: false })
   }
 
   login(event) {
     // blocks default page reload
+    this.setState({ loading: true })
     event.preventDefault()
 
     const { email, password } = this.state
@@ -43,7 +46,9 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, password, error } = this.state
+    const {
+      email, password, error, loading,
+    } = this.state
     return (
       <div className="wrapper">
         <div className="Login-container">
@@ -71,7 +76,9 @@ class Login extends React.Component {
             </div>
             {error ? <p style={{ color: 'red' }}>Erro ao acessar o sistema</p> : null}
             <div className="Login-container-button">
-              <button type="submit">Entrar</button>
+              <button type="submit">
+                {loading ? <FontAwesomeIcon className="Search-icon" icon={faSpinner} spin /> : 'Entrar'}
+              </button>
             </div>
           </form>
         </div>
