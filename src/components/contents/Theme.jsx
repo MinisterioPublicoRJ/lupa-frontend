@@ -76,7 +76,7 @@ class Theme extends React.Component {
 
   render() {
     const { content, open } = this.state
-    const { color, navigateToEntity, name } = this.props
+    const { name, color, entityType, entityId, navigateToEntity, openModal } = this.props
     const themeStatus = open ? 'open' : 'closed'
 
     return (
@@ -99,7 +99,10 @@ class Theme extends React.Component {
         {content ? (
           <ContentWrapper className="theme--content" pose={themeStatus}>
             {content.map(box => (
-              <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
+              <React.Fragment>
+                <span onClick={(e) => {openModal({entityType, entityId, boxId: box.id, content})}}>abrir modal</span>
+                <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
+              </React.Fragment>
             ))}
           </ContentWrapper>
         ) : null}
