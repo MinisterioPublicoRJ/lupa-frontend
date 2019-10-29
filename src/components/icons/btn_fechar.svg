@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+  <g id="btn_fechar" transform="translate(-158 -565)">
+    <circle id="Ellipse_5" data-name="Ellipse 5" cx="30" cy="30" r="30" transform="translate(158 565)" fill="#4b4b4b"/>
+    <path id="Path_577" data-name="Path 577" d="M0,0H30.8" transform="translate(177.282 584.282) rotate(45)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <path id="Path_578" data-name="Path 578" d="M0,0H30.8" transform="translate(177.282 606.059) rotate(-45)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+  </g>
+</svg>

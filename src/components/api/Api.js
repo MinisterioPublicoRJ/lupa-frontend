@@ -76,6 +76,21 @@ const Api = (() => {
   }
 
   /**
+   * Loads the detail content from the database
+   * @param  {Function} callback
+   * @param  {string}   entityType Entity code in the database
+   * @param  {string}   entityId   Desired entity ID
+   * @param  {string}   detailId   Desired detail ID
+   * @return {void}
+   */
+  function getDetailData(callback, entityType, entityId, detailId) {
+    const params = loadParams()
+    axios.get(`${API_URL}/lupa/detalhe/${entityType}/${entityId}/${detailId}`, params)
+      .then(response => callback(response.data))
+      .catch(error => callback(error, detailId))
+  }
+
+  /**
    * Search for a list of contents on OSM
    * @param  {Function} callback
    * @param  {string}   inputValue The value typed by the user
@@ -106,6 +121,7 @@ const Api = (() => {
     login,
     getEntityData,
     getBoxData,
+    getDetailData,
     getSearchData,
     getGeospacialData,
   }
