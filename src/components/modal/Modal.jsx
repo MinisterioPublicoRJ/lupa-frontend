@@ -23,6 +23,7 @@ class Modal extends React.Component {
   constructor(props) {
     super(props)
     // this.renderDetail = this.renderDetail.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   componentDidUpdate() {
@@ -45,6 +46,10 @@ class Modal extends React.Component {
     console.log(data)
   }
 
+  closeModal() {
+    this.setState({ modalOpen: false })
+  }
+
   render() {
     const { modalInfo, modalOpen } = this.props
 
@@ -56,7 +61,19 @@ class Modal extends React.Component {
 
     return (
       <div className="modal">
-        Hello World Modal
+        <div className="modal--content">
+          <h3 className="modal--title">Título</h3>
+        </div>
+        <button
+          className="modal--close"
+          onClick={this.closeModal}
+        >
+          <img
+            className="modal--icon"
+            src={require('../icons/btn_fechar.svg')}
+            alt="Identidade visual do botão para fechar o modal"
+          />
+        </button>
       </div>
     )
   }
