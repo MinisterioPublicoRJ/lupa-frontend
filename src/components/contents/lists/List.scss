@@ -16,10 +16,6 @@
     max-height: 70vh;
     overflow-y: scroll;
     padding: 0;
-
-    &:last-child {
-      border: 0;
-    }
   }
 
   &--filter {
@@ -42,8 +38,13 @@
   }
 
   &--item {
+    border-bottom: 1px solid #e8e8e8;
     display: flex;
     width: 100%;
+
+    &:last-child {
+      border: 0;
+    }
   }
 
   &--source {
@@ -61,7 +62,7 @@
 
 .Rli {
   align-items: center;
-  border-bottom: 1px solid #f8f8f8;
+  // border-bottom: 1px solid #f8f8f8;
   color: #929698;
   display: flex;
   font-family: Roboto;
@@ -71,7 +72,7 @@
 
   &--position {
     align-items: center;
-    border: 1px solid #E8E8E8;
+    border: 1px solid #e8e8e8;
     border-radius: 50%;
     display: flex;
     height: 30px;
@@ -92,7 +93,7 @@
 }
 
 .Pli {
-  border-bottom: 1px solid #E8E8E8;
+  // border-bottom: 1px solid #E8E8E8;
   border-radius: 3px;
   display: flex;
   flex-wrap: wrap;
@@ -102,7 +103,7 @@
   width: 100%;
 
   img {
-    border: 1px solid #EBEBEB;
+    border: 1px solid #ebebeb;
     margin: 5px 0 5px 0;
     width: 100%;
   }
@@ -122,7 +123,7 @@
   }
 
   &--name {
-    color: #706E6E;
+    color: #706e6e;
     font-family: 'Roboto';
     font-size: 2.5vh;
   }
