@@ -10,9 +10,19 @@
   &--content {
     background: #FFF;
     border-radius: 5px;
-    height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    height: 85vh;
+    justify-content: center;
     margin: 10px 10px 0;
+    overflow-y: scroll;
     padding: 5px;
+
+    &--wrapper {
+      max-width: 850px;
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
   &--title {
