@@ -149,6 +149,10 @@ class Home extends React.Component {
     this.setState({ isLogged: false })
   }
 
+  handleCloseModal() {
+    this.setState({ modalOpen: false, modalInfo: null })
+  }
+
   render() {
     const {
       error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes,
@@ -160,7 +164,11 @@ class Home extends React.Component {
 
     return (
       <div className="Entity-container">
-        <Modal modalInfo={modalInfo} modalOpen={modalOpen} />
+        <Modal
+          closeModal={() => this.handleCloseModal()}
+          modalInfo={modalInfo}
+          modalOpen={modalOpen}
+        />
         <div className="Main-container">
           {!error ? (
             <Search
