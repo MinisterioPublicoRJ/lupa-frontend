@@ -99,10 +99,15 @@ class Theme extends React.Component {
         {content ? (
           <ContentWrapper className="theme--content" pose={themeStatus}>
             {content.map(box => (
-              <React.Fragment>
-                <span onClick={(e) => {openModal({entityType, entityId, boxId: box.id, content})}}>abrir modal</span>
-                <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
-              </React.Fragment>
+                  <Box
+                    key={box.id}
+                    content={box}
+                    color={color}
+                    navigateToEntity={navigateToEntity}
+                    entityType={entityType}
+                    entityId={entityId}
+                    openModal={() => openModal(box)}
+                  />
             ))}
           </ContentWrapper>
         ) : null}

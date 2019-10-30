@@ -114,9 +114,11 @@ class Home extends React.Component {
     history.push(`/${entityType}/${entityId}`)
   }
 
-  handleOpenModal(params){
-    let boxData = params.content.filter(box => box.id === params.boxId)[0]
+  handleOpenModal(box){
+    let boxData = box
     let boxDetailsArray = boxData.detalhe
+    const entityType = this.props.match.params.entityType
+    const entityId = this.props.match.params.entityId
 
     if (!boxDetailsArray || boxDetailsArray.length === 0) {
       return console.log("Sem detalhes para exibir.")
@@ -126,8 +128,8 @@ class Home extends React.Component {
       modalInfo: {
         boxData,
         boxDetailsArray,
-        entityId: params.entityId,
-        entityType: params.entityType,
+        entityId,
+        entityType,
       },
       modalOpen: true,
     })
@@ -149,7 +151,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes, 
+      error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes,
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
