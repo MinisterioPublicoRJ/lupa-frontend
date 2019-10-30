@@ -4,13 +4,12 @@ import PropTypes from 'prop-types'
 import './Box.scss'
 import SmallBox from './SmallBox'
 import LongBox from './LongBox'
-import OrderedList from './OrderedList'
-import UnorderedList from './UnorderedList'
-import FilterableList from './FilterableList'
-import Graph from '../graphs/Graph'
-import People from '../person/People'
+import Graph from './graphs/Graph'
+import DescriptionBox from './DescriptionBox'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
+
+import List from './lists/List'
 
 const propTypes = {
   color: PropTypes.string,
@@ -28,7 +27,7 @@ const defaultProps = {
   color: null,
 }
 
-const Box = ({ content, navigateToEntity, color }) => {
+const Box = ({ content, navigateToEntity, color, key, openModal }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
@@ -39,6 +38,8 @@ const Box = ({ content, navigateToEntity, color }) => {
           description={content.external_data.details}
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
+          openModal={openModal}
+          key={key}
         />
       )
     case 'texto_grande':
@@ -54,41 +55,20 @@ const Box = ({ content, navigateToEntity, color }) => {
         />
       )
     case 'lista_filtrada':
-      return (
-        <FilterableList
-          color={color}
-          title={content.exibition_field}
-          list={content.external_data}
-          image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
-          navigateToEntity={navigateToEntity}
-        />
-      )
     case 'lista_ordenada':
-      return (
-        <OrderedList
-          color={color}
-          title={content.exibition_field}
-          list={content.external_data}
-          image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
-          navigateToEntity={navigateToEntity}
-        />
-      )
     case 'lista_sem_ordenacao':
-      return (
-        <UnorderedList
-          color={color}
-          title={content.exibition_field}
-          list={content.external_data}
-          image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
-          navigateToEntity={navigateToEntity}
-        />
-      )
     case 'lista_pessoa':
       return (
-        <People title={content.exibition_field} peopleArray={content.external_data} color={color} />
+        <List
+          color={color}
+          image={content.icon}
+          list={content.external_data}
+          navigateToEntity={navigateToEntity}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
+          sourceLink={content.external_data.link_externo}
+          type={content.data_type}
+          title={content.exibition_field}
+        />
       )
     case 'grafico_pizza':
     case 'grafico_barra_vertical':
@@ -97,11 +77,21 @@ const Box = ({ content, navigateToEntity, color }) => {
       return (
         <Graph
           color={color}
-          type={content.data_type}
-          title={content.exibition_field}
           data={content.external_data}
+          image={content.icon}
+          navigateToEntity={navigateToEntity}
           source={content.external_data[0].source ? content.external_data[0].source : null}
           sourceLink={content.external_data[0].link_externo ? content.external_data[0].link_externo : null}
+          type={content.data_type}
+          title={content.exibition_field}
+        />
+      )
+    case 'texto_descricao':
+      return (
+        <DescriptionBox
+          id={content.id}
+          details={content.external_data[0].details}
+          imagem={content.external_data[0].imagem}
         />
       )
     case 'loading':

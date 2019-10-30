@@ -54,9 +54,9 @@
   font-family: Roboto;
   justify-content: center;
   margin:auto;
-  max-width: 800px;
-  text-align: left;
-  padding: 0;
+  max-width: calc(800px - 20px);
+  text-align: center;
+  padding: 0 10px;
 }
 
 .contents {

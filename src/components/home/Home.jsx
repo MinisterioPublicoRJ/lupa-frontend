@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Home.scss'
+import Modal from '../modal/Modal'
 import Theme from '../contents/Theme'
 import Map from '../map/Map'
 import EntityError from '../utils/EntityError'
@@ -27,8 +28,10 @@ class Home extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      menuOpen: false,
       isLogged: !!localStorage.getItem('token'),
+      menuOpen: false,
+      modalInfo: {},
+      modalOpen: false,
     }
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
@@ -111,6 +114,27 @@ class Home extends React.Component {
     history.push(`/${entityType}/${entityId}`)
   }
 
+  handleOpenModal(box){
+    let boxData = box
+    let boxDetailsArray = boxData.detalhe
+    const entityType = this.props.match.params.entityType
+    const entityId = this.props.match.params.entityId
+
+    if (!boxDetailsArray || boxDetailsArray.length === 0) {
+      return console.log("Sem detalhes para exibir.")
+    }
+
+    this.setState({
+      modalInfo: {
+        boxData,
+        boxDetailsArray,
+        entityId,
+        entityType,
+      },
+      modalOpen: true,
+    })
+  }
+
   navigateToLogin() {
     const { history } = this.props
     history.push('/login')
@@ -125,9 +149,13 @@ class Home extends React.Component {
     this.setState({ isLogged: false })
   }
 
+  handleCloseModal() {
+    this.setState({ modalOpen: false, modalInfo: null })
+  }
+
   render() {
     const {
-      loading, menuOpen, error, geojson, name, title, themes, isLogged,
+      error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes,
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
@@ -136,6 +164,11 @@ class Home extends React.Component {
 
     return (
       <div className="Entity-container">
+        <Modal
+          closeModal={() => this.handleCloseModal()}
+          modalInfo={modalInfo}
+          modalOpen={modalOpen}
+        />
         <div className="Main-container">
           {!error ? (
             <Search
@@ -165,6 +198,7 @@ class Home extends React.Component {
                   entityType={entityType}
                   entityId={entityId}
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+                  openModal={params => this.handleOpenModal({...params, theme: item})}
                 />
               ))
             : null}
