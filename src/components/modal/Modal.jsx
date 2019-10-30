@@ -7,6 +7,7 @@ import Box from '../contents/Box'
 import './Modal.scss'
 
 const propTypes = {
+  closeModal: PropTypes.func,
   modalInfo: PropTypes.shape({
     boxData: PropTypes.object,
     boxDetailsArray: PropTypes.arrayOf(
@@ -25,7 +26,6 @@ class Modal extends React.Component {
     super(props)
     this.state = {content: []}
     this.renderDetail = this.renderDetail.bind(this)
-    this.closeModal = this.closeModal.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -41,8 +41,6 @@ class Modal extends React.Component {
         this.loadDetailsData(this.props.modalInfo.boxDetailsArray)  
       }
     }
-
-
   }
 
   loadDetailsData(dataList) {
@@ -72,12 +70,8 @@ class Modal extends React.Component {
     this.setState({ content: newContent })
   }
 
-  closeModal() {
-    this.setState({ modalOpen: false })
-  }
-
   render() {
-    const { modalInfo, modalOpen } = this.props
+    const { closeModal, modalInfo, modalOpen } = this.props
     const { content } = this.state
 
     console.log('Modal', modalOpen, modalInfo)
@@ -95,7 +89,7 @@ class Modal extends React.Component {
         </div>
         <button
           className="modal--close"
-          onClick={this.closeModal}
+          onClick={closeModal}
         >
           <img
             className="modal--icon"
