@@ -5,6 +5,7 @@ import './Box.scss'
 import SmallBox from './SmallBox'
 import LongBox from './LongBox'
 import Graph from './graphs/Graph'
+import DescriptionBox from './DescriptionBox'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
@@ -81,6 +82,14 @@ const Box = ({ content, navigateToEntity, color }) => {
           sourceLink={content.external_data[0].link_externo ? content.external_data[0].link_externo : null}
           type={content.data_type}
           title={content.exibition_field}
+        />
+      )
+    case 'texto_descricao':
+      return (
+        <DescriptionBox
+          id={content.id}
+          details={content.external_data[0].details}
+          imagem={content.external_data[0].imagem}
         />
       )
     case 'loading':
