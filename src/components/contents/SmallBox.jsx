@@ -20,9 +20,13 @@ const defaultProps = {
 }
 
 const SmallBox = ({
-  description, source, title, value, color, sourceLink,
+  description, source, title, value, color, sourceLink, openModal,
 }) => (
-  <div className="box SmallBox" style={color && { backgroundColor: color }}>
+  <div
+    className="box SmallBox"
+    style={color && { backgroundColor: color }}
+    onClick={openModal}
+  >
     <div className="box-title" style={color && { color: 'white' }}>
       {title && title.toLocaleUpperCase('pt-br')}
     </div>
