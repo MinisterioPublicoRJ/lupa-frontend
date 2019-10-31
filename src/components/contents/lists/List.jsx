@@ -12,8 +12,12 @@ import './List.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
-    .isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }),
+  ).isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
   color: PropTypes.string,
@@ -111,7 +115,7 @@ const List = ({
       return ` (${list.length})`
     }
     return ` (${list
-      .map(list => Number(list.dado))
+      .map(item => Number(item.dado))
       .reduce((a, b) => a + b, 0)
       .toLocaleString('pt-br')})`
   }
@@ -133,9 +137,11 @@ const List = ({
         <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
       </SearchWrapper>
       <ol className="List--container">
-        {filteredList.map((item, i) => (
-          <li className="List--item">{renderListItem(item, i)}</li>
-        ))}
+        {filteredList.map((item, i) => {console.log(item); return (
+          <li className="List--item" key={item.id}>
+            {renderListItem(item, i)}
+          </li>
+        )})}
       </ol>
       {source && <Source link={sourceLink} text={source} color={color} />}
     </div>

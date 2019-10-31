@@ -27,7 +27,7 @@ const defaultProps = {
   color: null,
 }
 
-const Box = ({ content, navigateToEntity, color, key, openModal }) => {
+const Box = ({ content, navigateToEntity, color, openModal }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
@@ -39,7 +39,6 @@ const Box = ({ content, navigateToEntity, color, key, openModal }) => {
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
           openModal={openModal}
-          key={key}
         />
       )
     case 'texto_grande':

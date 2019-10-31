@@ -4,12 +4,15 @@ import PropTypes from 'prop-types'
 import './List.scss'
 
 const propTypes = {
-  ordered: PropTypes.string.isRequired,
+  ordered: PropTypes.bool.isRequired,
   position: PropTypes.number.isRequired,
   label: PropTypes.string,
   data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   externalLink: PropTypes.string,
-  internalLink: PropTypes.shape({ entidade: PropTypes.string, id: PropTypes.string }),
+  internalLink: PropTypes.shape({
+    entidade: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }),
   navigateToEntity: PropTypes.func.isRequired,
 }
 const defaultProps = {
