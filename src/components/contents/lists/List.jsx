@@ -137,11 +137,11 @@ const List = ({
         <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
       </SearchWrapper>
       <ol className="List--container">
-        {filteredList.map((item, i) => {console.log(item); return (
+        {filteredList.map((item, i) => (
           <li className="List--item" key={item.id}>
             {renderListItem(item, i)}
           </li>
-        )})}
+        ))}
       </ol>
       {source && <Source link={sourceLink} text={source} color={color} />}
     </div>
