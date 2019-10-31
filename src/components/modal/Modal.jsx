@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Api from '../api/Api'
 import Box from '../contents/Box'
+import HeaderBox from '../contents/HeaderBox'
 
 import './Modal.scss'
 
@@ -74,6 +75,9 @@ class Modal extends React.Component {
   render() {
     const { closeModal, modalInfo, modalOpen } = this.props
     const { content } = this.state
+    const originalBox = modalInfo.boxData ? modalInfo.boxData.external_data : null
+
+    const title = modalInfo.boxData ? modalInfo.boxData.exibition_field : null
 
     console.log('Modal', modalOpen, modalInfo)
 
@@ -84,9 +88,14 @@ class Modal extends React.Component {
     return (
       <div className="modal">
         <div className="modal--content">
-          <h3 className="modal--title">Título</h3>
-          <div style={{ width: '100%', height: '50px', backgroundColor: 'pink' }}>
-            (falta repetir a caixa de fora aqui novamente)
+          <h3 className="modal--title">{`Visão detalhada - ${title}`}</h3>
+          <div className="modal--originalBox">
+            <HeaderBox
+              title={title}
+              label={originalBox.label}
+              detail={originalBox.details}
+              source={originalBox.source}
+            />
           </div>
           {content && (
             <div className="modal--content--wrapper">
@@ -96,10 +105,7 @@ class Modal extends React.Component {
             </div>
           )}
         </div>
-        <button
-          className="modal--close"
-          onClick={closeModal}
-        >
+        <button className="modal--close" onClick={closeModal}>
           <img
             className="modal--icon"
             src={require('../icons/btn_fechar.svg')}
