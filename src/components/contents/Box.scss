@@ -1,6 +1,6 @@
 .box {
-  background: #FFF;
-  border: 1px solid #E8E8E8;
+  background: #fff;
+  border: 1px solid #e8e8e8;
   border-radius: 3px;
   margin: 2.5% 5px 2.5% 5px;
   padding: 5px;
@@ -9,7 +9,8 @@
     max-width: 100%;
   }
 
-  &.SmallBox, &.LongBox {
+  &.SmallBox,
+  &.LongBox {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
@@ -34,7 +35,7 @@
 
     .box-title {
       align-items: flex-end;
-      color: #706E6E;
+      color: #706e6e;
       display: flex;
       flex: 1;
       flex-wrap: wrap;
@@ -49,7 +50,7 @@
 
     .box-value {
       align-items: center;
-      color: #009DFD;
+      color: #009dfd;
       display: flex;
       flex: 1.5;
       font-family: roboto;
@@ -81,24 +82,24 @@
     }
 
     &.SmallBoxContrast {
-      background-color: #00A5FD;
+      background-color: #00a5fd;
 
       .box-title {
         align-items: flex-start;
-        color: #FFF;
+        color: #fff;
         flex: 2;
         max-height: initial;
       }
 
       .box-value {
         align-items: flex-end;
-        color: #FFF;
+        color: #fff;
         flex: 3;
         max-height: initial;
       }
 
       .box-source {
-        color: #FFF;
+        color: #fff;
         cursor: pointer;
         margin: -8px 5px 3px 0;
         text-decoration: underline;
@@ -125,7 +126,7 @@
 
     .box-title {
       align-items: center;
-      color: #009DFD;
+      color: #009dfd;
       display: flex;
       flex: 4.5;
       font-family: roboto;
@@ -141,7 +142,7 @@
 
     .box-value {
       align-items: center;
-      color: #009DFD;
+      color: #009dfd;
       display: flex;
       flex-wrap: wrap;
       flex: 4.5;
@@ -169,7 +170,37 @@
   }
 }
 
-// THIS CSS IS ALREADY REFACTORED!
 .Box {
-  // UNDER CONSTRUCTION
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  display: flex;
+}
+
+.HeaderBox {
+  flex-direction: column;
+  padding: 10px;
+  width: 90%;
+
+  &--dataContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px 0;
+  }
+
+  &--title {
+    color: #706e6e;
+    font-family: Roboto;
+    font-size: 2.3vh;
+  }
+
+  &--value {
+    color: #00a5fd;
+    font-family: Roboto;
+    font-size: 3vh;
+    font-weight: 500; // bold
+  }
 }

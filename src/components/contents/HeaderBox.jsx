@@ -5,7 +5,6 @@ import Source from './genericComponents/Source'
 import './Box.scss'
 
 const propTypes = {
-  description: PropTypes.string,
   source: PropTypes.string,
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
@@ -13,35 +12,24 @@ const propTypes = {
   sourceLink: PropTypes.string,
 }
 const defaultProps = {
-  description: null,
   source: null,
   color: null,
   sourceLink: null,
 }
-// TODO:
-// GENERIC BOX CSS
-// REARRANGE ITEMS INTO NEW FORMAT
-// IMPORT AND USE IN MODAL
-// MAKE IT AVAILABLE AS A BOX TYPE
 
 const HeaderBox = ({
-  description, source, title, value, color, sourceLink, openModal,
+  source, title, value, color, sourceLink,
 }) => (
-  <div
-    className="box SmallBox"
-    style={color && { backgroundColor: color }}
-    onClick={openModal}
-  >
-    <div className="box-title" style={color && { color: 'white' }}>
-      {title && title.toLocaleUpperCase('pt-br')}
+  <div className="Box HeaderBox">
+    <div className="HeaderBox--dataContainer">
+      <div className="HeaderBox--title">{title && title.toLocaleUpperCase('pt-br')}</div>
+      <div className="HeaderBox--value">
+        {value && isNaN(value)
+          ? value.toLocaleUpperCase('pt-br')
+          : Number(value).toLocaleString('pt-br')}
+      </div>
     </div>
-    <div className="box-value" style={color && { color: 'white' }}>
-      {value && isNaN(value) ? value.toLocaleUpperCase('pt-br') : Number(value).toLocaleString('pt-br')}
-    </div>
-    <div className="box-description" style={color && { color: 'white' }}>
-      {description || null}
-    </div>
-    { source && <Source link={sourceLink} text={source} color={color} />}
+    {source && <Source link={sourceLink} text={source} color={color} />}
   </div>
 )
 

@@ -75,11 +75,9 @@ class Modal extends React.Component {
   render() {
     const { closeModal, modalInfo, modalOpen } = this.props
     const { content } = this.state
-    const originalBox = modalInfo.boxData ? modalInfo.boxData.external_data : null
+    const originalBox = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.external_data : null
 
-    const title = modalInfo.boxData ? modalInfo.boxData.exibition_field : null
-
-    console.log('Modal', modalOpen, modalInfo)
+    const title = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.exibition_field : null
 
     if (!modalOpen) {
       return null
@@ -88,12 +86,11 @@ class Modal extends React.Component {
     return (
       <div className="modal">
         <div className="modal--content">
-          <h3 className="modal--title">{`Visão detalhada - ${title}`}</h3>
           <div className="modal--originalBox">
             <HeaderBox
               title={title}
-              label={originalBox.label}
-              detail={originalBox.details}
+              value={originalBox.dado}
+              description={originalBox.details}
               source={originalBox.source}
             />
           </div>
