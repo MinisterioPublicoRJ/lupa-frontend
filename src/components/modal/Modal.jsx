@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Api from '../api/Api'
 import Box from '../contents/Box'
+import HeaderBox from '../contents/HeaderBox'
 
 import './Modal.scss'
 
@@ -13,7 +14,7 @@ const propTypes = {
     boxDetailsArray: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
-      })
+      }),
     ),
     entityId: PropTypes.string,
     entityType: PropTypes.string,
@@ -24,34 +25,35 @@ const propTypes = {
 class Modal extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {content: []}
+    this.state = { content: [] }
     this.renderDetail = this.renderDetail.bind(this)
   }
 
   componentDidUpdate(prevProps) {
-    let currentModalInfo = JSON.stringify(this.props.modalInfo)
-    let previousModalInfo = JSON.stringify(prevProps.modalInfo)
-    let currentModalOpen = this.props.modalOpen
-    let previousModalOpen = prevProps.modalOpen
-    
+    const currentModalInfo = JSON.stringify(this.props.modalInfo)
+    const previousModalInfo = JSON.stringify(prevProps.modalInfo)
+    const currentModalOpen = this.props.modalOpen
+    const previousModalOpen = prevProps.modalOpen
+
     if (currentModalInfo !== previousModalInfo || currentModalOpen !== previousModalOpen) {
       if (this.props.modalInfo && this.props.modalInfo.boxDetailsArray) {
-        let content = this.props.modalInfo.boxDetailsArray.map(box => ({ id: box.id, data_type: 'loading' }))
-        this.setState({content})
-        this.loadDetailsData(this.props.modalInfo.boxDetailsArray)  
+        const content = this.props.modalInfo.boxDetailsArray.map(box => ({
+          id: box.id,
+          data_type: 'loading',
+        }))
+        this.setState({ content })
+        this.loadDetailsData(this.props.modalInfo.boxDetailsArray)
       }
     }
   }
 
   loadDetailsData(dataList) {
-    dataList.forEach(
-      detail => Api.getDetailData(
-        this.renderDetail,
-        this.props.modalInfo.entityType,
-        this.props.modalInfo.entityId,
-        detail.id
-      )
-    )
+    dataList.forEach(detail => Api.getDetailData(
+      this.renderDetail,
+      this.props.modalInfo.entityType,
+      this.props.modalInfo.entityId,
+      detail.id,
+    ))
   }
 
   renderDetail(updatedDetail, detailId) {
@@ -73,8 +75,9 @@ class Modal extends React.Component {
   render() {
     const { closeModal, modalInfo, modalOpen } = this.props
     const { content } = this.state
+    const originalBox = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.external_data : null
 
-    console.log('Modal', modalOpen, modalInfo)
+    const title = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.exibition_field : null
 
     if (!modalOpen) {
       return null
@@ -83,14 +86,23 @@ class Modal extends React.Component {
     return (
       <div className="modal">
         <div className="modal--content">
-          <h3 className="modal--title">Título</h3>
-          <p>(falta repetir a caixa de fora aqui novamente)</p>
-          {content ? content.map(detail => <Box key={detail.id} content={detail} />) : null}
+          <div className="modal--originalBox">
+            <HeaderBox
+              title={title}
+              value={originalBox.dado}
+              description={originalBox.details}
+              source={originalBox.source}
+            />
+          </div>
+          {content && (
+            <div className="modal--content--wrapper">
+              {content.map(detail => (
+                <Box key={detail.id} content={detail} />
+              ))}
+            </div>
+          )}
         </div>
-        <button
-          className="modal--close"
-          onClick={closeModal}
-        >
+        <button className="modal--close" onClick={closeModal}>
           <img
             className="modal--icon"
             src={require('../icons/btn_fechar.svg')}

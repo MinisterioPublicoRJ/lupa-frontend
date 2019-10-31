@@ -8,12 +8,16 @@ import './GenericComponents.scss'
 const propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  image: PropTypes.node,
+  onSearchPressed: PropTypes.func,
+  total: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
-const defaultProps = { color: null }
+const defaultProps = {
+  color: null, image: null, onSearchPressed: null, total: null,
+}
 
 const Header = ({
-  title, image, color, type, onSearchPressed, total,
+  title, image, color, onSearchPressed, total,
 }) => (
   <div className="Generic-Header" style={color && { backgroundColor: color }}>
     <div className="Generic-Header--icon-container">
