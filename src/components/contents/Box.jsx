@@ -39,6 +39,7 @@ const Box = ({ content, navigateToEntity, color, openModal }) => {
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
           openModal={openModal}
+          hasDetails={content.detalhe ? !!content.detalhe.length : false}
         />
       )
     case 'texto_grande':
@@ -51,6 +52,7 @@ const Box = ({ content, navigateToEntity, color, openModal }) => {
           description={content.external_data.details}
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
+          hasDetails={content.detalhe ? !!content.detalhe.length : false}
         />
       )
     case 'lista_filtrada':

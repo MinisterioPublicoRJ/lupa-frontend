@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import Source from './genericComponents/Source'
 import './Box.scss'
@@ -11,6 +13,7 @@ const propTypes = {
   color: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   sourceLink: PropTypes.string,
+  hasDetails: PropTypes.bool,
 }
 const defaultProps = {
   description: null,
@@ -20,7 +23,7 @@ const defaultProps = {
 }
 
 const SmallBox = ({
-  description, source, title, value, color, sourceLink, openModal,
+  description, source, title, value, color, sourceLink, openModal, hasDetails
 }) => (
   <div
     className="box SmallBox"
@@ -29,6 +32,12 @@ const SmallBox = ({
   >
     <div className="box-title" style={color && { color: 'white' }}>
       {title && title.toLocaleUpperCase('pt-br')}
+      {hasDetails ?
+        <FontAwesomeIcon
+          style={{ color: '#929698' }}
+          icon={faSearch}
+        />
+      : null}
     </div>
     <div className="box-value" style={color && { color: 'white' }}>
       {value && isNaN(value) ? value.toLocaleUpperCase('pt-br') : Number(value).toLocaleString('pt-br')}
