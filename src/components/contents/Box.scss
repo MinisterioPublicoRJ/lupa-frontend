@@ -9,6 +9,10 @@
     max-width: 100%;
   }
 
+  .box-title svg {
+    margin-left: 10px;
+  }
+
   &.SmallBox,
   &.LongBox {
     display: flex;
@@ -111,6 +115,10 @@
     padding: 5px 0 5px 0;
     width: 100%;
 
+    .modal-indicator {
+      text-align: left;
+    }
+
     .box-icon {
       align-items: center;
       display: flex;
@@ -164,7 +172,7 @@
 
     .box-source {
       cursor: pointer;
-      margin: -8px 5px 3px 0;
+      margin: 4px 5px 3px 0;
       text-decoration: underline;
     }
   }
