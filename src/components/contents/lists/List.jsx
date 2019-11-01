@@ -125,9 +125,9 @@ const List = ({
       <Header
         title={title}
         total={listCount()}
-        image={image}
+        image={list.length > 1 ? image : null}
         color={color}
-        onSearchPressed={() => setSearchStatus(!searchStatus)}
+        onSearchPressed={list.length > 1 ? () => setSearchStatus(!searchStatus) : null}
       />
       <SearchWrapper
         pose={searchStatus ? 'show' : 'hide'}
