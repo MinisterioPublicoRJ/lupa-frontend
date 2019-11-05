@@ -2,6 +2,7 @@
 
 1. Open [OpenShift](http://oc-console.mprj.mp.br:8443)
 1. Login with LDAP credentials
+1. Choose `Desenvolvimento - MPMAPAS`
 1. Builds > Builds
 1. Choose project `d-lupa` for develop environment or `lupa` for production environment
 1. Start Build
