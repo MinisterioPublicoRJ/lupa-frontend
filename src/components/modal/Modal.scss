@@ -1,18 +1,22 @@
 .modal {
-  position: fixed;
-  z-index: 2000;
+  align-items: center;
   background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
   left: 0;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100%;
+  z-index: 2000;
 
   &--content {
     background: #fff;
     border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
-    height: 71vh;
+    height: 80vh;
     justify-content: center;
     margin: 10px 10px 0;
     overflow-y: scroll;
@@ -48,6 +52,7 @@
   }
 
   &--icon {
+    max-width: 80px;
     width: 20%;
   }
 }
