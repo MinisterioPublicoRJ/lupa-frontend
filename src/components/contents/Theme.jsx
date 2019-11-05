@@ -61,7 +61,7 @@ class Theme extends React.Component {
   renderBox(updatedBox, boxId) {
     const { content } = this.state
     let newContent
-    if (boxId) {
+    if (boxId || !updatedBox.external_data || JSON.stringify(updatedBox.external_data) === "{}") {
       newContent = content.filter(box => box.id !== boxId)
     } else {
       newContent = content.map((box) => {
@@ -78,6 +78,10 @@ class Theme extends React.Component {
     const { content, open } = this.state
     const { name, color, entityType, entityId, navigateToEntity, openModal } = this.props
     const themeStatus = open ? 'open' : 'closed'
+
+    if (content.length === 0) {
+      return null
+    }
 
     return (
       <div className="theme">
