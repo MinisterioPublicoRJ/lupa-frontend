@@ -62,7 +62,8 @@ class Theme extends React.Component {
     const { content } = this.state
     let newContent
     if (boxId || !updatedBox.external_data || JSON.stringify(updatedBox.external_data) === "{}") {
-      newContent = content.filter(box => box.id !== boxId)
+      let boxIdToFilter = boxId || updatedBox.id
+      newContent = content.filter(box => box.id !== boxIdToFilter)
     } else {
       newContent = content.map((box) => {
         if (box.id === updatedBox.id) return updatedBox
