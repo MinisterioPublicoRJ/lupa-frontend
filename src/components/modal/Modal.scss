@@ -21,11 +21,13 @@
     margin: 10px 10px 0;
     overflow-y: scroll;
     padding: 5px;
+    width: 80%;
 
     &--wrapper {
-      max-width: 850px;
       display: flex;
       flex-wrap: wrap;
+      max-width: 850px;
+      width: 100%;
     }
   }
 
