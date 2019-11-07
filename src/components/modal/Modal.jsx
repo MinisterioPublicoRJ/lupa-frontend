@@ -73,11 +73,13 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { closeModal, modalInfo, modalOpen } = this.props
+    const {
+      closeModal, modalInfo, modalOpen, navigateToEntity,
+    } = this.props
     const { content } = this.state
-    const originalBox = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.external_data : null
+    const originalBox = modalInfo && modalInfo.boxData ? modalInfo.boxData.external_data : null
 
-    const title = (modalInfo && modalInfo.boxData) ? modalInfo.boxData.exibition_field : null
+    const title = modalInfo && modalInfo.boxData ? modalInfo.boxData.exibition_field : null
 
     if (!modalOpen) {
       return null
@@ -97,7 +99,12 @@ class Modal extends React.Component {
           {content && (
             <div className="modal--content--wrapper">
               {content.map(detail => (
-                <Box key={detail.id} content={detail} />
+                <Box
+                  key={detail.id}
+                  content={detail}
+                  navigateToEntity={navigateToEntity}
+                  color={detail.color}
+                />
               ))}
             </div>
           )}

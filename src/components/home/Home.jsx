@@ -110,18 +110,22 @@ class Home extends React.Component {
   }
 
   handleNavigateToEntity(entityType, entityId) {
+    const { modalOpen } = this.state
+    if (modalOpen) {
+      this.handleCloseModal()
+    }
     const { history } = this.props
     history.push(`/${entityType}/${entityId}`)
   }
 
-  handleOpenModal(box){
-    let boxData = box
-    let boxDetailsArray = boxData.detalhe
-    const entityType = this.props.match.params.entityType
-    const entityId = this.props.match.params.entityId
+  handleOpenModal(box) {
+    const boxData = box
+    const boxDetailsArray = boxData.detalhe
+    const { entityType } = this.props.match.params
+    const { entityId } = this.props.match.params
 
     if (!boxDetailsArray || boxDetailsArray.length === 0) {
-      return console.log("Sem detalhes para exibir.")
+      return console.log('Sem detalhes para exibir.')
     }
 
     this.setState({
@@ -155,7 +159,16 @@ class Home extends React.Component {
 
   render() {
     const {
-      error, geojson, isLogged, loading, menuOpen, modalInfo, modalOpen, name, title, themes,
+      error,
+      geojson,
+      isLogged,
+      loading,
+      menuOpen,
+      modalInfo,
+      modalOpen,
+      name,
+      title,
+      themes,
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
@@ -168,6 +181,7 @@ class Home extends React.Component {
           closeModal={() => this.handleCloseModal()}
           modalInfo={modalInfo}
           modalOpen={modalOpen}
+          navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
         />
         <div className="Main-container">
           {!error ? (
@@ -198,11 +212,11 @@ class Home extends React.Component {
                   entityType={entityType}
                   entityId={entityId}
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
-                  openModal={params => this.handleOpenModal({...params, theme: item})}
+                  openModal={params => this.handleOpenModal({ ...params, theme: item })}
                 />
               ))
-            : null}
-            <OuvidoriaBox/>
+              : null}
+            <OuvidoriaBox />
             <Menu
               isLogged={isLogged}
               isOpen={menuOpen}
