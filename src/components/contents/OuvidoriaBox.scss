@@ -4,6 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 2.5% 10px 80px;
+    padding: 3%;
     width: 100%;
   }
 
@@ -17,21 +18,28 @@
   }
 
   &--content {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    width: 75%;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: calc(75% - 10px);
+    padding: 5px;
   }
 
   &--title {
     color: #706E6E;
+    display: flex;
+    flex: 1;
     font-size: 14px;
-    margin: 5px 10px;
+    margin: 5px 0px;
+    text-align: center;
   }
 
   &--button {
-    width: 90%;
+    width: 100%;
     background: #02a4fd;
-    margin: 0 5px;
+    // margin: 0 5px;
     padding: 8px 5px;
     text-align: center;
     border-radius: 10px;
