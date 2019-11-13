@@ -13,7 +13,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import './Menu.scss'
 
 const Menu = ({
-  isOpen, toggle, onLogin, onLogout, navigateToEntity, isLogged,
+  isOpen, toggle, onLogin, onLogout, navigateToEntity, isLogged, scrollToTop
 }) => {
   const FaButtons = ({ type, text }) => (
     <div>
@@ -49,7 +49,7 @@ const Menu = ({
         icon={<FaButtons type={faArrowUp} text="Topo" />}
         background="#00A5FD"
         size={40}
-        onClick={() => window.scrollTo(0, 0)}
+        onClick={() => {toggle(!isOpen); scrollToTop()}}
       />
     </FloatingMenu>
   )
