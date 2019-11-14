@@ -69,7 +69,11 @@ const List = ({
         } else {
           filterStr = item.dado ? item.dado : 'erro de cadastro?'
         }
-        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value))
+        let hasDetails = false
+        if (item.details) {
+          hasDetails = lowerCaseNoDiacritics(item.details).includes(lowerCaseNoDiacritics(value))
+        }
+        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value)) || hasDetails
       })
     }
 
