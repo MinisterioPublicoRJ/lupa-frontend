@@ -14,40 +14,53 @@ const propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   sourceLink: PropTypes.string,
   hasDetails: PropTypes.bool,
+  openModal: PropTypes.func.isRequired,
 }
 const defaultProps = {
   description: null,
   source: null,
   color: null,
   sourceLink: null,
+  hasDetails: false,
 }
 
 const SmallBox = ({
-  description, source, title, value, color, sourceLink, openModal, hasDetails
-}) => (
-  <div
-    className="box SmallBox"
-    style={color && { backgroundColor: color }}
-    onClick={openModal}
-  >
-    <div className="box-title" style={color && { color: 'white' }}>
-      {title && title.toLocaleUpperCase('pt-br')}
-      {hasDetails ?
-        <FontAwesomeIcon
-          style={{ color: '#929698' }}
-          icon={faSearch}
-        />
-      : null}
+  description,
+  source,
+  title,
+  value,
+  color,
+  sourceLink,
+  openModal,
+  hasDetails,
+}) => {
+  let titleClass = "box-title"
+  if (title.length > 18) {
+    titleClass += " big"
+  }
+  if (title.length > 31) {
+    titleClass += " huge"
+  }
+  return (
+    <div className="box SmallBox" style={color && { backgroundColor: color }} onClick={openModal}>
+      <div className={titleClass} style={color && { color: 'white' }}>
+        {title && title.toLocaleUpperCase('pt-br')}
+        {hasDetails ? (
+          <FontAwesomeIcon style={{ color: color ? 'white' : '#929698' }} icon={faSearch} />
+        ) : null}
+      </div>
+      <div className="box-value" style={color && { color: 'white' }}>
+        {value && isNaN(value)
+          ? value.toLocaleUpperCase('pt-br')
+          : Number(value).toLocaleString('pt-br')}
+      </div>
+      <div className="box-description" style={color && { color: 'white' }}>
+        {description || null}
+      </div>
+      {source && <Source link={sourceLink} text={source} color={color} />}
     </div>
-    <div className="box-value" style={color && { color: 'white' }}>
-      {value && isNaN(value) ? value.toLocaleUpperCase('pt-br') : Number(value).toLocaleString('pt-br')}
-    </div>
-    <div className="box-description" style={color && { color: 'white' }}>
-      {description || null}
-    </div>
-    { source && <Source link={sourceLink} text={source} color={color} />}
-  </div>
-)
+  )
+}
 
 SmallBox.propTypes = propTypes
 SmallBox.defaultProps = defaultProps

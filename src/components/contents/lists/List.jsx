@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import posed from 'react-pose'
 
@@ -37,11 +37,21 @@ const SearchWrapper = posed.div({
   show: { height: 'auto' },
 })
 
+const useFocus = () => {
+  const htmlElRef = useRef(null)
+  const setFocus = () => {
+    htmlElRef.current && htmlElRef.current.focus()
+  }
+
+  return [htmlElRef, setFocus]
+}
+
 const List = ({
   title, image, color, list, type, source, navigateToEntity, sourceLink,
 }) => {
   const [filteredList, setList] = useState(list)
   const [searchStatus, setSearchStatus] = useState(false)
+  const [inputRef, setInputFocus] = useFocus()
 
   const lowerCaseNoDiacritics = str => str
     .toLowerCase()
@@ -59,7 +69,11 @@ const List = ({
         } else {
           filterStr = item.dado ? item.dado : 'erro de cadastro?'
         }
-        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value))
+        let hasDetails = false
+        if (item.details) {
+          hasDetails = lowerCaseNoDiacritics(item.details).includes(lowerCaseNoDiacritics(value))
+        }
+        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value)) || hasDetails
       })
     }
 
@@ -127,14 +141,26 @@ const List = ({
         total={listCount()}
         image={list.length > 1 ? image : null}
         color={color}
-        onSearchPressed={list.length > 1 ? () => setSearchStatus(!searchStatus) : null}
+        onSearchPressed={
+          list.length > 1
+            ? () => {
+              setSearchStatus(!searchStatus)
+              setInputFocus()
+            }
+            : null
+        }
       />
       <SearchWrapper
         pose={searchStatus ? 'show' : 'hide'}
         className="List--filter"
         style={color && { backgroundColor: color }}
       >
-        <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
+        <input
+          className="List--input"
+          placeholder="Pesquise"
+          onChange={handleFiltering}
+          ref={inputRef}
+        />
       </SearchWrapper>
       <ol className="List--container">
         {filteredList.map((item, i) => (

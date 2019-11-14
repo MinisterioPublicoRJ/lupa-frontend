@@ -50,6 +50,12 @@
       padding: 10px;
       text-align: center;
       width: calc(100% - 20px);
+      &.big {
+        font-size: 2vh;
+      }
+      &.huge {
+        font-size: 1.7vh;
+      }
     }
 
     .box-value {
