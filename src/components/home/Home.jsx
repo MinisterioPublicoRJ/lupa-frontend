@@ -33,8 +33,10 @@ class Home extends React.Component {
       modalInfo: {},
       modalOpen: false,
     }
+    this.topOfPage = React.createRef();
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
+    this.handleTopScrolling = this.handleTopScrolling.bind(this)
   }
 
   componentDidMount() {
@@ -157,6 +159,10 @@ class Home extends React.Component {
     this.setState({ modalOpen: false, modalInfo: null })
   }
 
+  handleTopScrolling() {
+    this.topOfPage.current.scrollIntoView({behavior: 'smooth'})
+  }
+
   render() {
     const {
       error,
@@ -183,9 +189,10 @@ class Home extends React.Component {
           modalOpen={modalOpen}
           navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
         />
-        <div className="Main-container">
+      <div className="Main-container" ref={this.topOfPage}>
           {!error ? (
             <Search
+
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
               searchCallback={response => this.selectSearchItemCallback(response)}
             />
@@ -223,6 +230,7 @@ class Home extends React.Component {
               toggle={newState => this.setState({ menuOpen: newState })}
               onLogin={() => this.navigateToLogin()}
               onLogout={() => this.handleLogout()}
+              scrollToTop={this.handleTopScrolling}
               navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
             />
           </div>
