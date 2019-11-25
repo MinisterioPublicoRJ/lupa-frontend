@@ -5,6 +5,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import './GenericComponents.scss'
 
+const BIG_TITLE_MIN_LENGTH = 32
+
 const propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string,
@@ -18,13 +20,18 @@ const defaultProps = {
 
 const Header = ({
   title, image, color, onSearchPressed, total,
-}) => (
-  <div className="Generic-Header" style={color && { backgroundColor: color }}>
+}) => {
+  let headerTitleClass = "Generic-Header--title"
+  // magic number to avoid big titles cluttering
+  if (title.length > BIG_TITLE_MIN_LENGTH) {
+    headerTitleClass += " big"
+  }
+  return <div className="Generic-Header" style={color && { backgroundColor: color }}>
     <div className="Generic-Header--icon-container">
       {image && <img src={image} alt="" className="Generic-Header--icon" />}
     </div>
     <div className="Generic-Header--title-container">
-      {title && <span className="Generic-Header--title">{title.toLocaleUpperCase()}</span>}
+      {title && <span className={headerTitleClass}>{title.toLocaleUpperCase()}</span>}
       {total && <span className="Generic-Header--title">{total}</span>}
     </div>
     <div className="Generic-Header--search-container">
@@ -37,7 +44,7 @@ const Header = ({
       ) : null}
     </div>
   </div>
-)
+}
 
 Header.propTypes = propTypes
 Header.defaultProps = defaultProps
