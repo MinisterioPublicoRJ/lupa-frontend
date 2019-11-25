@@ -164,7 +164,7 @@ const List = ({
       </SearchWrapper>
       <ol className="List--container">
         {filteredList.map((item, i) => (
-          <li className="List--item" key={item.id}>
+          <li className="List--item" key={`${item.id}_${i}`}>
             {renderListItem(item, i)}
           </li>
         ))}
