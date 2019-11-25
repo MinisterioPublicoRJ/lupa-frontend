@@ -183,7 +183,7 @@ class Home extends React.Component {
           modalOpen={modalOpen}
           navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
         />
-        <div className="Main-container">
+        <div className={geojson ? "Main-container with-map" : "Main-container without-map"}>
           {!error ? (
             <Search
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
