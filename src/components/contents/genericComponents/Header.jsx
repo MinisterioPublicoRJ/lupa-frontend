@@ -23,7 +23,7 @@ const Header = ({
 }) => {
   let headerTitleClass = "Generic-Header--title"
   // magic number to avoid big titles cluttering
-  if (title.length > BIG_TITLE_MIN_LENGTH) {
+  if (title && title.length && title.length > BIG_TITLE_MIN_LENGTH) {
     headerTitleClass += " big"
   }
   return <div className="Generic-Header" style={color && { backgroundColor: color }}>
