@@ -50,6 +50,12 @@
       padding: 10px;
       text-align: center;
       width: calc(100% - 20px);
+      &.big {
+        font-size: 2vh;
+      }
+      &.huge {
+        font-size: 1.7vh;
+      }
     }
 
     .box-value {
@@ -59,7 +65,7 @@
       flex: 1.5;
       font-family: roboto;
       font-weight: bold;
-      font-size: 5vh;
+      font-size: 4.3vh;
       justify-content: center;
       max-height: 30%;
       text-align: center;

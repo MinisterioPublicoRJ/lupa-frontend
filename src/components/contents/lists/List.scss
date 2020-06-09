@@ -39,7 +39,6 @@
 
   &--item {
     border-bottom: 1px solid #e8e8e8;
-    display: flex;
     width: 100%;
 
     &:last-child {
@@ -62,13 +61,11 @@
 
 .Rli {
   align-items: center;
-  // border-bottom: 1px solid #f8f8f8;
   color: #929698;
   display: flex;
   font-family: Roboto;
   font-weight: bold;
   padding: 0 2.5%;
-  width: 100%;
 
   &--position {
     align-items: center;
@@ -93,7 +90,6 @@
 }
 
 .Pli {
-  // border-bottom: 1px solid #E8E8E8;
   border-radius: 3px;
   display: flex;
   flex-wrap: wrap;

@@ -33,7 +33,7 @@ class Home extends React.Component {
       modalInfo: {},
       modalOpen: false,
     }
-    this.topOfPage = React.createRef();
+    this.topOfPage = React.createRef()
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
     this.handleTopScrolling = this.handleTopScrolling.bind(this)
@@ -160,7 +160,7 @@ class Home extends React.Component {
   }
 
   handleTopScrolling() {
-    this.topOfPage.current.scrollIntoView({behavior: 'smooth'})
+    this.topOfPage.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   render() {
@@ -189,10 +189,12 @@ class Home extends React.Component {
           modalOpen={modalOpen}
           navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
         />
-      <div className="Main-container" ref={this.topOfPage}>
+        <div
+          className={geojson ? 'Main-container with-map' : 'Main-container without-map'}
+          ref={this.topOfPage}
+        >
           {!error ? (
             <Search
-
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
               searchCallback={response => this.selectSearchItemCallback(response)}
             />

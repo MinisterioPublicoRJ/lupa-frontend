@@ -69,7 +69,11 @@ const List = ({
         } else {
           filterStr = item.dado ? item.dado : 'erro de cadastro?'
         }
-        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value))
+        let hasDetails = false
+        if (item.details) {
+          hasDetails = lowerCaseNoDiacritics(item.details).includes(lowerCaseNoDiacritics(value))
+        }
+        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value)) || hasDetails
       })
     }
 
@@ -160,7 +164,7 @@ const List = ({
       </SearchWrapper>
       <ol className="List--container">
         {filteredList.map((item, i) => (
-          <li className="List--item" key={item.id}>
+          <li className="List--item" key={`${item.id}_${i}`}>
             {renderListItem(item, i)}
           </li>
         ))}
