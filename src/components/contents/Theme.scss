@@ -19,21 +19,19 @@
     transition: all 0.4s linear;
 
     &.open {
-      // margin: 0 5px 0 5px;
       justify-content: space-around;
     }
 
     &.closed {
       flex-direction: column;
       justify-content: center;
-      // height: 100%;
-      // width: 100%;
     }
 
     &--title {
-      text-align: center;
+      text-shadow: 0px 1px 3px #00000094;
       font-weight: 500; //medium
       margin: 0;
+      text-align: center;
 
       &.open {
         font-size: 3vh;
@@ -57,9 +55,9 @@
 
   &--content {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
     justify-content: space-between;
     overflow: hidden;
+    width: 100%;
   }
 }

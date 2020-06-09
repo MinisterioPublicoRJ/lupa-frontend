@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './Home.scss'
+import Modal from '../modal/Modal'
 import Theme from '../contents/Theme'
 import Map from '../map/Map'
 import EntityError from '../utils/EntityError'
@@ -27,11 +28,15 @@ class Home extends React.Component {
     super(props)
     this.state = {
       loading: true,
-      menuOpen: false,
       isLogged: !!localStorage.getItem('token'),
+      menuOpen: false,
+      modalInfo: {},
+      modalOpen: false,
     }
+    this.topOfPage = React.createRef()
     this.checkContent = this.checkContent.bind(this)
     this.selectSearchItemCallback = this.selectSearchItemCallback.bind(this)
+    this.handleTopScrolling = this.handleTopScrolling.bind(this)
   }
 
   componentDidMount() {
@@ -107,8 +112,33 @@ class Home extends React.Component {
   }
 
   handleNavigateToEntity(entityType, entityId) {
+    const { modalOpen } = this.state
+    if (modalOpen) {
+      this.handleCloseModal()
+    }
     const { history } = this.props
     history.push(`/${entityType}/${entityId}`)
+  }
+
+  handleOpenModal(box) {
+    const boxData = box
+    const boxDetailsArray = boxData.detalhe
+    const { entityType } = this.props.match.params
+    const { entityId } = this.props.match.params
+
+    if (!boxDetailsArray || boxDetailsArray.length === 0) {
+      return console.log('Sem detalhes para exibir.')
+    }
+
+    this.setState({
+      modalInfo: {
+        boxData,
+        boxDetailsArray,
+        entityId,
+        entityType,
+      },
+      modalOpen: true,
+    })
   }
 
   navigateToLogin() {
@@ -125,9 +155,26 @@ class Home extends React.Component {
     this.setState({ isLogged: false })
   }
 
+  handleCloseModal() {
+    this.setState({ modalOpen: false, modalInfo: null })
+  }
+
+  handleTopScrolling() {
+    this.topOfPage.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   render() {
     const {
-      loading, menuOpen, error, geojson, name, title, themes, isLogged,
+      error,
+      geojson,
+      isLogged,
+      loading,
+      menuOpen,
+      modalInfo,
+      modalOpen,
+      name,
+      title,
+      themes,
     } = this.state
     const { match } = this.props
     const { entityType, entityId } = match.params
@@ -136,7 +183,16 @@ class Home extends React.Component {
 
     return (
       <div className="Entity-container">
-        <div className="Main-container">
+        <Modal
+          closeModal={() => this.handleCloseModal()}
+          modalInfo={modalInfo}
+          modalOpen={modalOpen}
+          navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+        />
+        <div
+          className={geojson ? 'Main-container with-map' : 'Main-container without-map'}
+          ref={this.topOfPage}
+        >
           {!error ? (
             <Search
               homePressed={() => this.handleNavigateToEntity('EST', '33')}
@@ -165,16 +221,18 @@ class Home extends React.Component {
                   entityType={entityType}
                   entityId={entityId}
                   navigateToEntity={(eType, eId) => this.handleNavigateToEntity(eType, eId)}
+                  openModal={params => this.handleOpenModal({ ...params, theme: item })}
                 />
               ))
-            : null}
-            <OuvidoriaBox/>
+              : null}
+            <OuvidoriaBox />
             <Menu
               isLogged={isLogged}
               isOpen={menuOpen}
               toggle={newState => this.setState({ menuOpen: newState })}
               onLogin={() => this.navigateToLogin()}
               onLogout={() => this.handleLogout()}
+              scrollToTop={this.handleTopScrolling}
               navigateToEntity={() => this.handleNavigateToEntity('EST', '33')}
             />
           </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import Briefcase from '../icons/briefcase'
 import ArrowRight from '../icons/arrowRight'
 
@@ -12,6 +13,7 @@ const propTypes = {
   link: PropTypes.string,
   title: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  hasDetails: PropTypes.bool,
 }
 const defaultProps = {
   source: null,
@@ -41,7 +43,7 @@ const checkIfLinkExists = (link, value, color) => {
 }
 
 const LongBox = ({
-  source, title, value, link, color, sourceLink,
+  source, title, value, link, color, sourceLink, hasDetails,
 }) => (
   <div className="box LongBox" style={color ? { backgroundColor: color } : null}>
     <div className="box-icon">
@@ -49,6 +51,12 @@ const LongBox = ({
     </div>
     <div className="box-title" style={color ? { color: 'white' } : null}>
       {title ? title.toLocaleUpperCase('pt-br') : null}
+      {hasDetails ?
+        <FontAwesomeIcon
+          style={color ? {color: 'white'} : {color: '#009dfd'}}
+          icon={faSearch}
+        />
+      : null}
     </div>
     {checkIfLinkExists(link, value, color)}
     {source ? (

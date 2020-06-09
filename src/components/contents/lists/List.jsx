@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import posed from 'react-pose'
 
@@ -12,8 +12,12 @@ import './List.scss'
 
 const propTypes = {
   title: PropTypes.string.isRequired,
-  list: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, dado: PropTypes.string }))
-    .isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      dado: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }),
+  ).isRequired,
   image: PropTypes.node,
   source: PropTypes.string,
   color: PropTypes.string,
@@ -33,11 +37,21 @@ const SearchWrapper = posed.div({
   show: { height: 'auto' },
 })
 
+const useFocus = () => {
+  const htmlElRef = useRef(null)
+  const setFocus = () => {
+    htmlElRef.current && htmlElRef.current.focus()
+  }
+
+  return [htmlElRef, setFocus]
+}
+
 const List = ({
   title, image, color, list, type, source, navigateToEntity, sourceLink,
 }) => {
   const [filteredList, setList] = useState(list)
   const [searchStatus, setSearchStatus] = useState(false)
+  const [inputRef, setInputFocus] = useFocus()
 
   const lowerCaseNoDiacritics = str => str
     .toLowerCase()
@@ -55,7 +69,11 @@ const List = ({
         } else {
           filterStr = item.dado ? item.dado : 'erro de cadastro?'
         }
-        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value))
+        let hasDetails = false
+        if (item.details) {
+          hasDetails = lowerCaseNoDiacritics(item.details).includes(lowerCaseNoDiacritics(value))
+        }
+        return lowerCaseNoDiacritics(filterStr).includes(lowerCaseNoDiacritics(value)) || hasDetails
       })
     }
 
@@ -111,7 +129,7 @@ const List = ({
       return ` (${list.length})`
     }
     return ` (${list
-      .map(list => Number(list.dado))
+      .map(item => Number(item.dado))
       .reduce((a, b) => a + b, 0)
       .toLocaleString('pt-br')})`
   }
@@ -126,19 +144,21 @@ const List = ({
         listLength={list.length}
         onSearchPressed={list.length > 1 ? () => setSearchStatus(!searchStatus) : null}
       />
-      {
-        list.length > 1 && <SearchWrapper
+      {list.length > 1 && (
+        <SearchWrapper
           pose={searchStatus ? 'show' : 'hide'}
           className="List--filter"
           style={color && { backgroundColor: color }}
-          >
-            <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
-          </SearchWrapper>
-      }
+        >
+          <input className="List--input" placeholder="Pesquise" onChange={handleFiltering} />
+        </SearchWrapper>
+      )}
 
       <ol className="List--container">
         {filteredList.map((item, i) => (
-          <li className="List--item">{renderListItem(item, i)}</li>
+          <li className="List--item" key={`${item.id}_${i}`}>
+            {renderListItem(item, i)}
+          </li>
         ))}
       </ol>
       {source && <Source link={sourceLink} text={source} color={color} />}

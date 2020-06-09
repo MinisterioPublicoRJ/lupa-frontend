@@ -13,7 +13,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import './Menu.scss'
 
 const Menu = ({
-  isOpen, toggle, onLogin, onLogout, navigateToEntity, isLogged,
+  isOpen, toggle, onLogin, onLogout, navigateToEntity, isLogged, scrollToTop
 }) => {
   const FaButtons = ({ type, text }) => (
     <div>
@@ -24,50 +24,37 @@ const Menu = ({
     </div>
   )
   return (
-    <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={isOpen} className="outerMenu">
-      <MainButton
-        className="mainButton"
-        iconResting={<FaButtons type={faBars} />}
-        iconActive={<FaButtons type={faTimes} />}
-        background="#00A5FD"
-        onClick={() => toggle(!isOpen)}
-        size={56}
-      />
-      <ChildButton
-        icon={<FaButtons type={faChalkboardTeacher} text={isLogged ? 'Logout' : 'Login'} />}
-        background="#00A5FD"
-        size={40}
-        onClick={isLogged ? onLogout : onLogin}
-      />
-      <ChildButton
-        icon={<FaButtons type={faHome} text="Estado" />}
-        background="#00A5FD"
-        size={40}
-        onClick={navigateToEntity}
-      />
-      <ChildButton
-        icon={<FaButtons type={faArrowUp} text="Topo" />}
-        background="#00A5FD"
-        size={40}
-        onClick={() => window.scrollTo(0, 0)}
-      />
-    </FloatingMenu>
+    <div style={{ bottom: '20px', left: '20px', position: 'fixed', scale: 1, zIndex: 500 }}>
+      <FloatingMenu slideSpeed={500} direction="up" spacing={8} isOpen={isOpen} className="outerMenu">
+        <MainButton
+          className="mainButton"
+          iconResting={<FaButtons type={faBars} />}
+          iconActive={<FaButtons type={faTimes} />}
+          background="#00A5FD"
+          onClick={() => toggle(!isOpen)}
+          size={56}
+          />
+        <ChildButton
+          icon={<FaButtons type={faChalkboardTeacher} text={isLogged ? 'Logout' : 'Login'} />}
+          background="#00A5FD"
+          size={40}
+          onClick={isLogged ? onLogout : onLogin}
+          />
+        <ChildButton
+          icon={<FaButtons type={faHome} text="Estado" />}
+          background="#00A5FD"
+          size={40}
+          onClick={navigateToEntity}
+          />
+        <ChildButton
+          icon={<FaButtons type={faArrowUp} text="Topo" />}
+          background="#00A5FD"
+          size={40}
+          onClick={() => {toggle(!isOpen); scrollToTop()}}
+          />
+      </FloatingMenu>
+    </div>
   )
 }
 
-const WrapperDiv = posed.div({
-  draggable: false,
-  init: {
-    bottom: '20px', left: '20px', position: 'fixed', scale: 1, zIndex: 500,
-  },
-  pressable: true,
-  press: { scale: 0.8 },
-})
-
-const WrappedMenu = props => (
-  <WrapperDiv>
-    <Menu {...props} />
-  </WrapperDiv>
-)
-
-export default WrappedMenu
+export default Menu

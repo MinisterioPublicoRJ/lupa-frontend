@@ -61,8 +61,9 @@ class Theme extends React.Component {
   renderBox(updatedBox, boxId) {
     const { content } = this.state
     let newContent
-    if (boxId) {
-      newContent = content.filter(box => box.id !== boxId)
+    if (boxId || !updatedBox.external_data || JSON.stringify(updatedBox.external_data) === "{}") {
+      let boxIdToFilter = boxId || updatedBox.id
+      newContent = content.filter(box => box.id !== boxIdToFilter)
     } else {
       newContent = content.map((box) => {
         if (box.id === updatedBox.id) return updatedBox
@@ -76,8 +77,12 @@ class Theme extends React.Component {
 
   render() {
     const { content, open } = this.state
-    const { color, navigateToEntity, name } = this.props
+    const { name, color, entityType, entityId, navigateToEntity, openModal } = this.props
     const themeStatus = open ? 'open' : 'closed'
+
+    if (content.length === 0) {
+      return null
+    }
 
     return (
       <div className="theme">
@@ -99,7 +104,15 @@ class Theme extends React.Component {
         {content ? (
           <ContentWrapper className="theme--content" pose={themeStatus}>
             {content.map(box => (
-              <Box key={box.id} content={box} color={color} navigateToEntity={navigateToEntity} />
+                  <Box
+                    key={box.id}
+                    content={box}
+                    color={color}
+                    navigateToEntity={navigateToEntity}
+                    entityType={entityType}
+                    entityId={entityId}
+                    openModal={() => openModal(box)}
+                  />
             ))}
           </ContentWrapper>
         ) : null}

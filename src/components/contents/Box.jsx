@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import './Box.scss'
 import SmallBox from './SmallBox'
 import LongBox from './LongBox'
-import Graph from '../graphs/Graph'
+import Graph from './graphs/Graph'
+import DescriptionBox from './DescriptionBox'
 import LoadingBox from './LoadingBox'
 import ErrorBox from './ErrorBox'
 
@@ -26,7 +27,7 @@ const defaultProps = {
   color: null,
 }
 
-const Box = ({ content, navigateToEntity, color }) => {
+const Box = ({ content, navigateToEntity, color, openModal }) => {
   switch (content.data_type) {
     case 'texto_pequeno':
       return (
@@ -37,6 +38,8 @@ const Box = ({ content, navigateToEntity, color }) => {
           description={content.external_data.details}
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
+          openModal={openModal}
+          hasDetails={content.detalhe ? !!content.detalhe.length : false}
         />
       )
     case 'texto_grande':
@@ -49,6 +52,7 @@ const Box = ({ content, navigateToEntity, color }) => {
           description={content.external_data.details}
           source={content.external_data.source}
           sourceLink={content.external_data.link_externo}
+          hasDetails={content.detalhe ? !!content.detalhe.length : false}
         />
       )
     case 'lista_filtrada':
@@ -57,14 +61,14 @@ const Box = ({ content, navigateToEntity, color }) => {
     case 'lista_pessoa':
       return (
         <List
-          type={content.data_type}
           color={color}
-          title={content.exibition_field}
-          list={content.external_data}
           image={content.icon}
-          source={content.external_data[0].source ? content.external_data[0].source : null}
+          list={content.external_data}
           navigateToEntity={navigateToEntity}
+          source={content.external_data[0].source ? content.external_data[0].source : null}
           sourceLink={content.external_data.link_externo}
+          type={content.data_type}
+          title={content.exibition_field}
         />
       )
     case 'grafico_pizza':
@@ -74,11 +78,21 @@ const Box = ({ content, navigateToEntity, color }) => {
       return (
         <Graph
           color={color}
-          type={content.data_type}
-          title={content.exibition_field}
           data={content.external_data}
+          image={content.icon}
+          navigateToEntity={navigateToEntity}
           source={content.external_data[0].source ? content.external_data[0].source : null}
           sourceLink={content.external_data[0].link_externo ? content.external_data[0].link_externo : null}
+          type={content.data_type}
+          title={content.exibition_field}
+        />
+      )
+    case 'texto_descricao':
+      return (
+        <DescriptionBox
+          id={content.id}
+          details={content.external_data[0].details}
+          imagem={content.external_data[0].imagem}
         />
       )
     case 'loading':
